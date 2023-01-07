@@ -21,15 +21,20 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         val prefs = createSharedPreference(TOKEN_SHARED_NAME)
-//        val toOnboardingFragment = MainFragmentDirections.actionMainFragmentToNavigationOnboarding()
-        val toAuthFragment = MainFragmentDirections.actionMainFragmentToAuthFragment()
-/*        val toHomeFragment = MainFragmentDirections.actionMainFragmentToNavigationHome()
 
-        if (prefs.getBoolean(TOKEN_ENABLED_KEY, false))
-            findNavController().navigate(toHomeFragment)
-        else {
-            if (prefs.getBoolean(ONBOARDING_IS_SHOWN, false))*/
-                findNavController().navigate(toAuthFragment)
-         //   else findNavController().navigate(toOnboardingFragment)
-        }
+        findNavController().navigate(MainFragmentDirections
+            .actionMainFragmentToAuthFragment())
+
+        /*       val toOnboardingFragment = MainFragmentDirections.actionMainFragmentToNavigationOnboarding()
+               val toAuthFragment = MainFragmentDirections.actionMainFragmentToAuthFragment()
+               val toHomeFragment = MainFragmentDirections.actionMainFragmentToNavigationHome()
+
+               if (prefs.getBoolean(TOKEN_ENABLED_KEY, false))
+                   findNavController().navigate(toHomeFragment)
+               else {
+                   if (prefs.getBoolean(ONBOARDING_IS_SHOWN, false))
+                   findNavController().navigate(toAuthFragment)
+                   else findNavController().navigate(toOnboardingFragment)
+               }*/
     }
+}

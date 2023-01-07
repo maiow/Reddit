@@ -1,13 +1,13 @@
 package com.mivanovskaya.humblr.ui.auth
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -38,7 +38,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         tokenObserve(createSharedPreference(TOKEN_SHARED_NAME))
         loadingObserve()
         viewModel.createToken(args.code)
-
+        Log.e(TAG, "Created Token: ${args.code}")
     }
 
     private fun startAuth() {
@@ -60,6 +60,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     private fun loadingObserve() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loadState.collect { loadState ->
+                Log.d(TAG, "loadingObserve: $loadState")
                 when (loadState) {
                     LoadState.START ->
                         setLoadState(
@@ -78,7 +79,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                             textIsVisible = true,
                             progressIsVisible = false
                         )
-                        findNavController().navigate(R.id.action_authFragment_to_navigation_home)
+//                        findNavController().navigate(R.id.action_authFragment_to_navigation_home)
                     }
                     LoadState.ERROR -> {
                         setLoadState(
@@ -87,6 +88,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                             progressIsVisible = false
                         )
                         binding.text.text = loadState.message
+                        Log.e(TAG, "loadingObserve: ${loadState.message}")
                     }
                 }
             }

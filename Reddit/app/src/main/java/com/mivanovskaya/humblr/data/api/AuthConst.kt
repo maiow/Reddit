@@ -4,7 +4,7 @@ const val CLIENT_ID = "JgTq89fSORhHj-Hb1SQVRA"
 const val CLIENT_SECRET = ""
 const val RESPONSE_TYPE = "code"
 const val STATE = "my_state"
-const val REDIRECT_URI = "https://humblrmiva/redirect" //"https://humblrvsv/redirect"
+const val REDIRECT_URI = "http://com.mivanovskaya.humblr/redirect"
 const val DURATION = "permanent"
 const val SCOPE = "identity edit flair history modconfig" +
             " modflair modlog modposts modwiki " +

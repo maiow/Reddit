@@ -1,7 +1,7 @@
 package com.mivanovskaya.humblr.di
 
 import android.content.Context
-import com.mivanovskaya.humblr.data.api.*
+import com.mivanovskaya.humblr.data.api.ApiToken
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptor
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptorQualifier
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenProvider
@@ -34,11 +34,11 @@ class ApiModule {
     @LoggingInterceptorQualifier
     fun provideLoginInterceptor(): Interceptor =
         HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BASIC)
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
 
     @Provides
     @Singleton
-    fun provideUnsplashClient(
+    fun provideRedditClient(
         @LoggingInterceptorQualifier loggingInterceptor: Interceptor,
         @AuthTokenInterceptorQualifier authTokenInterceptor: Interceptor
     ): OkHttpClient = OkHttpClient.Builder()
@@ -50,7 +50,7 @@ class ApiModule {
     @Provides
     @Singleton
     fun provideRetrofit(okhttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl("https://api.unsplash.com/")
+        .baseUrl("https://oauth.reddit.com/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(okhttpClient)
         .build()

@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_auth">
         <deepLink
             android:id="@+id/deepLink"
-            app:uri="https://humblrmiva/redirect?state=my_state&amp;code={code}"  />
+            app:uri="http://com.mivanovskaya.humblr/redirect?state=my_state&amp;code={code}" />
         <argument
             android:name="code"
             android:defaultValue=""
