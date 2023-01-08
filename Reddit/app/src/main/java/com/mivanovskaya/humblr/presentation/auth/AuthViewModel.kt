@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.ui.auth
+package com.mivanovskaya.humblr.presentation.auth
 
 import android.content.ContentValues.TAG
 import android.util.Log

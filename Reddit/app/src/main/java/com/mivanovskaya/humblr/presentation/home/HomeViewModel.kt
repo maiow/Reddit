@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.ui.profile
+package com.mivanovskaya.humblr.presentation.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,10 +8,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val apiToken: ApiToken) : BaseViewModel()  {
+class HomeViewModel @Inject constructor(private val apiToken: ApiToken) : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
+        value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
 }

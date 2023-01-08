@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.ui.favourites
+package com.mivanovskaya.humblr.presentation.favourites
 
 import android.os.Bundle
 import android.view.LayoutInflater

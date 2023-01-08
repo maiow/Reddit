@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.ui.onboarding
+package com.mivanovskaya.humblr.presentation.onboarding
 
 import android.widget.ImageView
 import androidx.viewpager2.widget.ViewPager2

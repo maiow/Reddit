@@ -1,6 +1,7 @@
 package com.mivanovskaya.humblr.di
 
 import android.content.Context
+import com.mivanovskaya.humblr.data.api.ApiProfile
 import com.mivanovskaya.humblr.data.api.ApiToken
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptor
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptorQualifier
@@ -24,11 +25,13 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideAuthTokenProvider(@ApplicationContext context: Context): AuthTokenProvider = AuthTokenProvider(context)
+    fun provideAuthTokenProvider(@ApplicationContext context: Context): AuthTokenProvider =
+        AuthTokenProvider(context)
 
     @Provides
     @AuthTokenInterceptorQualifier
-    fun provideAuthTokenInterceptor(tokenProvider: AuthTokenProvider): Interceptor = AuthTokenInterceptor(tokenProvider)
+    fun provideAuthTokenInterceptor(tokenProvider: AuthTokenProvider): Interceptor =
+        AuthTokenInterceptor(tokenProvider)
 
     @Provides
     @LoggingInterceptorQualifier
@@ -66,9 +69,9 @@ class ApiModule {
 //    @Provides
 //    @Singleton
 // //   fun provideApiDigest(retrofit: Retrofit): ApiDigest = retrofit.create(ApiDigest::class.java)
-//
-//    @Provides
-//    @Singleton
-// //   fun provideApiProfile(retrofit: Retrofit): ApiProfile = retrofit.create(ApiProfile::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApiProfile(retrofit: Retrofit): ApiProfile = retrofit.create(ApiProfile::class.java)
 
 }

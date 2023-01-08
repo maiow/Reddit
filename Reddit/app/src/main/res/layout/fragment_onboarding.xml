@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_alfa4"
-    tools:context=".ui.onboarding.OnboardingFragment">
+    tools:context=".presentation.onboarding.OnboardingFragment">
 
     <ImageView
         android:id="@+id/logo"

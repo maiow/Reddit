@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.ui.onboarding
+package com.mivanovskaya.humblr.presentation.onboarding
 
 import android.os.Bundle
 import android.view.LayoutInflater

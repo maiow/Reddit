@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_onboarding"
-        android:name="com.mivanovskaya.humblr.ui.onboarding.OnboardingFragment"
+        android:name="com.mivanovskaya.humblr.presentation.onboarding.OnboardingFragment"
         tools:layout="@layout/fragment_onboarding">
         <action
             android:id="@+id/action_navigation_onboarding_to_navigation_auth"
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/navigation_auth"
-        android:name="com.mivanovskaya.humblr.ui.auth.AuthFragment"
+        android:name="com.mivanovskaya.humblr.presentation.auth.AuthFragment"
         tools:layout="@layout/fragment_auth">
         <deepLink
             android:id="@+id/deepLink"
@@ -36,25 +36,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.mivanovskaya.humblr.ui.home.HomeFragment"
+        android:name="com.mivanovskaya.humblr.presentation.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_favourites"
-        android:name="com.mivanovskaya.humblr.ui.favourites.FavouritesFragment"
+        android:name="com.mivanovskaya.humblr.presentation.favourites.FavouritesFragment"
         android:label="@string/title_favourites"
         tools:layout="@layout/fragment_favourites" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.mivanovskaya.humblr.ui.profile.ProfileFragment"
+        android:name="com.mivanovskaya.humblr.presentation.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.mivanovskaya.humblr.ui.MainFragment"
+        android:name="com.mivanovskaya.humblr.presentation.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
