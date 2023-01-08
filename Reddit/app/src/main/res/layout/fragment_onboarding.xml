@@ -8,7 +8,7 @@
     tools:context=".ui.onboarding.OnboardingFragment">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -26,9 +26,9 @@
         android:textAllCaps="false"
         android:textColor="@color/blue"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/logo" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -55,20 +55,5 @@
         app:tabIndicator="@drawable/ic_tab_selector"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorHeight="8dp" />
-
-
-
-    <!--ImageView
-        android:id="@+id/ellipse_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ellipse_12"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="-20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" /-->
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

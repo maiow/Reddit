@@ -25,7 +25,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         findNavController().navigate(MainFragmentDirections
             .actionMainFragmentToAuthFragment())
 
-        /*       val toOnboardingFragment = MainFragmentDirections.actionMainFragmentToNavigationOnboarding()
+/*               val toOnboardingFragment = MainFragmentDirections.actionMainFragmentToNavigationOnboarding()
                val toAuthFragment = MainFragmentDirections.actionMainFragmentToAuthFragment()
                val toHomeFragment = MainFragmentDirections.actionMainFragmentToNavigationHome()
 

@@ -1,5 +1,7 @@
 package com.mivanovskaya.humblr.ui.auth
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.mivanovskaya.humblr.data.api.ApiToken
 import com.mivanovskaya.humblr.data.state.LoadState
@@ -25,11 +27,13 @@ class AuthViewModel @Inject constructor(private val apiToken: ApiToken) : BaseVi
                 _loadState.emit(LoadState.LOADING)
                 accessToken = START_REQUEST
                 accessToken = try {
-                    apiToken.getToken(code = code).access_token
+                    Log.e(TAG, "code received, trying to get token")
+                     apiToken.getToken(code = code).access_token
                 } catch (e: Exception) {
                     _loadState.emit(LoadState.ERROR.apply { message = e.message.toString() })
                     PLUG
                 }
+                Log.e(TAG, "token is $accessToken")
                 _token.emit(accessToken)
                 _loadState.emit(LoadState.SUCCESS)
             }

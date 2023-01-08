@@ -1,9 +1,7 @@
 package com.mivanovskaya.humblr.data.api
 
 import android.util.Base64
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiToken {
 

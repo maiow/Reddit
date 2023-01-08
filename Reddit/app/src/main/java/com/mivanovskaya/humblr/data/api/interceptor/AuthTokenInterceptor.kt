@@ -9,7 +9,7 @@ class AuthTokenInterceptor(private val tokenProvider: AuthTokenProvider) : Inter
     override fun intercept(chain: Interceptor.Chain): Response {
         Log.e("Kart", "интерцептор токен = ${tokenProvider.getToken()}")
         val request = chain.request()
-        if (chain.request().url.encodedPath != "https://oauth.reddit.com") {
+        if (chain.request().url.encodedPath != "/api/v1/access_token") {
             return chain.proceed(request)
         }
         val newRequest = request.newBuilder()

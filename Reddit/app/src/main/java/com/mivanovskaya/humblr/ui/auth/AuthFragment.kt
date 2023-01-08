@@ -79,7 +79,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                             textIsVisible = true,
                             progressIsVisible = false
                         )
-//                        findNavController().navigate(R.id.action_authFragment_to_navigation_home)
+                        findNavController().navigate(R.id.action_authFragment_to_navigation_home)
                     }
                     LoadState.ERROR -> {
                         setLoadState(
