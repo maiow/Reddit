@@ -5,6 +5,8 @@ import com.mivanovskaya.humblr.domain.models.Profile
 
 data class ProfileDto(
     var name: String?,
+
+    var id: String,
     //val icon_img: String,
     @SerializedName("icon_img")
     var urlProfilePic: String?,
@@ -30,7 +32,7 @@ data class ProfileDto(
     @SerializedName("created_utc")
     var account_creation_date: Long?
 ) {
-    fun toProfile() = Profile(name, urlProfilePic, account_creation_date)
+    fun toProfile() = Profile(name, id, urlProfilePic, account_creation_date)
 }
 
 data class UserDataSub(
