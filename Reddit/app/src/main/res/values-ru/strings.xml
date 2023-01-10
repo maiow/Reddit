@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_via_reddit">Войти</string>
+    <string name="ok">Хорошо</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+    <string name="logout_message">Все сохраненные данные будут удалены.</string>
+    <string name="logout_title">Вы уверены, что хотите выйти?</string>
+    <string name="skip">Пропустить</string>
+    <string name="auth_under_logo">Найди единомышленников с Humblr</string>
+    <string-array name="onboarding_texts_array1">
+        <item>Добро пожаловать в Humblr</item>
+        <item>SubHumblr</item>
+        <item>Делись и сохраняй</item>
+    </string-array>
+    <string-array name="onboarding_texts_array2">
+        <item>Здесь собраны сообщества по всевозможным интересам</item>
+        <item>Ты можешь найти новые сабы по интересам и посмотреть сабы, на которые подписан</item>
+        <item>Вкладка избранное хранит закладки с комментариями и сабами. В профиле ты найдёшь информацию о себе</item>
+    </string-array>
+    <string name="successful_authorization">Успешный вход</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_favourites">Избранное</string>
+    <string name="no_connection">Проверьте подключение к сети</string>
+    <string name="title_home">Сабреддиты</string>
+</resources>

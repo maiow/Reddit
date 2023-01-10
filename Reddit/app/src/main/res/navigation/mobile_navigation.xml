@@ -50,7 +50,27 @@
         android:id="@+id/navigation_profile"
         android:name="com.mivanovskaya.humblr.presentation.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_friends"
+            app:destination="@id/navigation_friends"
+            app:popUpTo="@id/navigation_profile"/>
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_auth"
+            app:destination="@id/navigation_auth"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_friends"
+        android:name="com.mivanovskaya.humblr.presentation.profile.FriendsFragment"
+        tools:layout="@layout/fragment_friends">
+        <argument
+            android:name="user_id"
+            android:defaultValue="" />
+    </fragment>
 
     <fragment
         android:id="@+id/mainFragment"

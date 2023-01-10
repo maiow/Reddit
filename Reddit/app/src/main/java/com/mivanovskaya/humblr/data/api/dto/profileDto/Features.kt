@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.data.api.profileDto
+package com.mivanovskaya.humblr.data.api.dto.profileDto
 
 data class Features(
     val awards_on_streams: Boolean,

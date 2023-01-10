@@ -6,7 +6,7 @@ data class Profile(
     //val icon_img: String,
     var urlProfilePic: String?,
     //var more_infos: UserDataSub?,
-    var account_creation_date: Long?
+    var total_karma: Int?,
 )
 
 data class UserDataSub(

@@ -1,22 +1,29 @@
 <resources>
-    <string name="app_name">Humblr</string>
-    <string name="title_home">Home</string>
+    <string name="app_name" translatable="false">Humblr</string>
+    <string name="title_home">Subreddits</string>
     <string name="title_favourites">Favourites</string>
     <string name="title_profile">Profile</string>
-    <string name="login_via_reddit">Войти</string>
-    <string name="successful_authorization">Успешный вход</string>
-    <string name="auth_under_logo">Найди единомышленников с Humblr</string>
-    <string name="skip">Пропустить</string>
+    <string name="auth_under_logo">Find like-minded people with Humblr</string>
     <string-array name="onboarding_texts_array1">
-    <item>Добро пожаловать в Humblr</item>
+    <item>Welcome to Humblr</item>
     <item>SubHumblr</item>
-    <item>Делись и сохраняй</item>
+    <item>Sare and save</item>
     </string-array>
     <string-array name="onboarding_texts_array2">
-        <item>Здесь собраны сообщества по всевозможным интересам</item>
-        <item>Ты можешь найти новые сабы по интересам и посмотреть сабы, на которые подписан</item>
-        <item>Вкладка избранное хранит закладки с комментариями и сабами. В профиле ты найдёшь информацию о себе</item>
+        <item>Communities of all kinds of interests are gathered here</item>
+        <item>You can find new subs by interests and see the subs you are subscribed to</item>
+        <item>The favorites tab stores bookmarks with comments and subs. In the profile you will find information about yourself</item>
     </string-array>
+    <string name="logout_title">Are you sure you want to logout?</string>
+    <string name="logout_message">All local data will be deleted.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">Ok</string>
+    <string name="no_connection">Check the network connection</string>
+    <string name="login_via_reddit">Login</string>
+    <string name="skip">Skip</string>
+    <string name="successful_authorization">Successful login</string>
+
     <!--string-array name="button_array">
         <string>Пропустить</string>
         <string>Пропустить</string>

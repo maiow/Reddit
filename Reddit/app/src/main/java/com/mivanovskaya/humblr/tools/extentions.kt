@@ -5,6 +5,8 @@ import androidx.appcompat.widget.SearchView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.mivanovskaya.humblr.R
+import com.mivanovskaya.humblr.data.api.dto.profileDto.Children
+import com.mivanovskaya.humblr.domain.models.Friend
 
 
 /*fun List<PhotoDto>.toListPhoto(): List<Photo> {
@@ -14,10 +16,6 @@ import com.mivanovskaya.humblr.R
         newList.add(item.toPhoto())
     }
     return newList
-}
-
-fun List<TagDto>.toListTag(): List<Tags> {
-    return this.map { item -> item.toPhotoDetailsTags() }
 }
 
 fun List<DigestDto>.toListDigest(): List<Digest> {
@@ -38,6 +36,10 @@ fun List<PhotoDto>.toListPhotoEntity(): List<PhotoEntity> {
         it.toPhotoEntity()
     }
 }*/
+
+fun List<Children>.toListFriends(): List<Friend> {
+    return this.map { item -> item.toFriend() }
+}
 
 fun ImageView.loadImage(urls: String) {
     Glide.with(this)

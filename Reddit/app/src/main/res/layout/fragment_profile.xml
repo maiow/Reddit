@@ -12,26 +12,24 @@
         android:layout_width="300dp"
         android:layout_height="244dp"
         android:layout_marginTop="80dp"
-        android:background="@color/white"
+        android:background="@drawable/layout_bg"
         android:elevation="@android:dimen/app_icon_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="95dp"
             android:layout_height="95dp"
             android:layout_marginTop="19dp"
-            android:background="@color/blue"
+            android:background="@drawable/rounded"
             android:src="@drawable/ic_frog"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/user_name"
@@ -58,11 +56,11 @@
             app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
         <TextView
-            android:id="@+id/comments"
+            android:id="@+id/karma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:text="Comments:"
+            android:text="Karma:"
             android:textAlignment="center"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,9 +74,10 @@
             android:text="Subreddits:"
             android:textAlignment="center"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/comments" />
+            app:layout_constraintTop_toBottomOf="@+id/karma" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -120,9 +119,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_clear_saved" />
 
-    <!--android:textColor="@color/white"
-        android:clickable="true"
-    android:textStyle="bold"
-        android:textAlignment="center"-->
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:indeterminateTint="@color/blue"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:paddingHorizontal="85dp"
+        android:paddingVertical="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/no_connection"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/ic_wifi_off"
+            app:tint="@color/white" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
