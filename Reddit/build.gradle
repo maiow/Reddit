@@ -20,4 +20,5 @@ ext {
     // App dependencies
     roomVersion = '2.4.3'
     hiltVersion = '2.44'
+    retrofitVersion = '2.9.0'
 }

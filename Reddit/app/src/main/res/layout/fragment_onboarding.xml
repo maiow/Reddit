@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/authorize_button"
+        android:id="@+id/skip_button"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"

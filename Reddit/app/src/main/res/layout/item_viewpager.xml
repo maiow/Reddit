@@ -4,22 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--TextView
-        android:id="@+id/authorize_button"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:backgroundTint="@color/white"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="16dp"
-        android:text="asdfghhj"
-        android:textColor="@color/blue"
-        android:textSize="14sp"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:clickable="true"
-        android:focusable="true" /-->
-
     <ImageView
         android:id="@+id/onboarding_images"
         android:layout_width="320dp"
@@ -37,7 +21,6 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="490dp"
         android:layout_marginEnd="40dp"
-        android:text="AGHKJK"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -53,7 +36,6 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="40dp"
-        android:text="ghbvth"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16sp"

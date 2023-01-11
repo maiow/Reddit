@@ -1,4 +1,6 @@
-package com.mivanovskaya.humblr.domain.models
+package com.mivanovskaya.humblr.domain.state
+
+import com.mivanovskaya.humblr.domain.models.Profile
 
 /**тут ли должен лежать?*/
 

@@ -16,8 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
-    override fun initBinding(inflater: LayoutInflater) =
-        FragmentOnboardingBinding.inflate(inflater)
+    override fun initBinding(inflater: LayoutInflater) = FragmentOnboardingBinding.inflate(inflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,17 +34,18 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
                 ResourcesCompat.getDrawable(resources, R.drawable.onb_image1, null)!!,
                 ResourcesCompat.getDrawable(resources, R.drawable.onb_image2, null)!!,
                 ResourcesCompat.getDrawable(resources, R.drawable.onb_image3, null)!!
-            ),
-            // resources.getStringArray(R.array.button_array)
+            )
         )
-        //binding.viewPager.registerOnPageChangeCallback(AnimateImageOnPageChange(binding.ellipseImage))
+        binding.viewPager.registerOnPageChangeCallback(
+            ChangeButtonTextOnPageChange(binding.skipButton, requireContext())
+        )
     }
 
     private fun setTabs() = TabLayoutMediator(binding.tabs, binding.viewPager) { _, _ -> }.attach()
 
     private fun setAuthorizeButton() {
-        binding.authorizeButton.background = null
-        binding.authorizeButton.setOnClickListener {
+        binding.skipButton.background = null
+        binding.skipButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_onboarding_to_navigation_auth)
         }
     }

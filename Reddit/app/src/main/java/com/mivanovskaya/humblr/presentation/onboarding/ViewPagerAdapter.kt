@@ -9,14 +9,11 @@ import com.mivanovskaya.humblr.databinding.ItemViewpagerBinding
 class ViewPagerAdapter(
     private val allOnboardingHeaders: Array<String>,
     private val allOnboardingTexts: Array<String>,
-    private val allOnboardingImages: Array<Drawable>,
-   // private val buttonTexts: Array<String>
+    private val allOnboardingImages: Array<Drawable>
 ) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerHolder>() {
 
     class ViewPagerHolder(private val itemBinding: ItemViewpagerBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bindImages(item: Drawable) = itemBinding.onboardingImages.setImageDrawable(item)
-
         fun bindHeaders(item: String) {
             itemBinding.onboardingHeaders.text = item
         }
@@ -24,9 +21,8 @@ class ViewPagerAdapter(
         fun bindTexts(item: String) {
             itemBinding.onboardingTexts.text = item
         }
-//        fun bindButton(item: String) {
-//            itemBinding.authorizeButton.text = item
-//        }
+
+        fun bindImages(item: Drawable) = itemBinding.onboardingImages.setImageDrawable(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerHolder {
@@ -39,7 +35,6 @@ class ViewPagerAdapter(
         holder.bindHeaders(allOnboardingHeaders[position])
         holder.bindTexts(allOnboardingTexts[position])
         holder.bindImages(allOnboardingImages[position])
-        //holder.bindButton(buttonTexts[position])
     }
 
     override fun getItemCount(): Int = allOnboardingHeaders.size

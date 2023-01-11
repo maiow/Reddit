@@ -15,7 +15,7 @@ import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
 import com.mivanovskaya.humblr.data.state.LoadState
 import com.mivanovskaya.humblr.databinding.FragmentProfileBinding
-import com.mivanovskaya.humblr.domain.models.ProfileState
+import com.mivanovskaya.humblr.domain.state.ProfileState
 import com.mivanovskaya.humblr.tools.BaseFragment
 import com.mivanovskaya.humblr.tools.loadImage
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,16 +49,35 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             ProfileState.NotStartedYet -> {}
             ProfileState.Loading -> {
                 binding.progressBar.isVisible = true
+                showBindItems(false)
             }
             is ProfileState.Success -> {
+                showBindItems(true)
                 binding.progressBar.isVisible = false
                 binding.userName.text = state.data.name
-                binding.userId.text = "ID: " + state.data.id
-                binding.imageView.loadImage(state.data.urlProfilePic!!)
+                binding.userId.text = "Id: " + state.data.id
+                binding.subscribers.text  = "Followers: ${state.data.more_infos?.subscribers ?:0}"
+                getClearedUrlProfilePic(state.data.urlProfilePic!!)
                 binding.karma.text = "Karma: " + state.data.total_karma
                 setFriendsListClick(state.data.id)
             }
         }
+    }
+
+    private fun showBindItems(show: Boolean) {
+        binding.frame.isVisible = show
+        binding.buttonListOfFriends.isVisible = show
+        binding.buttonClearSaved.isVisible = show
+        binding.buttonLogout.isVisible = show
+    }
+
+    private fun getClearedUrlProfilePic(urlProfilePic: String) {
+    val questionMark = urlProfilePic.indexOf('?', 0)
+    loadAvatar(urlProfilePic.substring(0, questionMark))
+    }
+
+    private fun loadAvatar(url: String) {
+        binding.imageView.loadImage(url)
     }
 
     private fun setFriendsListClick(userId: String) {

@@ -1,7 +1,9 @@
 package com.mivanovskaya.humblr.di
-/*
+
+/**пока работает без этого модуля*/
 
 import com.mivanovskaya.humblr.data.repository.*
+import com.mivanovskaya.humblr.domain.repository.ProfileRemoteRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,31 +16,8 @@ abstract class RepositoryModule {
 
     @Singleton
     @Binds
-    abstract fun bindPhotoRemoteRepository(
-        photoRemoteRepository: PhotoRemoteRepositoryImpl
-    ): PhotoRemoteRepository
-
-    @Singleton
-    @Binds
-    abstract fun bindLocalRepository(
-        localRepository: LocalRepositoryImpl
-    ): LocalRepository
-
-    @Singleton
-    @Binds
-    abstract fun bindDigestRemoteRepository(
-        digestRemoteRepository: DigestRemoteRepositoryImpl
-    ): DigestRemoteRepository
-
-    @Singleton
-    @Binds
     abstract fun bindProfileRemoteRepository(
         profileRemoteRepository: ProfileRemoteRepositoryImpl
     ): ProfileRemoteRepository
+}
 
-    @Singleton
-    @Binds
-    abstract fun bindPhotosPagingSourceRepository(
-        photosPagingSourceRepository: PhotosPagingSourceRepositoryImpl
-    ): PhotosPagingSourceRepository
-}*/

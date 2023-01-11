@@ -22,12 +22,5 @@ interface ApiToken {
 }
 
 class ResponseToken(
-    val access_token: String,
-
-//    "access_token": Your access token,
-//    "token_type": "bearer",
-//    "expires_in": Unix Epoch Seconds,
-//    "scope": A scope string,
-//    "refresh_token": Your refresh token
-
+    val access_token: String
 )

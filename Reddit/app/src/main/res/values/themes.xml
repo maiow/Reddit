@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.Humblr" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -13,15 +13,23 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.Humblr.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!--style name="AppTheme" parent="Theme.Humblr">
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
     </style>
-    <style name="Theme.UnsplashHomeWork.AppBarOverlay"
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="android:Widget.Button">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style-->
+    <!--style name="Theme.Humblr.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.UnsplashHomeWork.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Humblr.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="ExpandedBarTextStyle" parent="Theme.Humblr">
         <item name="android:textSize">0sp</item>
         <item name="android:textColor">@android:color/transparent</item>
-    </style>
+    </style-->
 </resources>

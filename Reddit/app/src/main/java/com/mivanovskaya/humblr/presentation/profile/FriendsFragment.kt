@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.mivanovskaya.humblr.data.state.LoadState
 import com.mivanovskaya.humblr.databinding.FragmentFriendsBinding
-import com.mivanovskaya.humblr.domain.models.FriendsState
+import com.mivanovskaya.humblr.domain.state.FriendsState
 import com.mivanovskaya.humblr.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 

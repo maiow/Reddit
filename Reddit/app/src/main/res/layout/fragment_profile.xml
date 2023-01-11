@@ -24,7 +24,6 @@
             android:layout_height="95dp"
             android:layout_marginTop="19dp"
             android:background="@drawable/rounded"
-            android:src="@drawable/ic_frog"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,10 +32,10 @@
 
         <TextView
             android:id="@+id/user_name"
-            android:layout_width="match_parent"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            android:layout_marginBottom="14dp"
+            android:background="@drawable/round_corners_20alfa_btn"
             android:text="Name"
             android:textAlignment="center"
             android:textSize="20sp"
@@ -46,9 +45,11 @@
 
         <TextView
             android:id="@+id/user_id"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
             android:text="User id"
+            android:background="@drawable/round_corners_20alfa_btn"
             android:textAlignment="center"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +60,7 @@
             android:id="@+id/karma"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="11dp"
             android:text="Karma:"
             android:textAlignment="center"
             android:textSize="12sp"
@@ -68,13 +69,12 @@
             app:layout_constraintTop_toBottomOf="@+id/user_id" />
 
         <TextView
-            android:id="@+id/subreddits"
+            android:id="@+id/subscribers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Subreddits:"
+            android:text="Subscribers:"
             android:textAlignment="center"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/karma" />

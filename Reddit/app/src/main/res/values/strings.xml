@@ -18,15 +18,10 @@
     <string name="logout_message">All local data will be deleted.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="no_connection">Check the network connection</string>
     <string name="login_via_reddit">Login</string>
     <string name="skip">Skip</string>
+    <string name="ready">Ready</string>
     <string name="successful_authorization">Successful login</string>
-
-    <!--string-array name="button_array">
-        <string>Пропустить</string>
-        <string>Пропустить</string>
-        <item>Готово</item>
-    </string-array-->
 </resources>

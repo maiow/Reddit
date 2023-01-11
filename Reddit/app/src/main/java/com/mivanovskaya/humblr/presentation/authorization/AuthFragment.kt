@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.presentation.auth
+package com.mivanovskaya.humblr.presentation.authorization
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -34,21 +34,21 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        startAuth()
-        tokenObserve(createSharedPreference(TOKEN_SHARED_NAME))
-        loadingObserve()
+        startAuthorization()
+        saveToken(createSharedPreference(TOKEN_SHARED_NAME))
+        updateUiOnLoadStateChange()
         viewModel.createToken(args.code)
         Log.e(TAG, "Created Token: ${args.code}")
     }
 
-    private fun startAuth() {
+    private fun startAuthorization() {
         binding.authButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CALL))
             startActivity(intent)
         }
     }
 
-    private fun tokenObserve(preferences: SharedPreferences) {
+    private fun saveToken(preferences: SharedPreferences) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.token.collect { token ->
                 preferences.edit().putString(TOKEN_SHARED_KEY, token).apply()
@@ -57,10 +57,9 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         }
     }
 
-    private fun loadingObserve() {
+    private fun updateUiOnLoadStateChange() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loadState.collect { loadState ->
-                Log.d(TAG, "loadingObserve: $loadState")
                 when (loadState) {
                     LoadState.START ->
                         setLoadState(
@@ -68,18 +67,19 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                             textIsVisible = false,
                             progressIsVisible = false
                         )
-                    LoadState.LOADING -> setLoadState(
-                        buttonIsEnabled = false,
-                        textIsVisible = false,
-                        progressIsVisible = true
-                    )
+                    LoadState.LOADING ->
+                        setLoadState(
+                            buttonIsEnabled = false,
+                            textIsVisible = false,
+                            progressIsVisible = true
+                        )
                     LoadState.SUCCESS -> {
                         setLoadState(
                             buttonIsEnabled = false,
                             textIsVisible = true,
                             progressIsVisible = false
                         )
-                        findNavController().navigate(R.id.action_authFragment_to_navigation_home)
+                        findNavController().navigate(R.id.action_navigation_auth_to_navigation_home)
                     }
                     LoadState.ERROR -> {
                         setLoadState(
@@ -88,7 +88,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                             progressIsVisible = false
                         )
                         binding.text.text = loadState.message
-                        Log.e(TAG, "loadingObserve: ${loadState.message}")
+                        Log.e(TAG, "loadState: ${loadState.message}")
                     }
                 }
             }

@@ -2,7 +2,7 @@ package com.mivanovskaya.humblr.presentation.profile
 
 import androidx.lifecycle.viewModelScope
 import com.mivanovskaya.humblr.data.repository.ProfileRemoteRepositoryImpl
-import com.mivanovskaya.humblr.domain.models.FriendsState
+import com.mivanovskaya.humblr.domain.state.FriendsState
 import com.mivanovskaya.humblr.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

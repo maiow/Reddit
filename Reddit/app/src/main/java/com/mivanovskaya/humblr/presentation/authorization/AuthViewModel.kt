@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.presentation.auth
+package com.mivanovskaya.humblr.presentation.authorization
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -27,7 +27,6 @@ class AuthViewModel @Inject constructor(private val apiToken: ApiToken) : BaseVi
                 _loadState.emit(LoadState.LOADING)
                 accessToken = START_REQUEST
                 accessToken = try {
-                    Log.e(TAG, "code received, trying to get token")
                      apiToken.getToken(code = code).access_token
                 } catch (e: Exception) {
                     _loadState.emit(LoadState.ERROR.apply { message = e.message.toString() })

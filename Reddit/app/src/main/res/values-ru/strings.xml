@@ -7,6 +7,7 @@
     <string name="logout_message">Все сохраненные данные будут удалены.</string>
     <string name="logout_title">Вы уверены, что хотите выйти?</string>
     <string name="skip">Пропустить</string>
+    <string name="ready">Готово</string>
     <string name="auth_under_logo">Найди единомышленников с Humblr</string>
     <string-array name="onboarding_texts_array1">
         <item>Добро пожаловать в Humblr</item>

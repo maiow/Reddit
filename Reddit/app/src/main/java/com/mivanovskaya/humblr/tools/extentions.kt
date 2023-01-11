@@ -8,35 +8,6 @@ import com.mivanovskaya.humblr.R
 import com.mivanovskaya.humblr.data.api.dto.profileDto.Children
 import com.mivanovskaya.humblr.domain.models.Friend
 
-
-/*fun List<PhotoDto>.toListPhoto(): List<Photo> {
-    val newList = mutableListOf<Photo>()
-
-    this.forEach { item ->
-        newList.add(item.toPhoto())
-    }
-    return newList
-}
-
-fun List<DigestDto>.toListDigest(): List<Digest> {
-    val newList = mutableListOf<Digest>()
-
-    this.forEach { item ->
-        newList.add(item.toDigest())
-    }
-    return newList
-}
-
-fun List<DigestTagDto>.toListDigestTag(): List<DigestTag> {
-    return this.map { item -> item.toDigestTag() }
-}
-
-fun List<PhotoDto>.toListPhotoEntity(): List<PhotoEntity> {
-    return this.map {
-        it.toPhotoEntity()
-    }
-}*/
-
 fun List<Children>.toListFriends(): List<Friend> {
     return this.map { item -> item.toFriend() }
 }
@@ -46,14 +17,6 @@ fun ImageView.loadImage(urls: String) {
         .load(urls)
         .error(R.drawable.error_image)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
-        .placeholder(R.drawable.placeholder)
-        .into(this)
-}
-
-fun ImageView.loadImage(imageId: Int) {
-    Glide.with(this)
-        .load(imageId)
-        .error(R.drawable.error_image)
         .placeholder(R.drawable.placeholder)
         .into(this)
 }
