@@ -12,7 +12,7 @@
     <string-array name="onboarding_texts_array2">
         <item>Communities of all kinds of interests are gathered here</item>
         <item>You can find new subs by interests and see the subs you are subscribed to</item>
-        <item>The favorites tab stores bookmarks with comments and subs. In the profile you will find information about yourself</item>
+        <item>The favorites tab stores bookmarks with comments and subs. You will find information about yourself in the profile</item>
     </string-array>
     <string name="logout_title">Are you sure you want to logout?</string>
     <string name="logout_message">All local data will be deleted.</string>

@@ -37,7 +37,11 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
             )
         )
         binding.viewPager.registerOnPageChangeCallback(
-            ChangeButtonTextOnPageChange(binding.skipButton, requireContext())
+            ChangeButtonTextOnPageChange(
+                binding.skipButton,
+                requireContext(),
+                resources.getStringArray(R.array.onboarding_texts_array1).size
+            )
         )
     }
 
