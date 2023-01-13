@@ -4,8 +4,9 @@ import com.mivanovskaya.humblr.domain.models.FriendsWrapper
 
 /**тут ли должен лежать?*/
 
-sealed class FriendsState{
-    data class Success(val data: FriendsWrapper): FriendsState()
+sealed class FriendsState {
     object NotStartedYet : FriendsState()
     object Loading : FriendsState()
+    data class Content(val data: FriendsWrapper) : FriendsState()
+    data class Error(var message: String = "") : FriendsState()
 }

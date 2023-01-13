@@ -3,7 +3,7 @@ package com.mivanovskaya.humblr.domain.models
 data class Profile(
     var name: String?,
     var id: String,
-    var urlProfilePic: String?,
+    var urlAvatar: String?,
     var more_infos: UserDataSubscribers?,
     var total_karma: Int?,
 )

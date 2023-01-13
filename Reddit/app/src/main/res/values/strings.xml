@@ -24,4 +24,10 @@
     <string name="skip">Skip</string>
     <string name="ready">Ready</string>
     <string name="successful_authorization">Successful login</string>
+    <string name="list_of_friends">List of Friends</string>
+    <string name="clear_saved">Clear Saved</string>
+    <string name="logout">Logout</string>
+    <string name="karma">Karma: %1$d</string>
+    <string name="user_id">Id: %1$s</string>
+    <string name="followers">Followers: %1$s</string>
 </resources>

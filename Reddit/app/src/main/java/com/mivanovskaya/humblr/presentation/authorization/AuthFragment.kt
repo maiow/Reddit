@@ -18,7 +18,7 @@ import com.mivanovskaya.humblr.data.api.CALL
 import com.mivanovskaya.humblr.data.api.TOKEN_ENABLED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
-import com.mivanovskaya.humblr.data.state.LoadState
+import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.databinding.FragmentAuthBinding
 import com.mivanovskaya.humblr.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,21 +59,21 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
     private fun updateUiOnLoadStateChange() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.loadState.collect { loadState ->
-                when (loadState) {
-                    LoadState.START ->
+            viewModel.state.collect { state ->
+                when (state) {
+                    LoadState.NotStartedYet ->
                         setLoadState(
                             buttonIsEnabled = true,
                             textIsVisible = false,
                             progressIsVisible = false
                         )
-                    LoadState.LOADING ->
+                    LoadState.Loading ->
                         setLoadState(
                             buttonIsEnabled = false,
                             textIsVisible = false,
                             progressIsVisible = true
                         )
-                    LoadState.SUCCESS -> {
+                    is LoadState.Content -> {
                         setLoadState(
                             buttonIsEnabled = false,
                             textIsVisible = true,
@@ -81,14 +81,14 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                         )
                         findNavController().navigate(R.id.action_navigation_auth_to_navigation_home)
                     }
-                    LoadState.ERROR -> {
+                    is LoadState.Error -> {
                         setLoadState(
                             buttonIsEnabled = true,
                             textIsVisible = true,
                             progressIsVisible = false
                         )
-                        binding.text.text = loadState.message
-                        Log.e(TAG, "loadState: ${loadState.message}")
+                        binding.text.text = state.message
+                        Log.e(TAG, "loading error: ${state.message}")
                     }
                 }
             }

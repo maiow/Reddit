@@ -16,8 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
-    override fun initBinding(inflater: LayoutInflater) = FragmentOnboardingBinding.inflate(inflater)
     private var mediator: TabLayoutMediator? = null
+
+    override fun initBinding(inflater: LayoutInflater) = FragmentOnboardingBinding.inflate(inflater)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,9 +33,12 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
             resources.getStringArray(R.array.onboarding_texts_array1),
             resources.getStringArray(R.array.onboarding_texts_array2),
             arrayOf(
-                ResourcesCompat.getDrawable(resources, R.drawable.onb_image1, null)!!,
-                ResourcesCompat.getDrawable(resources, R.drawable.onb_image2, null)!!,
-                ResourcesCompat.getDrawable(resources, R.drawable.onb_image3, null)!!
+                ResourcesCompat.getDrawable(resources, R.drawable.onb_image1, null)
+                    ?: error("lost onboarding image1"),
+                ResourcesCompat.getDrawable(resources, R.drawable.onb_image2, null)
+                    ?: error("lost onboarding image2"),
+                ResourcesCompat.getDrawable(resources, R.drawable.onb_image3, null)
+                    ?: error("lost onboarding image3"),
             )
         )
         binding.viewPager.registerOnPageChangeCallback(

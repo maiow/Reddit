@@ -8,7 +8,7 @@ data class ProfileDto(
     var name: String?,
     var id: String,
     @SerializedName("icon_img")
-    var urlProfilePic: String?,
+    var urlAvatar: String?,
 
     @SerializedName("subreddit")
     var more_infos: UserDataSubDto?,
@@ -25,7 +25,7 @@ data class ProfileDto(
     @SerializedName("created_utc")
     var account_creation_date: Long?
 ) {
-    fun toProfile() = Profile(name, id, urlProfilePic, more_infos?.toUserDataSub(), total_karma)
+    fun toProfile() = Profile(name, id, urlAvatar, more_infos?.toUserDataSub(), total_karma)
 }
 
 data class UserDataSubDto(

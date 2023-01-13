@@ -58,7 +58,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_standard"
         android:text="@string/auth_under_logo"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/successful_authorization"
-        android:textSize="25sp"
+        android:textSize="@dimen/standard_font_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/auth_button" />

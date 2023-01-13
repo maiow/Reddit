@@ -13,7 +13,6 @@ import com.mivanovskaya.humblr.R
 import com.mivanovskaya.humblr.data.api.TOKEN_ENABLED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
-import com.mivanovskaya.humblr.data.state.LoadState
 import com.mivanovskaya.humblr.databinding.FragmentProfileBinding
 import com.mivanovskaya.humblr.domain.state.ProfileState
 import com.mivanovskaya.humblr.tools.BaseFragment
@@ -35,9 +34,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun getLoadingState() {
         viewModel.getProfile()
-        if (viewModel.loadState.value == LoadState.ERROR) {
-            binding.error.isVisible = true
-        }
         viewLifecycleOwner.lifecycleScope
             .launchWhenStarted {
                 viewModel.state.collect { state -> updateUi(state) }
@@ -48,32 +44,39 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         when (state) {
             ProfileState.NotStartedYet -> {}
             ProfileState.Loading -> {
-                binding.progressBar.isVisible = true
                 showBindItems(false)
             }
-            is ProfileState.Success -> {
+            is ProfileState.Content -> {
                 showBindItems(true)
-                binding.progressBar.isVisible = false
+                getClearedUrlAvatar(state.data.urlAvatar!!)
+
                 binding.userName.text = state.data.name
-                binding.userId.text = "Id: " + state.data.id
-                binding.subscribers.text  = "Followers: ${state.data.more_infos?.subscribers ?:0}"
-                getClearedUrlProfilePic(state.data.urlProfilePic!!)
-                binding.karma.text = "Karma: " + state.data.total_karma
+                binding.userId.text = getString(R.string.user_id, state.data.id)
+                binding.subscribers.text =
+                    getString(R.string.followers, state.data.more_infos?.subscribers ?: "0")
+                binding.karma.text = getString(R.string.karma, state.data.total_karma ?: 0)
+
                 setFriendsListClick(state.data.id)
+            }
+            is ProfileState.Error -> {
+                binding.progressBar.isVisible = false
+                binding.error.isVisible = true
+                showBindItems(false)
             }
         }
     }
 
     private fun showBindItems(show: Boolean) {
-        binding.frame.isVisible = show
+        binding.userDataFrame.isVisible = show
         binding.buttonListOfFriends.isVisible = show
         binding.buttonClearSaved.isVisible = show
         binding.buttonLogout.isVisible = show
+        binding.progressBar.isVisible = !show
     }
 
-    private fun getClearedUrlProfilePic(urlProfilePic: String) {
-    val questionMark = urlProfilePic.indexOf('?', 0)
-    loadAvatar(urlProfilePic.substring(0, questionMark))
+    private fun getClearedUrlAvatar(urlAvatar: String) {
+        val questionMark = urlAvatar.indexOf('?', 0)
+        loadAvatar(urlAvatar.substring(0, questionMark))
     }
 
     private fun loadAvatar(url: String) {
@@ -82,15 +85,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun setFriendsListClick(userId: String) {
         binding.buttonListOfFriends.setOnClickListener {
-            findNavController().navigate(ProfileFragmentDirections
-                .actionNavigationProfileToNavigationFriends(userId))
+            findNavController().navigate(
+                ProfileFragmentDirections
+                    .actionNavigationProfileToNavigationFriends(userId)
+            )
         }
     }
 
     private fun setLogoutButton(preferences: SharedPreferences) {
         binding.buttonLogout.setOnClickListener {
             setAlertDialog(preferences)
-            true
         }
     }
 

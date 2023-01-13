@@ -8,7 +8,7 @@
     tools:context=".presentation.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frame"
+        android:id="@+id/user_data_frame"
         android:layout_width="300dp"
         android:layout_height="244dp"
         android:layout_marginTop="80dp"
@@ -24,8 +24,6 @@
             android:layout_height="95dp"
             android:layout_marginTop="19dp"
             android:background="@drawable/rounded"
-            android:textAlignment="center"
-            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +36,7 @@
             android:background="@drawable/round_corners_20alfa_btn"
             android:text="Name"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="@dimen/standard_font_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -48,7 +46,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
-            android:text="User id"
+            android:text="@string/user_id"
             android:background="@drawable/round_corners_20alfa_btn"
             android:textAlignment="center"
             android:textSize="16sp"
@@ -61,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
-            android:text="Karma:"
+            android:text="@string/karma"
             android:textAlignment="center"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,12 +85,12 @@
         android:layout_height="38dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/round_corners_btn"
-        android:text="List of Friends"
+        android:text="@string/list_of_friends"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@id/button_clear_saved"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frame" />
+        app:layout_constraintTop_toBottomOf="@+id/user_data_frame" />
 
     <Button
         android:id="@+id/button_clear_saved"
@@ -100,7 +98,7 @@
         android:layout_height="38dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/round_corners_btn"
-        android:text="Clear Saved"
+        android:text="@string/clear_saved"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +110,7 @@
         android:layout_height="38dp"
         android:layout_marginTop="51dp"
         android:background="@drawable/round_corners_btn"
-        android:text="Logout"
+        android:text="@string/logout"
         android:textAllCaps="false"
         app:backgroundTint="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +123,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:indeterminateTint="@color/blue"
-        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -136,8 +133,7 @@
         android:layout_height="wrap_content"
         android:background="@color/red"
         android:paddingHorizontal="85dp"
-        android:paddingVertical="8dp"
-        android:visibility="invisible"
+        android:paddingVertical="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

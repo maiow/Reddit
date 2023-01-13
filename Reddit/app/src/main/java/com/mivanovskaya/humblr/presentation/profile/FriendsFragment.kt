@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.mivanovskaya.humblr.data.state.LoadState
 import com.mivanovskaya.humblr.databinding.FragmentFriendsBinding
 import com.mivanovskaya.humblr.domain.state.FriendsState
 import com.mivanovskaya.humblr.tools.BaseFragment
@@ -21,9 +20,6 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getFriends()
-        if (viewModel.loadState.value == LoadState.ERROR) {
-            binding.error.isVisible = true
-        }
         viewLifecycleOwner.lifecycleScope
             .launchWhenStarted {
                 viewModel.state.collect { state -> updateUi(state) }
@@ -36,9 +32,13 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
             FriendsState.Loading -> {
                 binding.progressBar.isVisible = true
             }
-            is FriendsState.Success -> {
+            is FriendsState.Content -> {
                 binding.progressBar.isVisible = false
                 binding.friendsTest.text = state.data.data.friends_list.toString()
+            }
+            is FriendsState.Error -> {
+                binding.progressBar.isVisible = false
+                binding.error.isVisible = true
             }
         }
     }

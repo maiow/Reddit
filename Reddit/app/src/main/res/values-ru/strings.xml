@@ -24,4 +24,10 @@
     <string name="title_favourites">Избранное</string>
     <string name="no_connection">Проверьте подключение к сети</string>
     <string name="title_home">Сабреддиты</string>
+    <string name="list_of_friends">Список друзей</string>
+    <string name="clear_saved">Очистить сохраненные</string>
+    <string name="logout">Выйти</string>
+    <string name="karma">Карма: %1$d</string>
+    <string name="user_id">Ваш id: %1$s</string>
+    <string name="followers">Фолловеры: %1$s</string>
 </resources>

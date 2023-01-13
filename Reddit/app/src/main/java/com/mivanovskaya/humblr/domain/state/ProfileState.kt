@@ -4,8 +4,9 @@ import com.mivanovskaya.humblr.domain.models.Profile
 
 /**тут ли должен лежать?*/
 
-sealed class ProfileState{
-    data class Success(val data: Profile): ProfileState()
+sealed class ProfileState {
     object NotStartedYet : ProfileState()
-    object Loading: ProfileState()
+    object Loading : ProfileState()
+    data class Content(val data: Profile) : ProfileState()
+    data class Error(var message: String = "") : ProfileState()
 }

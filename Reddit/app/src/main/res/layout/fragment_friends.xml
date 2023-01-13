@@ -24,7 +24,6 @@
         android:layout_marginBottom="60dp"
         android:indeterminateTint="@color/blue"
         app:layout_constraintBottom_toTopOf="@+id/error"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -34,8 +33,7 @@
         android:layout_height="wrap_content"
         android:background="@color/red"
         android:paddingHorizontal="85dp"
-        android:paddingVertical="8dp"
-        android:visibility="invisible"
+        android:paddingVertical="@dimen/margin_standard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
