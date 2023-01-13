@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
     override fun initBinding(inflater: LayoutInflater) = FragmentOnboardingBinding.inflate(inflater)
+    private var mediator: TabLayoutMediator? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,12 +41,15 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
             ChangeButtonTextOnPageChange(
                 binding.skipButton,
                 requireContext(),
-                resources.getStringArray(R.array.onboarding_texts_array1).size
+                resources.getStringArray(R.array.onboarding_texts_array1).lastIndex
             )
         )
     }
 
-    private fun setTabs() = TabLayoutMediator(binding.tabs, binding.viewPager) { _, _ -> }.attach()
+    private fun setTabs() {
+        mediator = TabLayoutMediator(binding.tabs, binding.viewPager) { _, _ -> }
+        mediator!!.attach()
+    }
 
     private fun setAuthorizeButton() {
         binding.skipButton.background = null
@@ -55,7 +59,14 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     }
 
     private fun saveOnboardingShown() {
+        //val prefs = requireContext().getSharedPreferences(TOKEN_SHARED_NAME, Context.MODE_PRIVATE)
         val prefs = createSharedPreference(TOKEN_SHARED_NAME)
         prefs.edit().putBoolean(ONBOARDING_IS_SHOWN, true).apply()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mediator?.detach()
+        mediator = null
     }
 }
