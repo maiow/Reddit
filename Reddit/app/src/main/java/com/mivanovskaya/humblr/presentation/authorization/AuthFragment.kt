@@ -20,6 +20,7 @@ import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
 import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.databinding.FragmentAuthBinding
+import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
 import com.mivanovskaya.humblr.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -35,7 +36,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         startAuthorization()
-        saveToken(createSharedPreference(TOKEN_SHARED_NAME))
+        saveToken(SharedPrefsService.create(requireContext(),TOKEN_SHARED_NAME))
         updateUiOnLoadStateChange()
         viewModel.createToken(args.code)
         Log.e(TAG, "Created Token: ${args.code}")

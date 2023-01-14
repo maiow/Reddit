@@ -1,6 +1,5 @@
 package com.mivanovskaya.humblr.presentation.profile
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.mivanovskaya.humblr.R
-import com.mivanovskaya.humblr.data.api.TOKEN_ENABLED_KEY
-import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_KEY
-import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
 import com.mivanovskaya.humblr.databinding.FragmentProfileBinding
 import com.mivanovskaya.humblr.domain.state.ProfileState
 import com.mivanovskaya.humblr.tools.BaseFragment
@@ -29,7 +25,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         getLoadingState()
-        setLogoutButton(createSharedPreference(TOKEN_SHARED_NAME))
+        setLogoutButton()
     }
 
     private fun getLoadingState() {
@@ -48,7 +44,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             }
             is ProfileState.Content -> {
                 showBindItems(true)
-                getClearedUrlAvatar(state.data.urlAvatar!!)
+                loadAvatar(state.data.urlAvatar!!)// ?: ...
 
                 binding.userName.text = state.data.name
                 binding.userId.text = getString(R.string.user_id, state.data.id)
@@ -74,13 +70,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.progressBar.isVisible = !show
     }
 
-    private fun getClearedUrlAvatar(urlAvatar: String) {
-        val questionMark = urlAvatar.indexOf('?', 0)
-        loadAvatar(urlAvatar.substring(0, questionMark))
-    }
-
     private fun loadAvatar(url: String) {
-        binding.imageView.loadImage(url)
+        binding.imageView.loadImage(
+            viewModel.getClearedUrlAvatar(url)
+        )
     }
 
     private fun setFriendsListClick(userId: String) {
@@ -92,20 +85,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
     }
 
-    private fun setLogoutButton(preferences: SharedPreferences) {
+    private fun setLogoutButton() {
         binding.buttonLogout.setOnClickListener {
-            setAlertDialog(preferences)
+            setAlertDialog()
         }
     }
 
-    private fun setAlertDialog(preferences: SharedPreferences) {
+    private fun setAlertDialog() {
         val dialog = AlertDialog.Builder(requireContext())
         dialog.setTitle(R.string.logout_title)
             .setMessage(R.string.logout_message)
             .setPositiveButton(R.string.yes) { _, _ ->
-                preferences.edit().putString(TOKEN_SHARED_KEY, "").apply()
-                preferences.edit().putBoolean(TOKEN_ENABLED_KEY, false).apply()
-                findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationAuth())
+                viewModel.logout(requireContext(), this)
             }
             .setNegativeButton(R.string.no) { _, _ ->
                 dialog.create().hide()
