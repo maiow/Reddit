@@ -1,6 +1,7 @@
 package com.mivanovskaya.humblr.data.sharedprefs
 
-//TODO: вот с этого начать
+//TODO: вот это удалить, когда финализирую SP сервис в domain
+
 /*
 private const val SHARED_PREFS_NAME = "shared_prefs_name"
 private const val SHARED_KEY = "shared_key"

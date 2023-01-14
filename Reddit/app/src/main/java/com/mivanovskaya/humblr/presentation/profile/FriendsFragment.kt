@@ -7,7 +7,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.mivanovskaya.humblr.databinding.FragmentFriendsBinding
-import com.mivanovskaya.humblr.domain.state.FriendsState
+import com.mivanovskaya.humblr.domain.models.FriendsWrapper
+import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +20,11 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        getLoadingState()
+    }
+
+    private fun getLoadingState() {
         viewModel.getFriends()
         viewLifecycleOwner.lifecycleScope
             .launchWhenStarted {
@@ -26,17 +32,18 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
             }
     }
 
-    private fun updateUi(state: FriendsState) {
+    private fun updateUi(state: LoadState) {
         when (state) {
-            FriendsState.NotStartedYet -> {}
-            FriendsState.Loading -> {
+            LoadState.NotStartedYet -> {}
+            LoadState.Loading -> {
                 binding.progressBar.isVisible = true
             }
-            is FriendsState.Content -> {
+            is LoadState.Content -> {
+                val data = state.data as FriendsWrapper
                 binding.progressBar.isVisible = false
-                binding.friendsTest.text = state.data.data.friends_list.toString()
+                binding.friendsTest.text = data.data.friends_list.toString()
             }
-            is FriendsState.Error -> {
+            is LoadState.Error -> {
                 binding.progressBar.isVisible = false
                 binding.error.isVisible = true
             }

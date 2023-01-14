@@ -8,15 +8,18 @@ import com.mivanovskaya.humblr.data.api.ONBOARDING_IS_SHOWN
 import com.mivanovskaya.humblr.data.api.TOKEN_ENABLED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
 import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor() : ViewModel() {
 
     fun setNavigation(context: Context, fragment: Fragment) {
         val prefs = SharedPrefsService.create(context, TOKEN_SHARED_NAME)
 
         /**для тестирования без онбординга раскомментировать две строки ниже
          * и закомментировать все остальные ниже этих двух*/
-        // fragment.findNavController().navigate(MainFragmentDirections
+        // fragment.findNavController().navigateToFriends(MainFragmentDirections
         //     .actionMainFragmentToAuthFragment())
 
         val toOnboardingFragment = MainFragmentDirections.actionMainFragmentToNavigationOnboarding()

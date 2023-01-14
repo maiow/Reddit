@@ -6,14 +6,12 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-/** теперь не получится использовать, т.к. у всех фрагментов силд классы стейты разные? */
+abstract class BaseViewModel : ViewModel() {
 
-//abstract class BaseViewModel : ViewModel() {
-//
-//    protected val _loadState = MutableStateFlow(LoadState.START)
-//    val loadState = _loadState.asStateFlow()
-//
-//    protected val handler = CoroutineExceptionHandler { _, _ ->
-//        _loadState.value = LoadState.ERROR
-//    }
-//}
+    protected val _state = MutableStateFlow<LoadState>(LoadState.NotStartedYet)
+    val state = _state.asStateFlow()
+
+    protected val handler = CoroutineExceptionHandler { _, e ->
+        _state.value = LoadState.Error("${e.message}")
+    }
+}

@@ -36,6 +36,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         startAuthorization()
+        //TODO: разобраться, почему после создания .createEncrypted... в запрос токен не включается
         saveToken(SharedPrefsService.create(requireContext(),TOKEN_SHARED_NAME))
         updateUiOnLoadStateChange()
         viewModel.createToken(args.code)

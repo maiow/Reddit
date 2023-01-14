@@ -7,10 +7,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.mivanovskaya.humblr.R
 import com.mivanovskaya.humblr.databinding.FragmentProfileBinding
-import com.mivanovskaya.humblr.domain.state.ProfileState
+import com.mivanovskaya.humblr.domain.models.Profile
+import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.tools.BaseFragment
 import com.mivanovskaya.humblr.tools.loadImage
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,30 +36,33 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             }
     }
 
-    private fun updateUi(state: ProfileState) {
+    private fun updateUi(state: LoadState) {
         when (state) {
-            ProfileState.NotStartedYet -> {}
-            ProfileState.Loading -> {
+            LoadState.NotStartedYet -> {}
+            LoadState.Loading -> {
                 showBindItems(false)
             }
-            is ProfileState.Content -> {
-                showBindItems(true)
-                loadAvatar(state.data.urlAvatar!!)// ?: ...
-
-                binding.userName.text = state.data.name
-                binding.userId.text = getString(R.string.user_id, state.data.id)
-                binding.subscribers.text =
-                    getString(R.string.followers, state.data.more_infos?.subscribers ?: "0")
-                binding.karma.text = getString(R.string.karma, state.data.total_karma ?: 0)
-
-                setFriendsListClick(state.data.id)
-            }
-            is ProfileState.Error -> {
+            is LoadState.Error -> {
                 binding.progressBar.isVisible = false
                 binding.error.isVisible = true
                 showBindItems(false)
             }
+            is LoadState.Content -> {
+                val data = state.data as Profile
+                showBindItems(true)
+                loadAvatar(data.urlAvatar!!)// ?: ...
+                loadProfileTexts(data)
+                setFriendsListClick(data.id)
+            }
         }
+    }
+
+    private fun loadProfileTexts(data: Profile) {
+        binding.userName.text = data.name
+        binding.userId.text = getString(R.string.user_id, data.id)
+        binding.subscribers.text =
+            getString(R.string.followers, data.more_infos?.subscribers ?: "0")
+        binding.karma.text = getString(R.string.karma, data.total_karma ?: 0)
     }
 
     private fun showBindItems(show: Boolean) {
@@ -78,10 +81,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun setFriendsListClick(userId: String) {
         binding.buttonListOfFriends.setOnClickListener {
-            findNavController().navigate(
-                ProfileFragmentDirections
-                    .actionNavigationProfileToNavigationFriends(userId)
-            )
+            viewModel.navigateToFriends(userId, this)
         }
     }
 

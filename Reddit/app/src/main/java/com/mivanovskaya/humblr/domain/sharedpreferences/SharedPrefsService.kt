@@ -2,17 +2,20 @@ package com.mivanovskaya.humblr.domain.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
 
 interface StorageService {
     fun create(context: Context, key: String): SharedPreferences
+    fun createEncrypted(context: Context, key: String): SharedPreferences
     fun save(context: Context, key: String, data: String)
     fun load(context: Context, key: String): String?
 }
 
 object SharedPrefsService : StorageService {
 
-    // createSharedPreference(key: String) =
-    // requireContext().getSharedPreferences(key, Context.MODE_PRIVATE)
     override fun create(context: Context, key: String): SharedPreferences {
         return context.getSharedPreferences(key, Context.MODE_PRIVATE)
     }
@@ -26,16 +29,28 @@ object SharedPrefsService : StorageService {
         return context.getSharedPreferences(key, Context.MODE_PRIVATE).getString(key, null)
     }
 
-/*     override fun load(context: Context, key: String): String? {
-        return getSharedPreferences(key).getString(key, null)
+    override fun createEncrypted(context: Context, key: String): SharedPreferences {
+        val masterKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val shard = EncryptedSharedPreferences.create(
+            context,
+            TOKEN_SHARED_NAME, //"secret_shared_prefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+        Log.e("Kart", "EncryptedSharedPreferences: $shard")
+        return shard
     }
 
-   // Always use local source for some settings, or always backed up source for others
-    private fun getSharedPreferences(key: String) = when (key) {
-        "localConfig" -> localSharedPreferences
-        "networkSpecificConfigs" -> localSharedPreferences // Not send network names anywhere
-        else -> if (useBackup) backedUpSharedPreferences else localSharedPreferences
-    }*/
+/*
+
+    // use the shared preferences and editor as you normally would
+   // var editor = sharedPreferences.edit()
+
+ */
 
     private fun SharedPreferences.save(key: String, value: String) {
         val edit = this.edit()
