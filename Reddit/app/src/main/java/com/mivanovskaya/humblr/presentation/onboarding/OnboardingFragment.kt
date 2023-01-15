@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mivanovskaya.humblr.R
 import com.mivanovskaya.humblr.data.api.ONBOARDING_IS_SHOWN
-import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
 import com.mivanovskaya.humblr.databinding.FragmentOnboardingBinding
 import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
 import com.mivanovskaya.humblr.tools.BaseFragment
@@ -64,8 +63,7 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     }
 
     private fun saveOnboardingShown() {
-        val prefs = SharedPrefsService.create(requireContext(), TOKEN_SHARED_NAME)
-        prefs.edit().putBoolean(ONBOARDING_IS_SHOWN, true).apply()
+        SharedPrefsService.save(requireContext(), ONBOARDING_IS_SHOWN, true)
     }
 
     override fun onDestroyView() {

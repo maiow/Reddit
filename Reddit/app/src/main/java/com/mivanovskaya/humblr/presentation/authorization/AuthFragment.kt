@@ -2,7 +2,6 @@ package com.mivanovskaya.humblr.presentation.authorization
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,13 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.mivanovskaya.humblr.R
-import com.mivanovskaya.humblr.data.api.CALL
-import com.mivanovskaya.humblr.data.api.TOKEN_ENABLED_KEY
-import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_KEY
-import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
+import com.mivanovskaya.humblr.data.api.*
 import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.databinding.FragmentAuthBinding
-import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
 import com.mivanovskaya.humblr.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -35,27 +30,15 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        startAuthorization()
-        //TODO: разобраться, почему после создания .createEncrypted... в запрос токен не включается
-        saveToken(SharedPrefsService.create(requireContext(),TOKEN_SHARED_NAME))
+        setAuthorizationButton()
         updateUiOnLoadStateChange()
-        viewModel.createToken(args.code)
-        Log.e(TAG, "Created Token: ${args.code}")
+        viewModel.createToken(args.code, requireContext())
     }
 
-    private fun startAuthorization() {
+    private fun setAuthorizationButton() {
         binding.authButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CALL))
             startActivity(intent)
-        }
-    }
-
-    private fun saveToken(preferences: SharedPreferences) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.token.collect { token ->
-                preferences.edit().putString(TOKEN_SHARED_KEY, token).apply()
-                preferences.edit().putBoolean(TOKEN_ENABLED_KEY, true).apply()
-            }
         }
     }
 
@@ -64,19 +47,19 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             viewModel.state.collect { state ->
                 when (state) {
                     LoadState.NotStartedYet ->
-                        setLoadState(
+                        setViewsStates(
                             buttonIsEnabled = true,
                             textIsVisible = false,
                             progressIsVisible = false
                         )
                     LoadState.Loading ->
-                        setLoadState(
+                        setViewsStates(
                             buttonIsEnabled = false,
                             textIsVisible = false,
                             progressIsVisible = true
                         )
                     is LoadState.Content -> {
-                        setLoadState(
+                        setViewsStates(
                             buttonIsEnabled = false,
                             textIsVisible = true,
                             progressIsVisible = false
@@ -84,7 +67,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                         findNavController().navigate(R.id.action_navigation_auth_to_navigation_home)
                     }
                     is LoadState.Error -> {
-                        setLoadState(
+                        setViewsStates(
                             buttonIsEnabled = true,
                             textIsVisible = true,
                             progressIsVisible = false
@@ -97,7 +80,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         }
     }
 
-    private fun setLoadState(
+    private fun setViewsStates(
         buttonIsEnabled: Boolean,
         textIsVisible: Boolean,
         progressIsVisible: Boolean

@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.mivanovskaya.humblr.data.api.TOKEN_ENABLED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_KEY
-import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
 import com.mivanovskaya.humblr.domain.repository.ProfileRemoteRepository
 import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
 import com.mivanovskaya.humblr.domain.state.LoadState
@@ -34,9 +33,8 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun logout(context: Context, fragment: Fragment) {
-        val preferences = SharedPrefsService.create(context, TOKEN_SHARED_NAME)
-        preferences.edit().putString(TOKEN_SHARED_KEY, "").apply()
-        preferences.edit().putBoolean(TOKEN_ENABLED_KEY, false).apply()
+        SharedPrefsService.save(context, TOKEN_SHARED_KEY, "")
+        SharedPrefsService.save(context, TOKEN_ENABLED_KEY, false)
         fragment.findNavController()
             .navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationAuth())
     }

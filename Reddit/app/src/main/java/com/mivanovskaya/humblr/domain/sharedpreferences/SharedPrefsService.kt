@@ -2,59 +2,62 @@ package com.mivanovskaya.humblr.domain.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.mivanovskaya.humblr.data.api.SECRET_SHARED_KEY
+import com.mivanovskaya.humblr.data.api.SECRET_SHARED_NAME
+import com.mivanovskaya.humblr.data.api.TOKEN_ENABLED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_NAME
+import javax.inject.Singleton
 
 interface StorageService {
-    fun create(context: Context, key: String): SharedPreferences
-    fun createEncrypted(context: Context, key: String): SharedPreferences
-    fun save(context: Context, key: String, data: String)
-    fun load(context: Context, key: String): String?
+    fun create(context: Context): SharedPreferences
+    fun createEncrypted(context: Context): SharedPreferences
+    fun saveEncryptedToken(context: Context, data: String)
+    fun save(context: Context, key: String, data: Any?)
+    fun load(context: Context, key: String): Boolean
 }
 
+@Singleton
 object SharedPrefsService : StorageService {
 
-    override fun create(context: Context, key: String): SharedPreferences {
-        return context.getSharedPreferences(key, Context.MODE_PRIVATE)
+    override fun create(context: Context): SharedPreferences {
+        return context.getSharedPreferences(TOKEN_SHARED_NAME, Context.MODE_PRIVATE)
     }
 
-    override fun save(context: Context, key: String, data: String) {
-        val prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE)
-        prefs.save(key, data)
+    override fun save(context: Context, key: String, data: Any?) {
+        create(context).save(key, data)
     }
 
-    override fun load(context: Context, key: String): String? {
-        return context.getSharedPreferences(key, Context.MODE_PRIVATE).getString(key, null)
+    override fun load(context: Context, key: String): Boolean {
+        return create(context).getBoolean(key, false)
     }
 
-    override fun createEncrypted(context: Context, key: String): SharedPreferences {
+    override fun createEncrypted(context: Context): SharedPreferences {
         val masterKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
             .build()
 
-        val shard = EncryptedSharedPreferences.create(
+        return EncryptedSharedPreferences.create(
             context,
-            TOKEN_SHARED_NAME, //"secret_shared_prefs",
+            SECRET_SHARED_NAME,
             masterKey,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
-        Log.e("Kart", "EncryptedSharedPreferences: $shard")
-        return shard
     }
 
-/*
+    override fun saveEncryptedToken(context: Context, data: String) {
+        save(context, TOKEN_ENABLED_KEY, true)
+        return createEncrypted(context).edit().putString(SECRET_SHARED_KEY, data).apply()
+    }
 
-    // use the shared preferences and editor as you normally would
-   // var editor = sharedPreferences.edit()
-
- */
-
-    private fun SharedPreferences.save(key: String, value: String) {
+    private fun SharedPreferences.save(key: String, value: Any?) {
         val edit = this.edit()
-        edit.putString(key, value)
-        edit.commit() || throw Exception("Could not save $key to SharedPreferences")
+        if (value is String)
+            edit.putString(key, value)
+        if (value is Boolean)
+            edit.putBoolean(key, value)
+        edit.commit() || throw Exception("Could not save $value to SharedPreferences")
     }
 }
