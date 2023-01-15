@@ -50,7 +50,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             is LoadState.Content -> {
                 val data = state.data as Profile
                 showBindItems(true)
-                loadAvatar(data.urlAvatar!!)// ?: ...
+                if (data.urlAvatar != null) loadAvatar(data.urlAvatar!!)
                 loadProfileTexts(data)
                 setFriendsListClick(data.id)
             }
