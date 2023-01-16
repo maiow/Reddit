@@ -7,6 +7,42 @@
     android:background="@color/blue_alfa4"
     tools:context=".presentation.profile.FriendsFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/topAppBar"
+        style="@style/MyToolbarStyle"
+        android:layout_width="match_parent"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/button_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_arrow" />
+
+            <TextView
+                style="@style/MyToolbarStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/list_of_friends"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:src="@drawable/ic_info_24" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
         android:id="@+id/friends_test"
         android:layout_width="match_parent"
@@ -25,7 +61,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/progressbar" />
+        app:lottie_rawRes="@raw/progressbar"
+        app:lottie_speed="@dimen/progressbar_speed" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/error"

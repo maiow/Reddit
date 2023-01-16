@@ -25,13 +25,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         getLoadingState()
+        setFriendsListClick()
         setLogoutButton()
     }
 
     private fun getLoadingState() {
         viewModel.getProfile()
-        viewLifecycleOwner.lifecycleScope
-            .launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                 viewModel.state.collect { state -> updateUi(state) }
             }
     }
@@ -52,7 +52,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 showBindItems(true)
                 if (data.urlAvatar != null) loadAvatar(data.urlAvatar!!)
                 loadProfileTexts(data)
-                setFriendsListClick(data.id)
             }
         }
     }
@@ -60,9 +59,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun loadProfileTexts(data: Profile) {
         binding.userName.text = data.name
         binding.userId.text = getString(R.string.user_id, data.id)
-        binding.subscribers.text =
-            getString(R.string.followers, data.more_infos?.subscribers ?: "0")
         binding.karma.text = getString(R.string.karma, data.total_karma ?: 0)
+        binding.followers.text =
+            getString(R.string.followers, data.more_infos?.subscribers ?: "0")
     }
 
     private fun showBindItems(show: Boolean) {
@@ -79,9 +78,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         )
     }
 
-    private fun setFriendsListClick(userId: String) {
+    private fun setFriendsListClick() {
         binding.buttonListOfFriends.setOnClickListener {
-            viewModel.navigateToFriends(userId, this)
+            viewModel.navigateToFriends(this)
         }
     }
 

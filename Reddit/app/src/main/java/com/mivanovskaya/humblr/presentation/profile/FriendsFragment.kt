@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.mivanovskaya.humblr.databinding.FragmentFriendsBinding
 import com.mivanovskaya.humblr.domain.models.FriendsWrapper
 import com.mivanovskaya.humblr.domain.state.LoadState
@@ -22,12 +23,12 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         getLoadingState()
+        setToolbarBackButton()
     }
 
     private fun getLoadingState() {
         viewModel.getFriends()
-        viewLifecycleOwner.lifecycleScope
-            .launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                 viewModel.state.collect { state -> updateUi(state) }
             }
     }
@@ -47,6 +48,14 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
                 binding.progressBar.isVisible = false
                 binding.error.isVisible = true
             }
+        }
+    }
+
+    private fun setToolbarBackButton() {
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigate(
+                FriendsFragmentDirections.actionNavigationFriendsToNavigationProfile()
+            )
         }
     }
 }

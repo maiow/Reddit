@@ -67,9 +67,11 @@
         android:id="@+id/navigation_friends"
         android:name="com.mivanovskaya.humblr.presentation.profile.FriendsFragment"
         tools:layout="@layout/fragment_friends">
-        <argument
-            android:name="user_id"
-            android:defaultValue="" />
+        <action
+            android:id="@+id/action_navigation_friends_to_navigation_profile"
+            app:destination="@id/navigation_profile"
+            app:popUpTo="@id/navigation_profile"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <fragment
