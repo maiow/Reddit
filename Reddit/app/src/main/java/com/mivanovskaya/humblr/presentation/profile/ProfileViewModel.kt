@@ -39,10 +39,10 @@ class ProfileViewModel @Inject constructor(
             .navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationAuth())
     }
 
-    fun navigateToFriends(userId: String, fragment: Fragment) {
+    fun navigateToFriends(fragment: Fragment) {
         fragment.findNavController().navigate(
             ProfileFragmentDirections
-                .actionNavigationProfileToNavigationFriends(userId)
+                .actionNavigationProfileToNavigationFriends()
         )
     }
 }
