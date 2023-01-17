@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_alfa4">
+
+    <LinearLayout
+        android:id="@+id/friend_frame"
+        android:layout_width="150dp"
+        android:layout_height="176dp"
+        android:layout_marginTop="@dimen/user_margin_top"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/layout_bg"
+        android:elevation="@android:dimen/app_icon_size"
+        android:layout_margin="@dimen/header_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/friend_photo"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="@dimen/friend_photo_margin_top"
+            android:background="@drawable/rounded"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/friend_name"
+            android:layout_width="115dp"
+            android:layout_height="@dimen/header_padding"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:background="@drawable/round_corners_20alfa_btn"
+            android:textAlignment="center"
+            android:textSize="@dimen/medium_font_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/friend_photo" />
+
+        <TextView
+            android:id="@+id/friend_id"
+            android:layout_width="90dp"
+            android:layout_height="@dimen/profile_margin_top"
+            android:layout_marginTop="@dimen/profile_margin_top"
+            android:background="@drawable/round_corners_20alfa_btn"
+            android:text="@string/user_id"
+            android:textAlignment="center"
+            android:textSize="@dimen/karma_font_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/friend_name" />
+
+    </LinearLayout>
+</FrameLayout>

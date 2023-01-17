@@ -7,10 +7,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.mivanovskaya.humblr.databinding.FragmentFriendsBinding
 import com.mivanovskaya.humblr.domain.models.FriendsWrapper
 import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.tools.BaseFragment
+import com.mivanovskaya.humblr.tools.ListItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +20,10 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
 
     override fun initBinding(inflater: LayoutInflater) = FragmentFriendsBinding.inflate(inflater)
     private val viewModel by viewModels<FriendsViewModel>()
+
+    //TODO: начинаю с этого места
+    //задача данного adapter - зарегистрировать view types
+   // private val adapter = ListDelegationAdapter<List<ListItem>>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
