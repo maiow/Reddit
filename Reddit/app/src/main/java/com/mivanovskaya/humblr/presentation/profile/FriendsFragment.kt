@@ -21,22 +21,34 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
     override fun initBinding(inflater: LayoutInflater) = FragmentFriendsBinding.inflate(inflater)
     private val viewModel by viewModels<FriendsViewModel>()
 
-    //TODO: начинаю с этого места
     //задача данного adapter - зарегистрировать view types
-   // private val adapter = ListDelegationAdapter<List<ListItem>>()
+    private val adapter = ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         getLoadingState()
         setToolbarBackButton()
+        with(binding) {
+            recyclerView.adapter = adapter
+            adapter.apply {
+                items = listOf(
+                    FriendRVItem(1, "name1"), FriendRVItem(2, "name2"),
+                    FriendRVItem(3, "name3"), FriendRVItem(4, "name4"),
+                    FriendRVItem(0, "name0"), FriendRVItem(5, "name5"),
+                    FriendRVItem(6, "name6"), FriendRVItem(7, "name7")
+                )
+                notifyDataSetChanged()
+            }
+        }
+        initRefresher()
     }
 
     private fun getLoadingState() {
         viewModel.getFriends()
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                viewModel.state.collect { state -> updateUi(state) }
-            }
+            viewModel.state.collect { state -> updateUi(state) }
+        }
     }
 
     private fun updateUi(state: LoadState) {
@@ -44,11 +56,14 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
             LoadState.NotStartedYet -> {}
             LoadState.Loading -> {
                 binding.progressBar.isVisible = true
+                binding.error.isVisible = false
             }
             is LoadState.Content -> {
-                val data = state.data as FriendsWrapper
                 binding.progressBar.isVisible = false
-                binding.friendsTest.text = data.data.friends_list.toString()
+                binding.error.isVisible = false
+                val data = state.data as FriendsWrapper
+
+                //binding.friendsTest.text = data.data.friends_list.toString()
             }
             is LoadState.Error -> {
                 binding.progressBar.isVisible = false
@@ -62,6 +77,15 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
             findNavController().navigate(
                 FriendsFragmentDirections.actionNavigationFriendsToNavigationProfile()
             )
+        }
+    }
+
+    private fun initRefresher() {
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.recyclerView.isVisible = true
+            //viewModel.refresh()
+            adapter.refresh()
+            binding.swipeRefresh.isRefreshing = false
         }
     }
 }

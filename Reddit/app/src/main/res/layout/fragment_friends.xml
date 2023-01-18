@@ -43,7 +43,28 @@
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/error_margin_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        android:orientation="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <!--TextView
         android:id="@+id/friends_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,7 +72,9 @@
         android:textColor="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="16dp" /-->
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progress_bar"
@@ -70,6 +93,7 @@
         android:layout_height="wrap_content"
         android:background="@color/red"
         android:paddingVertical="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/error_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

@@ -41,15 +41,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             LoadState.NotStartedYet -> {}
             LoadState.Loading -> {
                 showBindItems(false)
+                binding.progressBar.isVisible = true
+                binding.error.isVisible = false
             }
             is LoadState.Error -> {
+                showBindItems(false)
                 binding.progressBar.isVisible = false
                 binding.error.isVisible = true
-                showBindItems(false)
             }
             is LoadState.Content -> {
-                val data = state.data as Profile
                 showBindItems(true)
+                binding.progressBar.isVisible = false
+                binding.error.isVisible = false
+                val data = state.data as Profile
                 if (data.urlAvatar != null) loadAvatar(data.urlAvatar!!)
                 loadProfileTexts(data)
             }
@@ -69,7 +73,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.buttonListOfFriends.isVisible = show
         binding.buttonClearSaved.isVisible = show
         binding.buttonLogout.isVisible = show
-        binding.progressBar.isVisible = !show
     }
 
     private fun loadAvatar(url: String) {

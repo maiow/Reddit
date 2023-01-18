@@ -120,6 +120,7 @@
         android:layout_height="wrap_content"
         android:background="@color/red"
         android:paddingVertical="@dimen/margin_standard"
+        android:layout_marginBottom="@dimen/error_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
