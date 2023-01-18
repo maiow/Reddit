@@ -20,6 +20,4 @@ class FriendsViewModel @Inject constructor(
             _state.value = LoadState.Content(repository.getFriends())
         }
     }
-
-    fun refresh() = getFriends()
 }

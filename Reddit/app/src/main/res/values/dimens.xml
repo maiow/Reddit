@@ -10,6 +10,7 @@
     <dimen name="header_image_width">100dp</dimen>
     <dimen name="standard_font_size">20sp</dimen>
     <dimen name="medium_font_size">16sp</dimen>
+    <dimen name="small_font_size">14sp</dimen>
     <dimen name="karma_font_size">12sp</dimen>
     <dimen name="logout_margin_top">51dp</dimen>
     <dimen name="user_margin_top">80dp</dimen>
@@ -18,5 +19,6 @@
     <dimen name="friend_photo_margin_top">30dp</dimen>
     <dimen name="user_name_margin_top">14dp</dimen>
     <dimen name="progressbar_speed">3</dimen>
+    <dimen name="item_list_elevation">3dip</dimen>
 
 </resources>

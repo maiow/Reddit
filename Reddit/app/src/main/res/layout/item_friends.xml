@@ -6,6 +6,9 @@
         <variable
             name="name"
             type="String" />
+        <variable
+            name="id"
+            type="String" />
     </data>
 <FrameLayout
     android:layout_width="wrap_content"
@@ -19,7 +22,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:background="@drawable/layout_bg"
-        android:elevation="@android:dimen/app_icon_size"
+        android:elevation="@dimen/item_list_elevation"
         android:layout_margin="@dimen/header_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,12 +40,12 @@
 
         <TextView
             android:id="@+id/friend_name"
-            android:layout_width="115dp"
-            android:layout_height="@dimen/header_padding"
+            android:layout_width="130dp"
+            android:layout_height="@dimen/photo_margin_top"
             android:layout_marginTop="@dimen/profile_margin_top"
             android:background="@drawable/round_corners_20alfa_btn"
             android:textAlignment="center"
-            android:textSize="@dimen/medium_font_size"
+            android:textSize="@dimen/small_font_size"
             android:text="@{name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +53,11 @@
 
         <TextView
             android:id="@+id/friend_id"
-            android:layout_width="90dp"
-            android:layout_height="@dimen/profile_margin_top"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/header_padding"
             android:layout_marginTop="@dimen/profile_margin_top"
             android:background="@drawable/round_corners_20alfa_btn"
-            android:text="@string/user_id"
+            android:text="@{id}"
             android:textAlignment="center"
             android:textSize="@dimen/karma_font_size"
             app:layout_constraintEnd_toEndOf="parent"

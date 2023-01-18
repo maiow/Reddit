@@ -21,6 +21,14 @@ fun ImageView.loadImage(urls: String) {
         .into(this)
 }
 
+fun ImageView.loadImage(id: Int) {
+    Glide.with(this)
+        .load(id)
+        .error(R.drawable.error_image)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .into(this)
+}
+
 fun SearchView.setChangeTextListener(block: (query: String) -> Unit) {
 
     this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

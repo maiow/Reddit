@@ -14,17 +14,12 @@ class ViewPagerAdapter(
 
     class ViewPagerHolder(private val itemBinding: ItemViewpagerBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bindHeaders(item: String) {
-            itemBinding.onboardingHeaders.text = item
-        }
-
-        fun bindTexts(item: String) {
-            itemBinding.onboardingTexts.text = item
-        }
-
-        fun bindImages(item: Drawable) = itemBinding.onboardingImages.setImageDrawable(item)
+        fun bind(itemHeaders: String, itemTexts: String, itemImages: Drawable) {
+            itemBinding.onboardingHeaders.text = itemHeaders
+            itemBinding.onboardingTexts.text = itemTexts
+            itemBinding.onboardingImages.setImageDrawable(itemImages)
     }
-
+}
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerHolder {
         return ViewPagerHolder(
             ItemViewpagerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,9 +27,11 @@ class ViewPagerAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewPagerHolder, position: Int) {
-        holder.bindHeaders(allOnboardingHeaders[position])
-        holder.bindTexts(allOnboardingTexts[position])
-        holder.bindImages(allOnboardingImages[position])
+        holder.bind(
+            allOnboardingHeaders[position],
+            allOnboardingTexts[position],
+            allOnboardingImages[position]
+        )
     }
 
     override fun getItemCount(): Int = allOnboardingHeaders.size

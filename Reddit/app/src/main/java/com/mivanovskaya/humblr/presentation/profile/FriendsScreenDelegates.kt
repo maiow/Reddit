@@ -11,6 +11,7 @@ object FriendsScreenDelegates {
     ) {
         bind {
             binding.name = item.name
+            binding.id = item.id
             binding.executePendingBindings()
         }
     }

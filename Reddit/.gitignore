@@ -14,6 +14,5 @@
 .cxx
 /app/src/androidTest/java/com/mivanovskaya/humblr/ExampleInstrumentedTest.kt
 /app/src/test/java/com/mivanovskaya/humblr/ExampleUnitTest.kt
-/gradle/wrapper/gradle-wrapper.properties
 /app/proguard-rules.pro
 /gradle.properties

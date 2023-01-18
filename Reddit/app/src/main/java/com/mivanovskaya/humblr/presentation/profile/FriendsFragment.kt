@@ -12,7 +12,6 @@ import com.mivanovskaya.humblr.databinding.FragmentFriendsBinding
 import com.mivanovskaya.humblr.domain.models.FriendsWrapper
 import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.tools.BaseFragment
-import com.mivanovskaya.humblr.tools.ListItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +21,9 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
     private val viewModel by viewModels<FriendsViewModel>()
 
     //задача данного adapter - зарегистрировать view types
-    private val adapter = ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate)
+    //private val adapter = ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate)
+    //почитать:
+    private val adapter by lazy { ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate)}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,18 +31,14 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
         getLoadingState()
         setToolbarBackButton()
         with(binding) {
+            adapter.items = listOf(
+                FriendRVItem("1", "name1"), FriendRVItem("2", "name2"),
+                FriendRVItem("3", "name3"), FriendRVItem("4", "name4"),
+                FriendRVItem("0", "name0"), FriendRVItem("5", "name5"),
+                FriendRVItem("6", "name6"), FriendRVItem("7", "name7")
+            )
             recyclerView.adapter = adapter
-            adapter.apply {
-                items = listOf(
-                    FriendRVItem(1, "name1"), FriendRVItem(2, "name2"),
-                    FriendRVItem(3, "name3"), FriendRVItem(4, "name4"),
-                    FriendRVItem(0, "name0"), FriendRVItem(5, "name5"),
-                    FriendRVItem(6, "name6"), FriendRVItem(7, "name7")
-                )
-                notifyDataSetChanged()
-            }
         }
-        initRefresher()
     }
 
     private fun getLoadingState() {
@@ -77,15 +74,6 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
             findNavController().navigate(
                 FriendsFragmentDirections.actionNavigationFriendsToNavigationProfile()
             )
-        }
-    }
-
-    private fun initRefresher() {
-        binding.swipeRefresh.setOnRefreshListener {
-            binding.recyclerView.isVisible = true
-            //viewModel.refresh()
-            adapter.refresh()
-            binding.swipeRefresh.isRefreshing = false
         }
     }
 }

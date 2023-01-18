@@ -32,6 +32,8 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
         binding.viewPager.adapter = ViewPagerAdapter(
             resources.getStringArray(R.array.onboarding_texts_array1),
             resources.getStringArray(R.array.onboarding_texts_array2),
+            /**можно было бы с id и грузить glide'ом, но он тормозит, и заранее кэшировать
+             * векторы не может, а так очень быстро всё подгружается*/
             arrayOf(
                 ResourcesCompat.getDrawable(resources, R.drawable.onb_image1, null)
                     ?: error("lost onboarding image1"),
