@@ -1,8 +1,6 @@
 package com.mivanovskaya.humblr.tools
 
-/**попытка разобраться с DelegateAdapter, надо как-то "реализовать интерфейс LayoutContainer"*/
-
-/**нужен пример реализации на Kotlin, это перевод с Java и явно не то, что надо */
+/**попытка разобраться с DelegateAdapter с помощью первой библиотеки попроще*/
 
 //import android.view.LayoutInflater
 //import android.view.View

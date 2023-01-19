@@ -66,4 +66,7 @@ class ApiModule {
     @Singleton
     fun provideApiProfile(retrofit: Retrofit): ApiProfile = retrofit.create(ApiProfile::class.java)
 
+//    @Provides
+//    @Singleton
+//    fun provideApiSubreddits(retrofit: Retrofit): ApiSubreddits = retrofit.create(ApiSubreddits::class.java)
 }

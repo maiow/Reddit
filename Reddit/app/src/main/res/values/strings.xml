@@ -30,4 +30,9 @@
     <string name="karma">Karma: %1$d</string>
     <string name="user_id">Id: %1$s</string>
     <string name="followers">Followers: %1$s</string>
+    <string name="search">Search</string>
+    <string name="posts">Posts</string>
+    <string name="subreddits">Subreddits</string>
+    <string name="popular">Popular</string>
+    <string name="newest">New</string>
 </resources>

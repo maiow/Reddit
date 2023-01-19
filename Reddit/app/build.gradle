@@ -99,8 +99,6 @@ dependencies {
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'
     implementation 'com.hannesdorfmann:adapterdelegates4-pagination:4.3.2'
 
-   // implementation 'de.hdodenhof:circleimageview:3.1.0'
-
    // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 
     testImplementation 'junit:junit:4.13.2'

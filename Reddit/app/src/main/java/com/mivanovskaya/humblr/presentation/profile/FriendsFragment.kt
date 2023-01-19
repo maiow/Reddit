@@ -22,23 +22,13 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
 
     //задача данного adapter - зарегистрировать view types
     //private val adapter = ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate)
-    //почитать:
-    private val adapter by lazy { ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate)}
+    private val adapter by lazy { ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         getLoadingState()
         setToolbarBackButton()
-        with(binding) {
-            adapter.items = listOf(
-                FriendRVItem("1", "name1"), FriendRVItem("2", "name2"),
-                FriendRVItem("3", "name3"), FriendRVItem("4", "name4"),
-                FriendRVItem("0", "name0"), FriendRVItem("5", "name5"),
-                FriendRVItem("6", "name6"), FriendRVItem("7", "name7")
-            )
-            recyclerView.adapter = adapter
-        }
     }
 
     private fun getLoadingState() {
@@ -54,19 +44,25 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
             LoadState.Loading -> {
                 binding.progressBar.isVisible = true
                 binding.error.isVisible = false
+                binding.recyclerView.isVisible = false
             }
             is LoadState.Content -> {
                 binding.progressBar.isVisible = false
                 binding.error.isVisible = false
-                val data = state.data as FriendsWrapper
-
-                //binding.friendsTest.text = data.data.friends_list.toString()
+                binding.recyclerView.isVisible = true
+                loadContent(state.data as FriendsWrapper)
             }
             is LoadState.Error -> {
                 binding.progressBar.isVisible = false
                 binding.error.isVisible = true
+                binding.recyclerView.isVisible = false
             }
         }
+    }
+
+    private fun loadContent(data: FriendsWrapper) {
+        adapter.items = data.data.friends_list
+        binding.recyclerView.adapter = adapter
     }
 
     private fun setToolbarBackButton() {

@@ -1,6 +1,7 @@
 package com.mivanovskaya.humblr.tools
 
-/**попытка разобраться с DelegateAdapter, надо как-то "реализовать интерфейс LayoutContainer"*/
+/**попытка разобраться с DelegateAdapter с помощью первой библиотеки попроще*/
+
 //import android.view.View
 //import kotlinx.android.extensions.LayoutContainer
 //

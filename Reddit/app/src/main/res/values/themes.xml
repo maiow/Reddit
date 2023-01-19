@@ -31,19 +31,19 @@
         <item name="navigationIcon">@drawable/ic_arrow</item>
     </style>
 
-    <!--style name="AppTheme" parent="Theme.Humblr">
-        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
-        <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+    <style name="MyTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="android:textSize">@dimen/karma_font_size</item>
+        <item name="tabSelectedTextColor">@color/blue_alfa20</item>
+        <item name="tabTextColor">@color/white</item>
+        <!--item name="android:background">@drawable/tab_bg</item>
+        <item name="tabBackground">@drawable/tab_selector</item-->
+        <item name="tabIndicatorAnimationMode">elastic</item>
+        <item name="tabIndicator">@null</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabMinWidth">@dimen/tab_min_width</item>
+        <item name="android:layout_height">@dimen/tab_layout_height</item>
+        <item name="android:layout_width">wrap_content</item>
     </style>
-
-    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">sans-serif</item>
-    </style>
-
-    <style name="RobotoButtonStyle" parent="android:Widget.Button">
-        <item name="android:fontFamily">sans-serif-medium</item>
-
-    </style-->
 
     <!--style name="Theme.Humblr.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

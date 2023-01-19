@@ -30,4 +30,9 @@
     <string name="karma">Карма: %1$d</string>
     <string name="user_id">Ваш id: %1$s</string>
     <string name="followers">Фолловеры: %1$s</string>
+    <string name="search">Поиск</string>
+    <string name="subreddits">Сабреддиты</string>
+    <string name="popular">Популярное</string>
+    <string name="newest">Новое</string>
+    <string name="posts">Посты</string>
 </resources>
