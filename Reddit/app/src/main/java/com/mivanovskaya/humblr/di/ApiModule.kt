@@ -2,6 +2,7 @@ package com.mivanovskaya.humblr.di
 
 import android.content.Context
 import com.mivanovskaya.humblr.data.api.ApiProfile
+import com.mivanovskaya.humblr.data.api.ApiSubreddits
 import com.mivanovskaya.humblr.data.api.ApiToken
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptor
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptorQualifier
@@ -66,7 +67,7 @@ class ApiModule {
     @Singleton
     fun provideApiProfile(retrofit: Retrofit): ApiProfile = retrofit.create(ApiProfile::class.java)
 
-//    @Provides
-//    @Singleton
-//    fun provideApiSubreddits(retrofit: Retrofit): ApiSubreddits = retrofit.create(ApiSubreddits::class.java)
+    @Provides
+    @Singleton
+    fun provideApiSubreddits(retrofit: Retrofit): ApiSubreddits = retrofit.create(ApiSubreddits::class.java)
 }

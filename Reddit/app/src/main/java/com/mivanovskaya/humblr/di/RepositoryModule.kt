@@ -1,9 +1,8 @@
 package com.mivanovskaya.humblr.di
 
-/**пока работает без этого модуля*/
-
 import com.mivanovskaya.humblr.data.repository.*
 import com.mivanovskaya.humblr.domain.repository.ProfileRemoteRepository
+import com.mivanovskaya.humblr.domain.repository.SubredditsRemoteRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -19,5 +18,11 @@ abstract class RepositoryModule {
     abstract fun bindProfileRemoteRepository(
         profileRemoteRepository: ProfileRemoteRepositoryImpl
     ): ProfileRemoteRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindSubredditsRemoteRepository(
+        subredditsRemoteRepository: SubredditsRemoteRepositoryImpl
+    ): SubredditsRemoteRepository
 }
 

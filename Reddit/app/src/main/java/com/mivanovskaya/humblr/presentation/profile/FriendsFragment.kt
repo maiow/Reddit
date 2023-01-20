@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.mivanovskaya.humblr.databinding.FragmentFriendsBinding
-import com.mivanovskaya.humblr.domain.models.FriendsWrapper
+import com.mivanovskaya.humblr.domain.models.Friends
 import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +21,6 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
     private val viewModel by viewModels<FriendsViewModel>()
 
     //задача данного adapter - зарегистрировать view types
-    //private val adapter = ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate)
     private val adapter by lazy { ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +49,7 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
                 binding.progressBar.isVisible = false
                 binding.error.isVisible = false
                 binding.recyclerView.isVisible = true
-                loadContent(state.data as FriendsWrapper)
+                loadContent(state.data as Friends)
             }
             is LoadState.Error -> {
                 binding.progressBar.isVisible = false
@@ -60,8 +59,8 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
         }
     }
 
-    private fun loadContent(data: FriendsWrapper) {
-        adapter.items = data.data.friends_list
+    private fun loadContent(data: Friends) {
+        adapter.items = data.friends_list
         binding.recyclerView.adapter = adapter
     }
 

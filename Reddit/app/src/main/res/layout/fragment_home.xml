@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_alfa4"
     tools:context=".presentation.home.HomeFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:iconifiedByDefault="false"
+        android:layout_margin="@dimen/margin_standard"
+        app:iconifiedByDefault="true"
+        android:background="@drawable/round_corners_20alfa_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="@string/search" />
 
-    <com.google.android.material.tabs.TabLayout
+    <!--com.google.android.material.tabs.TabLayout
         android:id="@+id/toggle_type"
         style="@style/MyTabLayoutStyle"
         android:layout_marginTop="@dimen/margin_standard"
@@ -34,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="@string/subreddits" />
 
-    </com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.tabs.TabLayout-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/toggle_source"
@@ -42,17 +45,17 @@
         android:layout_marginTop="@dimen/margin_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toggle_type">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/popular" />
+        app:layout_constraintTop_toBottomOf="@id/search_view">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/newest" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/popular" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -63,6 +66,8 @@
         android:layout_marginTop="@dimen/margin_standard"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/home_screen_margin_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toggle_source"

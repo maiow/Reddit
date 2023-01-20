@@ -1,5 +1,4 @@
 package com.mivanovskaya.humblr.tools
-/*
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -79,4 +78,4 @@ abstract class PagedDataDelegationAdapter<T:Any > : PagingDataAdapter<T, Recycle
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         delegatesManager.onViewDetachedFromWindow(holder)
     }
-}*/
+}

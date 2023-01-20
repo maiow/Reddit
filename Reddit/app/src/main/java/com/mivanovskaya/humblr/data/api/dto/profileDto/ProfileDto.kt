@@ -1,8 +1,6 @@
 package com.mivanovskaya.humblr.data.api.dto.profileDto
 
 import com.google.gson.annotations.SerializedName
-import com.mivanovskaya.humblr.domain.models.Profile
-import com.mivanovskaya.humblr.domain.models.UserDataSubscribers
 
 data class ProfileDto(
     var name: String?,
@@ -24,14 +22,10 @@ data class ProfileDto(
 
     @SerializedName("created_utc")
     var account_creation_date: Long?
-) {
-    fun toProfile() = Profile(name, id, urlAvatar, more_infos?.toUserDataSub(), total_karma)
-}
+)
 
 data class UserDataSubDto(
     var subscribers: Int?,
     @SerializedName("public_description")
     var description: String?
-) {
-    fun toUserDataSub() = UserDataSubscribers(subscribers)
-}
+)

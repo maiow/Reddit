@@ -1,10 +1,11 @@
 package com.mivanovskaya.humblr.data.repository
 
 import com.mivanovskaya.humblr.data.api.ApiProfile
-import com.mivanovskaya.humblr.domain.models.FriendsWrapper
+import com.mivanovskaya.humblr.domain.models.Friends
 import com.mivanovskaya.humblr.domain.models.Profile
 import com.mivanovskaya.humblr.domain.repository.ProfileRemoteRepository
-import com.mivanovskaya.humblr.tools.toFriendsWrapper
+import com.mivanovskaya.humblr.tools.toFriends
+import com.mivanovskaya.humblr.tools.toProfile
 import javax.inject.Inject
 
 class ProfileRemoteRepositoryImpl @Inject constructor(private val apiProfile: ApiProfile):
@@ -12,5 +13,5 @@ class ProfileRemoteRepositoryImpl @Inject constructor(private val apiProfile: Ap
 
     override suspend fun getProfile(): Profile = apiProfile.getProfile().toProfile()
 
-    override suspend fun getFriends(): FriendsWrapper = apiProfile.getFriends().toFriendsWrapper()
+    override suspend fun getFriends(): Friends = apiProfile.getFriends().data.toFriends()
 }
