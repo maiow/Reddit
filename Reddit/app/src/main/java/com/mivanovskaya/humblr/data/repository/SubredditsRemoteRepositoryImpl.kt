@@ -1,15 +1,11 @@
 package com.mivanovskaya.humblr.data.repository
 
-import com.mivanovskaya.humblr.data.api.ApiPost
 import com.mivanovskaya.humblr.data.api.ApiSubreddits
-import com.mivanovskaya.humblr.domain.ListTypes
 import com.mivanovskaya.humblr.domain.ListItem
 import com.mivanovskaya.humblr.domain.models.Subreddit
-import com.mivanovskaya.humblr.domain.models.Subreddits
 import com.mivanovskaya.humblr.domain.repository.SubredditsRemoteRepository
-import com.mivanovskaya.humblr.tools.toListPost
-import com.mivanovskaya.humblr.tools.toListSubreddit
-import com.mivanovskaya.humblr.tools.toSubreddits
+import com.mivanovskaya.humblr.domain.tools.ListTypes
+import com.mivanovskaya.humblr.domain.tools.toListSubreddit
 import javax.inject.Inject
 
 class SubredditsRemoteRepositoryImpl @Inject constructor(
@@ -17,8 +13,9 @@ class SubredditsRemoteRepositoryImpl @Inject constructor(
     /*private val apiPost: ApiPost*/
 ) : SubredditsRemoteRepository {
 
-    override suspend fun getList(type: ListTypes, source: String?/*, page: String*/): Subreddits {//List<ListItem> {
-        return apiSubreddits.getSubredditListing(source/*, page*/).data.toSubreddits()
+    override suspend fun getList(type: ListTypes, source: String?, page: String): List<ListItem> {
+        return apiSubreddits.getSubredditListing(source, page).data.children.toListSubreddit()
+
         /*  ListTypes.SUBREDDIT -> apiSubreddits.getSubredditListing(source, page)
                  .data.children.toListSubreddit()
             ListTypes.POST -> apiPost.getPostListing(source, page).data.children.toListPost()

@@ -27,6 +27,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         getLoadingState()
         setFriendsListClick()
         setLogoutButton()
+        //TODO: добавить кнопку Clear Saved после готовности экрана с функционалом сохранения
     }
 
     private fun getLoadingState() {

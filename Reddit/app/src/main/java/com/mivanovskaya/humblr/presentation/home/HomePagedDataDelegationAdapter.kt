@@ -4,8 +4,8 @@ import com.mivanovskaya.humblr.domain.ListItem
 import com.mivanovskaya.humblr.presentation.ListItemDiffUtil
 import com.mivanovskaya.humblr.tools.PagedDataDelegationAdapter
 
-class OneCategoryForPaging(
-    private val onClick:(item: ListItem)->Unit
+class HomePagedDataDelegationAdapter(
+    //private val onClick:(item: ListItem)->Unit
 ) : PagedDataDelegationAdapter<ListItem>(ListItemDiffUtil()) {
     init {
         delegatesManager.addDelegate(HomeScreenDelegates.subredditsDelegate /*{ onClick(it) }*/)

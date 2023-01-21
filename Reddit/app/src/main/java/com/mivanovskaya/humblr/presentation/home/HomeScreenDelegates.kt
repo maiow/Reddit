@@ -16,7 +16,8 @@ object HomeScreenDelegates {
             binding.subscribeButton.isSelected = item.isUserSubscriber == true
             binding.subscribeButton.setOnClickListener {
                 binding.subscribeButton.isSelected =! binding.subscribeButton.isSelected
-                //TODO: добавить отправку запроса на сервер о подписке/отписке на сабреддит
+            //TODO: добавить отправку запроса на сервер о подписке/отписке на сабреддит по клику
+
 //                onClickItem(
 //                    Query(id = item.id)
 //                )

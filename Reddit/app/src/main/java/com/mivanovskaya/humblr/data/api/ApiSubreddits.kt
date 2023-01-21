@@ -12,7 +12,7 @@ interface ApiSubreddits {
     @GET("/subreddits/{source}")
     suspend fun getSubredditListing(
         @Path("source") source: String?,
-       // @Query("after") page: String
+        @Query("after") page: String
     ): SubredditListingDto
 
     @GET("/{source}")

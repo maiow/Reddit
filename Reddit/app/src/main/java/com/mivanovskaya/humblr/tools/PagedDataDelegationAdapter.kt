@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
-//на основе библиотеки 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2'
+//на основе библиотеки 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2' by SR-rodi
+//библиотека из коробки работает с устаревшим paged list, а не paged data
 
 abstract class PagedDataDelegationAdapter<T:Any > : PagingDataAdapter<T, RecyclerView.ViewHolder> {
     protected val delegatesManager: AdapterDelegatesManager<List<T>>

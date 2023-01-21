@@ -4,8 +4,8 @@ import com.mivanovskaya.humblr.data.api.ApiProfile
 import com.mivanovskaya.humblr.domain.models.Friends
 import com.mivanovskaya.humblr.domain.models.Profile
 import com.mivanovskaya.humblr.domain.repository.ProfileRemoteRepository
-import com.mivanovskaya.humblr.tools.toFriends
-import com.mivanovskaya.humblr.tools.toProfile
+import com.mivanovskaya.humblr.domain.tools.toFriends
+import com.mivanovskaya.humblr.domain.tools.toProfile
 import javax.inject.Inject
 
 class ProfileRemoteRepositoryImpl @Inject constructor(private val apiProfile: ApiProfile):

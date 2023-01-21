@@ -1,6 +1,8 @@
 package com.mivanovskaya.humblr.presentation.profile
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.mivanovskaya.humblr.domain.repository.ProfileRemoteRepository
 import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.tools.BaseViewModel
@@ -19,5 +21,10 @@ class FriendsViewModel @Inject constructor(
             _state.value = LoadState.Loading
             _state.value = LoadState.Content(repository.getFriends())
         }
+    }
+    fun navigateBack(fragment: Fragment) {
+        fragment.findNavController().navigate(
+            FriendsFragmentDirections.actionNavigationFriendsToNavigationProfile()
+        )
     }
 }

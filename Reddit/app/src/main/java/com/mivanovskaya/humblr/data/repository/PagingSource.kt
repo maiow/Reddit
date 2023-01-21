@@ -5,12 +5,11 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.mivanovskaya.humblr.domain.ListTypes
+import com.mivanovskaya.humblr.domain.tools.ListTypes
 import com.mivanovskaya.humblr.domain.ListItem
 import com.mivanovskaya.humblr.domain.repository.SubredditsRemoteRepository
 import javax.inject.Inject
 
-/*
 class PagingSource @Inject constructor(
     private val repository: SubredditsRemoteRepository,
     private val source: String?,
@@ -47,4 +46,4 @@ class PagingSource @Inject constructor(
         private const val FIRST_PAGE = ""
     }
 }
-*/
+

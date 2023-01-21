@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.mivanovskaya.humblr.databinding.FragmentFriendsBinding
 import com.mivanovskaya.humblr.domain.models.Friends
@@ -20,7 +19,6 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
     override fun initBinding(inflater: LayoutInflater) = FragmentFriendsBinding.inflate(inflater)
     private val viewModel by viewModels<FriendsViewModel>()
 
-    //задача данного adapter - зарегистрировать view types
     private val adapter by lazy { ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,9 +64,7 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
 
     private fun setToolbarBackButton() {
         binding.buttonBack.setOnClickListener {
-            findNavController().navigate(
-                FriendsFragmentDirections.actionNavigationFriendsToNavigationProfile()
-            )
+            viewModel.navigateBack(this)
         }
     }
 }

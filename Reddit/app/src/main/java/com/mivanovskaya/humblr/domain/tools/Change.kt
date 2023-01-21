@@ -1,9 +1,9 @@
-package com.mivanovskaya.humblr.domain
+package com.mivanovskaya.humblr.domain.tools
 
 class Change<T>(val value: T)
 
 data class Query(
-    var listing: ListTypes = ListTypes.POST,
+    var listing: ListTypes = ListTypes.SUBREDDIT,
     var source: String = "new"
 )
 
