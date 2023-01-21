@@ -4,6 +4,7 @@ import com.mivanovskaya.humblr.data.api.dto.postDto.PostListingDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditListingDto
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -14,6 +15,12 @@ interface ApiSubreddits {
         @Path("source") source: String?,
         @Query("after") page: String
     ): SubredditListingDto
+
+    @POST("/api/subscribe")
+    suspend fun subscribeOnSubreddit(
+        @Query("action") action: String,
+        @Query("sr") name: String
+    )
 
     @GET("/{source}")
     suspend fun getSubredditPosts(

@@ -41,17 +41,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         when (state) {
             LoadState.NotStartedYet -> {}
             LoadState.Loading -> {
-                showBindItems(false)
+                binding.containerView.isVisible = false
                 binding.progressBar.isVisible = true
                 binding.error.isVisible = false
             }
             is LoadState.Error -> {
-                showBindItems(false)
+                binding.containerView.isVisible = false
                 binding.progressBar.isVisible = false
                 binding.error.isVisible = true
             }
             is LoadState.Content -> {
-                showBindItems(true)
+                binding.containerView.isVisible = true
                 binding.progressBar.isVisible = false
                 binding.error.isVisible = false
                 val data = state.data as Profile
@@ -67,13 +67,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.karma.text = getString(R.string.karma, data.total_karma ?: 0)
         binding.followers.text =
             getString(R.string.followers, data.more_infos?.subscribers ?: "0")
-    }
-
-    private fun showBindItems(show: Boolean) {
-        binding.userDataFrame.isVisible = show
-        binding.buttonListOfFriends.isVisible = show
-        binding.buttonClearSaved.isVisible = show
-        binding.buttonLogout.isVisible = show
     }
 
     private fun loadAvatar(url: String) {

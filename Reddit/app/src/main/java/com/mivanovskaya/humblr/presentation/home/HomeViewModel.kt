@@ -11,6 +11,7 @@ import com.mivanovskaya.humblr.domain.repository.SubredditsRemoteRepository
 import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.domain.tools.ListTypes
 import com.mivanovskaya.humblr.domain.tools.Query
+import com.mivanovskaya.humblr.domain.tools.SubQuery
 import com.mivanovskaya.humblr.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -33,6 +34,12 @@ class HomeViewModel @Inject constructor(private val repository: SubredditsRemote
     val query get() = _query.source
 
     private val _thingFlow = MutableStateFlow(query)
+
+//    private val _sub = SubQuery()
+//    val sub get() = _sub.action
+//    val sub_name get() = _sub.name
+//    private val _subFlow = MutableStateFlow(sub)
+//    private val _subFlow = MutableStateFlow(sub_name)
 
     fun setSource(position: Int) {
         _query.source = if (position == 0) NEW else POPULAR
@@ -58,6 +65,12 @@ class HomeViewModel @Inject constructor(private val repository: SubredditsRemote
         config = PagingConfig(pageSize = 10),
         pagingSourceFactory = { PagingSource(repository, source, listType) }
     )
+
+    fun subscribe(subQuery: SubQuery) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+            repository.subscribeOnSubreddit(subQuery.action, subQuery.name)
+        }
+    }
 
     companion object {
         private const val NEW = "new"

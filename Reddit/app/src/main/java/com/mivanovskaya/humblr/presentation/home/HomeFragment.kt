@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.mivanovskaya.humblr.databinding.FragmentHomeBinding
 import com.mivanovskaya.humblr.domain.state.LoadState
+import com.mivanovskaya.humblr.domain.tools.SubQuery
 import com.mivanovskaya.humblr.tools.BaseFragment
 import com.mivanovskaya.humblr.tools.setSelectedTabListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     // private val adapter by lazy { PagedListDelegationAdapter(ListItemDiffUtil(), HomeScreenDelegates.subredditsDelegate) }
     //private val adapter by lazy { ListDelegationAdapter(HomeScreenDelegates.subredditsDelegate) }
-    private val adapter by lazy { HomePagedDataDelegationAdapter() }
+    private val adapter by lazy { HomePagedDataDelegationAdapter{onClick(it)} }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -93,5 +94,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             ).show()
         }
     }
+
+    private fun onClick(subQuery: SubQuery/*item: ListItem, clickableView: ClickableView, item: ListItem*/) {
+//        if (clickableView == ClickableView.SUBREDDIT) {
+//            findNavController().navigate(
+//                HomeFragmentDirections.actionHomeFragmentToSingleSubredditFragment(
+//                    (item as Subreddit).namePrefixed
+//                )
+//            )
+//        }
+//        if (clickableView == ClickableView.SUBSCRIBE) Toast.makeText(
+//            requireContext(),
+//            "subscribed",
+//            Toast.LENGTH_SHORT
+//        ).show()
+        viewModel.subscribe(subQuery)
+    }
 }
+
 

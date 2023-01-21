@@ -8,100 +8,113 @@
     tools:context=".presentation.profile.ProfileFragment">
 
     <LinearLayout
-        android:id="@+id/user_data_frame"
-        android:layout_width="300dp"
-        android:layout_height="244dp"
-        android:layout_marginTop="@dimen/user_margin_top"
-        android:background="@drawable/layout_bg"
-        android:elevation="@android:dimen/app_icon_size"
-        android:gravity="center"
+        android:id="@+id/container_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_marginTop="@dimen/photo_margin_top"
-            android:background="@drawable/rounded" />
+        <LinearLayout
+            android:id="@+id/user_data_frame"
+            android:layout_width="300dp"
+            android:layout_height="244dp"
+            android:layout_marginTop="@dimen/user_margin_top"
+            android:background="@drawable/layout_bg"
+            android:elevation="@android:dimen/app_icon_size"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/user_name_margin_top"
-            android:background="@drawable/round_corners_20alfa_btn"
-            android:textAlignment="center"
-            android:textSize="@dimen/standard_font_size" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
+                android:layout_marginTop="@dimen/photo_margin_top"
+                android:background="@drawable/rounded" />
 
-        <TextView
-            android:id="@+id/user_id"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/user_name_margin_top"
+                android:background="@drawable/round_corners_20alfa_btn"
+                android:textAlignment="center"
+                android:textSize="@dimen/standard_font_size" />
+
+            <TextView
+                android:id="@+id/user_id"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/profile_margin_top"
+                android:background="@drawable/round_corners_20alfa_btn"
+                android:text="@string/user_id"
+                android:textAlignment="center"
+                android:textSize="@dimen/medium_font_size" />
+
+            <TextView
+                android:id="@+id/karma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/profile_margin_top"
+                android:text="@string/karma"
+                android:textAlignment="center"
+                android:textSize="@dimen/karma_font_size" />
+
+            <TextView
+                android:id="@+id/followers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/followers"
+                android:textAlignment="center"
+                android:textSize="@dimen/karma_font_size" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_list_of_friends"
+            android:layout_width="300dp"
+            android:layout_height="38dp"
             android:layout_marginTop="@dimen/profile_margin_top"
-            android:background="@drawable/round_corners_20alfa_btn"
-            android:text="@string/user_id"
-            android:textAlignment="center"
-            android:textSize="@dimen/medium_font_size" />
+            android:background="@drawable/round_corners_btn"
+            android:text="@string/list_of_friends"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@id/button_clear_saved"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_data_frame" />
 
-        <TextView
-            android:id="@+id/karma"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/button_clear_saved"
+            android:layout_width="300dp"
+            android:layout_height="38dp"
             android:layout_marginTop="@dimen/profile_margin_top"
-            android:text="@string/karma"
-            android:textAlignment="center"
-            android:textSize="@dimen/karma_font_size" />
+            android:background="@drawable/round_corners_btn"
+            android:text="@string/clear_saved"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_list_of_friends" />
 
-        <TextView
-            android:id="@+id/followers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/followers"
-            android:textAlignment="center"
-            android:textSize="@dimen/karma_font_size" />
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="300dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="@dimen/logout_margin_top"
+            android:background="@drawable/round_corners_btn"
+            android:text="@string/logout"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_clear_saved" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button_list_of_friends"
-        android:layout_width="300dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="@dimen/profile_margin_top"
-        android:background="@drawable/round_corners_btn"
-        android:text="@string/list_of_friends"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@id/button_clear_saved"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_data_frame" />
-
-    <Button
-        android:id="@+id/button_clear_saved"
-        android:layout_width="300dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="@dimen/profile_margin_top"
-        android:background="@drawable/round_corners_btn"
-        android:text="@string/clear_saved"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_list_of_friends" />
-
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="300dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="@dimen/logout_margin_top"
-        android:background="@drawable/round_corners_btn"
-        android:text="@string/logout"
-        android:textAllCaps="false"
-        app:backgroundTint="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_clear_saved" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progress_bar"

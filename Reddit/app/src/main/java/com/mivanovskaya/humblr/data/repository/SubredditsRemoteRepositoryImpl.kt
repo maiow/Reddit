@@ -25,6 +25,9 @@ class SubredditsRemoteRepositoryImpl @Inject constructor(
                  .data.children.toListSubreddit()
              ListTypes.SAVED_POST -> apiPost.getSaved(source, page).data.children.toListPost()*/
     }
+
+    override suspend fun subscribeOnSubreddit(action: String, name: String) = apiSubreddits.subscribeOnSubreddit(action, name)
+
     //override suspend fun votePost(dir: Int, postName: String) = apiPost.votePost(dir, postName)
 
     override suspend fun getSubredditInfo(subredditName: String): Subreddit {

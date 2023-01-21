@@ -8,6 +8,8 @@ interface SubredditsRemoteRepository {
 
     suspend fun getList(type: ListTypes, source: String?, page: String): List<ListItem>//Subreddits//
 
+    suspend fun subscribeOnSubreddit(action: String, name: String)
+
    // suspend fun votePost(dir: Int, postName: String)
 
     suspend fun getSubredditInfo(subredditName: String): Subreddit
