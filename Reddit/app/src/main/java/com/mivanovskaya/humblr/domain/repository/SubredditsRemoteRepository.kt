@@ -12,6 +12,6 @@ interface SubredditsRemoteRepository {
 
    // suspend fun votePost(dir: Int, postName: String)
 
-    suspend fun getSubredditInfo(subredditName: String): Subreddit
+    suspend fun getSubredditInfo(name: String): Subreddit
 
 }

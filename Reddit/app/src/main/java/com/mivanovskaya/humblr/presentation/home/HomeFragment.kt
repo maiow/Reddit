@@ -9,8 +9,12 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
+import com.mivanovskaya.humblr.R
 import com.mivanovskaya.humblr.databinding.FragmentHomeBinding
+import com.mivanovskaya.humblr.domain.ListItem
 import com.mivanovskaya.humblr.domain.state.LoadState
+import com.mivanovskaya.humblr.domain.tools.ClickableView
+import com.mivanovskaya.humblr.domain.tools.SUBSCRIBE
 import com.mivanovskaya.humblr.domain.tools.SubQuery
 import com.mivanovskaya.humblr.tools.BaseFragment
 import com.mivanovskaya.humblr.tools.setSelectedTabListener
@@ -22,21 +26,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun initBinding(inflater: LayoutInflater) = FragmentHomeBinding.inflate(inflater)
     private val viewModel by viewModels<HomeViewModel>()
 
-    // private val adapter by lazy { PagedListDelegationAdapter(ListItemDiffUtil(), HomeScreenDelegates.subredditsDelegate) }
-    //private val adapter by lazy { ListDelegationAdapter(HomeScreenDelegates.subredditsDelegate) }
-    private val adapter by lazy { HomePagedDataDelegationAdapter{onClick(it)} }
+    private val adapter by lazy {
+        HomePagedDataDelegationAdapter { subQuery: SubQuery, item: ListItem, clickableView: ClickableView ->
+            onClick(subQuery, item, clickableView)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         getLoadingState()
-        setAdapter()
         tabLayoutListener(binding.toggleSource)
         setSearch()
-    }
-
-    private fun setAdapter() {
-        binding.recyclerView.adapter = adapter
     }
 
     private fun getLoadingState() {
@@ -68,15 +69,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-
     private fun loadContent() {
         binding.recyclerView.adapter = adapter
-
-        //private fun observePagingData() {
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.thingList.collect { pagingData ->
-                adapter.submitData(pagingData)
-            }
+            viewModel.thingList.collect { pagingData -> adapter.submitData(pagingData) }
         }
     }
 
@@ -88,27 +84,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun setSearch() {
         binding.searchView.setOnSearchClickListener {
-            Snackbar.make(
-                binding.recyclerView, "Humblr doesn't provide search functionality yet",
-                LENGTH_SHORT
-            ).show()
+            Snackbar.make(binding.recyclerView, getString(R.string.no_function), LENGTH_SHORT)
+                .show()
         }
     }
 
-    private fun onClick(subQuery: SubQuery/*item: ListItem, clickableView: ClickableView, item: ListItem*/) {
-//        if (clickableView == ClickableView.SUBREDDIT) {
-//            findNavController().navigate(
-//                HomeFragmentDirections.actionHomeFragmentToSingleSubredditFragment(
-//                    (item as Subreddit).namePrefixed
-//                )
-//            )
-//        }
-//        if (clickableView == ClickableView.SUBSCRIBE) Toast.makeText(
-//            requireContext(),
-//            "subscribed",
-//            Toast.LENGTH_SHORT
-//        ).show()
-        viewModel.subscribe(subQuery)
+    private fun onClick(subQuery: SubQuery, item: ListItem, clickableView: ClickableView) {
+        if (clickableView == ClickableView.SUBREDDIT) viewModel.navigate(this, item)
+        if (clickableView == ClickableView.SUBSCRIBE) {
+            viewModel.subscribe(subQuery)
+            val text =
+                if (subQuery.action == SUBSCRIBE) getString(R.string.subscribed)
+                else getString(R.string.unsubscribed)
+            Snackbar.make(binding.recyclerView, text, LENGTH_SHORT).show()
+        }
     }
 }
 

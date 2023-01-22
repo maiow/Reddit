@@ -35,4 +35,9 @@
     <string name="popular">Популярное</string>
     <string name="newest">Новое</string>
     <string name="posts">Посты</string>
+    <string name="unsubscribed">Вы отписались от сабреддита</string>
+    <string name="no_function">Humblr пока не предоставляет возможность поиска</string>
+    <string name="subscribed">Вы подписаны на сабреддит</string>
+    <string name="author">"Автор поста:  %1$s"</string>
+    <string name="share">Поделиться</string>
 </resources>

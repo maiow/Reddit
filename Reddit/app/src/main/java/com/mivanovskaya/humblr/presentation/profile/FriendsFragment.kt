@@ -19,7 +19,7 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
     override fun initBinding(inflater: LayoutInflater) = FragmentFriendsBinding.inflate(inflater)
     private val viewModel by viewModels<FriendsViewModel>()
 
-    private val adapter by lazy { ListDelegationAdapter(FriendsScreenDelegates.friendsDelegate) }
+    private val adapter by lazy { ListDelegationAdapter(friendsDelegate()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,12 +1,15 @@
 package com.mivanovskaya.humblr.presentation.home
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.mivanovskaya.humblr.data.repository.PagingSource
 import com.mivanovskaya.humblr.domain.ListItem
+import com.mivanovskaya.humblr.domain.models.Subreddit
 import com.mivanovskaya.humblr.domain.repository.SubredditsRemoteRepository
 import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.domain.tools.ListTypes
@@ -25,7 +28,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: SubredditsRemoteRepository) :
+class HomeViewModel @Inject constructor(
+    private val repository: SubredditsRemoteRepository
+) :
     BaseViewModel() {
 
     /**работает без показа прогресс бара, и тут пока по-черному написано, надо подчистить*/
@@ -61,15 +66,24 @@ class HomeViewModel @Inject constructor(private val repository: SubredditsRemote
             getSubredditsList(ListTypes.SUBREDDIT, query).flow
         }.cachedIn(CoroutineScope(Dispatchers.IO))
 
-    private fun getSubredditsList(listType: ListTypes, source: String?): Pager<String, ListItem> = Pager(
-        config = PagingConfig(pageSize = 10),
-        pagingSourceFactory = { PagingSource(repository, source, listType) }
-    )
+    private fun getSubredditsList(listType: ListTypes, source: String?): Pager<String, ListItem> =
+        Pager(
+            config = PagingConfig(pageSize = 10),
+            pagingSourceFactory = { PagingSource(repository, source, listType) }
+        )
 
     fun subscribe(subQuery: SubQuery) {
         viewModelScope.launch(Dispatchers.IO + handler) {
             repository.subscribeOnSubreddit(subQuery.action, subQuery.name)
         }
+    }
+
+    fun navigate(fragment: Fragment, item: ListItem) {
+        fragment.findNavController().navigate(
+            HomeFragmentDirections.actionNavigationHomeToNavigationSingleSubredditFragment(
+                (item as Subreddit).namePrefixed
+            )
+        )
     }
 
     companion object {

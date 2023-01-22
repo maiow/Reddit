@@ -1,6 +1,7 @@
 package com.mivanovskaya.humblr.di
 
 import android.content.Context
+import com.mivanovskaya.humblr.data.api.ApiPost
 import com.mivanovskaya.humblr.data.api.ApiProfile
 import com.mivanovskaya.humblr.data.api.ApiSubreddits
 import com.mivanovskaya.humblr.data.api.ApiToken
@@ -70,4 +71,8 @@ class ApiModule {
     @Provides
     @Singleton
     fun provideApiSubreddits(retrofit: Retrofit): ApiSubreddits = retrofit.create(ApiSubreddits::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApiPost(retrofit: Retrofit): ApiPost = retrofit.create(ApiPost::class.java)
 }

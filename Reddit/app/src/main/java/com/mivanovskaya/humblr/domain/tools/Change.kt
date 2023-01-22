@@ -7,12 +7,13 @@ data class Query(
     var source: String = "new"
 )
 
-data class FavoritesQuery(
-    var listing: ListTypes = ListTypes.SAVED_POST,
-    var source: String = ""
-)
+//data class FavoritesQuery(
+//    var listing: ListTypes = ListTypes.SAVED_POST,
+//    var source: String = ""
+//)
 
 data class SubQuery(
     var action: String = "",
-    var name: String = ""
+    var name: String = "",
+    var id: String = ""
 )

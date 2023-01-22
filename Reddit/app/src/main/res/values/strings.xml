@@ -35,4 +35,10 @@
     <string name="subreddits">Subreddits</string>
     <string name="popular">Popular</string>
     <string name="newest">New</string>
+    <string name="subscribed">Subscribed on subreddit</string>
+    <string name="unsubscribed">Unsubscribed from subreddit</string>
+    <string name="no_function">Humblr doesn\'t provide search functionality yet</string>
+    <string name="author">Author: %1$s</string>
+    <string name="share_url" translatable="false">https://www.reddit.com%1$s</string>
+    <string name="share">Share</string>
 </resources>

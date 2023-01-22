@@ -38,7 +38,12 @@
         android:id="@+id/navigation_home"
         android:name="com.mivanovskaya.humblr.presentation.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_single_subreddit_fragment"
+            app:destination="@id/navigation_single_subreddit_fragment"
+            app:popUpTo="@id/navigation_home"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favourites"
@@ -54,7 +59,7 @@
         <action
             android:id="@+id/action_navigation_profile_to_navigation_friends"
             app:destination="@id/navigation_friends"
-            app:popUpTo="@id/navigation_profile"/>
+            app:popUpTo="@id/navigation_profile" />
         <action
             android:id="@+id/action_navigation_profile_to_navigation_auth"
             app:destination="@id/navigation_auth"
@@ -70,8 +75,8 @@
         <action
             android:id="@+id/action_navigation_friends_to_navigation_profile"
             app:destination="@id/navigation_profile"
-            app:popUpTo="@id/navigation_profile"
-            app:launchSingleTop="true"/>
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_profile" />
     </fragment>
 
     <fragment
@@ -94,6 +99,21 @@
             app:destination="@id/navigation_home"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_single_subreddit_fragment"
+        android:name="com.mivanovskaya.humblr.presentation.home.SingleSubredditFragment"
+        android:label="Subreddit Description">
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_navigation_single_subreddit_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_home" />
+
     </fragment>
 
 </navigation>
