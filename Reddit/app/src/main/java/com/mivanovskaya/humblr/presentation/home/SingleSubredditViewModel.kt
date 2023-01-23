@@ -25,10 +25,9 @@ class SingleSubredditViewModel @Inject constructor(private val repository: Subre
 
     //TODO:
     // - progress bar for recycler loading, not for AppBar;
-    // - Subscription;
-    // - Posts votes buttons;
-    // - Posts Load button textview + snackbar;
-    // - Posts Comment button;
+    // - Posts votes to api;
+    // - Posts Load button snackbar;
+    // - Posts Comment button - decide on;
     // - SharedPrefs DI in VMs.
 
     fun getPostsList(name: String?): Flow<PagingData<ListItem>> = Pager(

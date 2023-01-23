@@ -38,7 +38,15 @@
     <string name="subscribed">Subscribed on subreddit</string>
     <string name="unsubscribed">Unsubscribed from subreddit</string>
     <string name="no_function">Humblr doesn\'t provide search functionality yet</string>
-    <string name="author">Author: %1$s</string>
+    <string name="author">Author: u/%1$s</string>
     <string name="share_url" translatable="false">https://www.reddit.com%1$s</string>
     <string name="share">Share</string>
+    <string name="subscribers">Subscribers: %1$d</string>
+    <string name="share_text" translatable="false">text/plain</string>
+    <string name="download">Download</string>Downloaded
+    <string name="likesK" translatable="false">%1$sK</string>
+    <string name="likesM" translatable="false">%1$sM</string>
+    <string name="downloaded">Downloaded</string>
+    <string name="already_downloaded">Already downloaded</string>
+    <string name="save">Save</string>
 </resources>

@@ -10,7 +10,7 @@ interface SubredditsRemoteRepository {
 
     suspend fun subscribeOnSubreddit(action: String, name: String)
 
-   // suspend fun votePost(dir: Int, postName: String)
+    suspend fun votePost(dir: Int, postName: String)
 
     suspend fun getSubredditInfo(name: String): Subreddit
 

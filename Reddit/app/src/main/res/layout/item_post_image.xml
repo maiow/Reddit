@@ -26,7 +26,7 @@
             android:layout_marginStart="@dimen/header_padding"
             android:layout_marginTop="@dimen/margin_standard"
             android:text="r/subreddit"
-            android:textSize="12sp"
+            android:textSize="@dimen/small_font_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="11sp"
+            android:textSize="@dimen/small_font_size"
             android:layout_marginStart="@dimen/header_padding"
             android:text="u/username"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,23 +72,26 @@
 
         </LinearLayout>
 
-        <!--LinearLayout
+        <LinearLayout
             android:id="@+id/votes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/header_padding"
             android:layout_marginTop="@dimen/margin_mini"
-            android:background="@color/blue_alfa4"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/post_body">
+            app:layout_constraintTop_toBottomOf="@id/post_body"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnUpVote"
+                android:id="@+id/up_vote_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:background="@color/blue_alfa4"
+                android:layout_margin="@dimen/margin_mini"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:background="@color/white"
                 android:src="@drawable/selector_up_vote" />
 
             <TextView
@@ -96,54 +99,99 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="123456" />
+                android:layout_marginHorizontal="@dimen/margin_mini"
+                android:text="123К" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/down_vote_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:background="@color/blue_alfa4"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:layout_margin="@dimen/margin_mini"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                android:background="@color/white"
                 android:src="@drawable/selector_down_vote" />
-        </LinearLayout-->
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/download_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mini"
+            android:background="@color/white"
+            android:scaleY="1.2"
+            android:scaleX="1.2"
+            android:src="@drawable/selector_download"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_body" />
+
+        <TextView
+            android:id="@+id/download_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mini"
+            android:layout_marginStart="@dimen/margin_mini"
+            android:background="@color/white"
+            android:text="@string/download"
+            app:layout_constraintBottom_toBottomOf="@id/download_button"
+            app:layout_constraintStart_toEndOf="@id/download_button"
+            app:layout_constraintTop_toTopOf="@id/download_button" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_mini"
-            android:background="@color/blue_alfa4"
+            android:background="@color/white"
+            android:scaleY="0.8"
+            android:scaleX="0.8"
             android:src="@drawable/selector_save"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/save_text"
             app:layout_constraintTop_toBottomOf="@id/post_body" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/save_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_mini"
+            android:layout_marginStart="@dimen/margin_mini"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@color/white"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="@id/save_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/save_button" />
+
+        <!--LinearLayout
             android:id="@+id/comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_mini"
             android:layout_marginEnd="@dimen/header_padding"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/blue_alfa4"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/post_body">
+            app:layout_constraintTop_toBottomOf="@id/post_body"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/comment_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/blue_alfa4"
+                android:backgroundTint="@color/white"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
                 android:src="@drawable/ic_comment" />
 
             <TextView
                 android:id="@+id/comments_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="5" />
-        </LinearLayout>
+        </LinearLayout-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -15,5 +15,6 @@ data class Query(
 data class SubQuery(
     var action: String = "",
     var name: String = "",
-    var id: String = ""
+    var id: String = "",
+    var dir: Int = 0
 )

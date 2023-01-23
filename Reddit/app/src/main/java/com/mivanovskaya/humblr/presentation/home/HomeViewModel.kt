@@ -55,7 +55,7 @@ class HomeViewModel @Inject constructor(
     fun getSubreddits() {
         viewModelScope.launch(Dispatchers.IO + handler) {
             _state.value = LoadState.Loading
-            getSubredditsList(ListTypes.SUBREDDIT, query)
+            getSubredditsList(query)
             _state.value = LoadState.Content("")
         }
     }
@@ -63,13 +63,13 @@ class HomeViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     var thingList: Flow<PagingData<ListItem>> =
         _thingFlow.asStateFlow().flatMapLatest { query ->
-            getSubredditsList(ListTypes.SUBREDDIT, query).flow
+            getSubredditsList(query).flow
         }.cachedIn(CoroutineScope(Dispatchers.IO))
 
-    private fun getSubredditsList(listType: ListTypes, source: String?): Pager<String, ListItem> =
+    private fun getSubredditsList(source: String?): Pager<String, ListItem> =
         Pager(
             config = PagingConfig(pageSize = 10),
-            pagingSourceFactory = { PagingSource(repository, source, listType) }
+            pagingSourceFactory = { PagingSource(repository, source, ListTypes.SUBREDDIT) }
         )
 
     fun subscribe(subQuery: SubQuery) {

@@ -35,7 +35,7 @@ class SubredditsRemoteRepositoryImpl @Inject constructor(
     override suspend fun subscribeOnSubreddit(action: String, name: String) =
         apiSubreddits.subscribeOnSubreddit(action, name)
 
-    //override suspend fun votePost(dir: Int, postName: String) = apiPost.votePost(dir, postName)
+    override suspend fun votePost(dir: Int, postName: String) = apiPost.votePost(dir, postName)
 
     override suspend fun getSubredditInfo(name: String): Subreddit {
         return apiSubreddits.getSubredditInfo(name).toSubreddit()
