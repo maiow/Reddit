@@ -1,5 +1,5 @@
 # study project using API for Reddit
-Humblr for Reddit
+Humblr for Reddit. Description in English - in Readme inside the project.
 
 Задание
 Вам предстоит разработать мобильное приложение-аналог Reddit. 
