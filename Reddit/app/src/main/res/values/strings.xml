@@ -49,4 +49,6 @@
     <string name="downloaded">Downloaded</string>
     <string name="already_downloaded">Already downloaded</string>
     <string name="save">Save</string>
+    <string name="saved">Saved</string>
+    <string name="unsaved">Unsaved</string>
 </resources>

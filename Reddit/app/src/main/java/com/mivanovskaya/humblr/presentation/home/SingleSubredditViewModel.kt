@@ -25,8 +25,7 @@ class SingleSubredditViewModel @Inject constructor(private val repository: Subre
 
     //TODO:
     // - progress bar for recycler loading, not for AppBar;
-    // - Posts votes to api;
-    // - Posts Load button snackbar;
+    // - move save & votes logic from ViewHolder here;
     // - Posts Comment button - decide on;
     // - SharedPrefs DI in VMs.
 
@@ -48,9 +47,32 @@ class SingleSubredditViewModel @Inject constructor(private val repository: Subre
         }
     }
 
+    fun votePost(voteDirection: Int, postName: String){
+        viewModelScope.launch (Dispatchers.IO + handler) {
+            repository.votePost(voteDirection, postName)
+        }
+    }
+
+    fun savePost(postName: String){
+        viewModelScope.launch (Dispatchers.IO + handler) {
+            repository.savePost(postName)
+        }
+    }
+
+    fun unsavePost(postName: String){
+        viewModelScope.launch (Dispatchers.IO + handler) {
+            repository.unsavePost(postName)
+        }
+    }
+
     fun navigateBack(fragment: Fragment) {
         fragment.findNavController().navigate(
             SingleSubredditFragmentDirections.actionNavigationSingleSubredditToNavigationHome()
         )
     }
+    /** тут регулярно перестает видеть action, поэтому убрала во фрагмент*/
+//    fun navigateToProfile(fragment: Fragment, name: String) {
+//        fragment.findNavController().navigate(SingleSubredditFragmentDirections.actionNavigationSubredditToNavigationProfile(name))
+//    }
+
 }

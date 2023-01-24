@@ -23,8 +23,6 @@ class FriendsViewModel @Inject constructor(
         }
     }
     fun navigateBack(fragment: Fragment) {
-        fragment.findNavController().navigate(
-            FriendsFragmentDirections.actionNavigationFriendsToNavigationProfile()
-        )
+        fragment.findNavController().popBackStack()
     }
 }

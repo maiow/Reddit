@@ -1,14 +1,14 @@
 package com.mivanovskaya.humblr.data.repository
 
+import android.util.Log
 import com.mivanovskaya.humblr.data.api.ApiPost
 import com.mivanovskaya.humblr.data.api.ApiSubreddits
+import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentDto
+import com.mivanovskaya.humblr.data.api.dto.postDto.PostDto
 import com.mivanovskaya.humblr.domain.ListItem
 import com.mivanovskaya.humblr.domain.models.Subreddit
 import com.mivanovskaya.humblr.domain.repository.SubredditsRemoteRepository
-import com.mivanovskaya.humblr.domain.tools.ListTypes
-import com.mivanovskaya.humblr.domain.tools.toListPost
-import com.mivanovskaya.humblr.domain.tools.toListSubreddit
-import com.mivanovskaya.humblr.domain.tools.toSubreddit
+import com.mivanovskaya.humblr.domain.tools.*
 import javax.inject.Inject
 
 class SubredditsRemoteRepositoryImpl @Inject constructor(
@@ -37,7 +37,23 @@ class SubredditsRemoteRepositoryImpl @Inject constructor(
 
     override suspend fun votePost(dir: Int, postName: String) = apiPost.votePost(dir, postName)
 
+    override suspend fun savePost(postName: String) = apiPost.savePost(postName)
+
+    override suspend fun unsavePost(postName: String) = apiPost.unsavePost(postName)
+
     override suspend fun getSubredditInfo(name: String): Subreddit {
         return apiSubreddits.getSubredditInfo(name).toSubreddit()
+    }
+
+    override suspend fun getSinglePost(url: String): List<ListItem> {
+        val list = mutableListOf<ListItem>()
+        apiPost.getSinglePost(url).forEach { responseItem ->
+            responseItem.data.children.forEach { child ->
+                if (child is PostDto) list.add(child.toPost())
+                else if (child is CommentDto) list.add(child.toComment())
+            }
+        }
+        Log.d("Model is ready:", "${list.toList()}")
+        return list.toList()
     }
 }

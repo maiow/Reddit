@@ -45,4 +45,6 @@
     <string name="downloaded">Загружено</string>
     <string name="already_downloaded">Уже загружено ранее</string>
     <string name="save">Сохранить</string>
+    <string name="saved">Сохранено</string>
+    <string name="unsaved">Удалено из сохраненных</string>
 </resources>

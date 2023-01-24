@@ -114,32 +114,41 @@
                 android:src="@drawable/selector_down_vote" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/margin_standard"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_body"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/download_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_mini"
+            android:layout_marginHorizontal="@dimen/margin_mini"
             android:background="@color/white"
             android:scaleY="1.2"
             android:scaleX="1.2"
             android:src="@drawable/selector_download"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/download_text"
             app:layout_constraintTop_toBottomOf="@id/post_body" />
 
         <TextView
             android:id="@+id/download_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_mini"
-            android:layout_marginStart="@dimen/margin_mini"
             android:background="@color/white"
             android:text="@string/download"
-            app:layout_constraintBottom_toBottomOf="@id/download_button"
-            app:layout_constraintStart_toEndOf="@id/download_button"
-            app:layout_constraintTop_toTopOf="@id/download_button" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_body" />
 
+        </LinearLayout>
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/save_button"
             android:layout_width="wrap_content"

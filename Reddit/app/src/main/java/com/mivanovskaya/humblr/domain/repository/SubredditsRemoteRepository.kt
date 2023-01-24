@@ -12,6 +12,11 @@ interface SubredditsRemoteRepository {
 
     suspend fun votePost(dir: Int, postName: String)
 
+    suspend fun savePost(postName: String)
+
+    suspend fun unsavePost(postName: String)
+
     suspend fun getSubredditInfo(name: String): Subreddit
 
+    suspend fun getSinglePost(url: String): List<ListItem>
 }

@@ -68,29 +68,41 @@ fun postsDelegate(
 
         binding.upVoteButton.setOnClickListener {
             if (!binding.upVoteButton.isSelected)
-                onClick(SubQuery(dir = 1, name = item.name), item, ClickableView.UP_VOTE)
+                onClick(SubQuery(dir = 1, name = item.name), item, ClickableView.VOTE)
             else
-                onClick(SubQuery(dir = 0, name = item.name), item, ClickableView.UP_VOTE)
+                onClick(SubQuery(dir = 0, name = item.name), item, ClickableView.VOTE)
             binding.upVoteButton.isSelected = !binding.upVoteButton.isSelected
             binding.downVoteButton.isSelected = false
-            showScore(item.score)
+            // showScore(item.score+SubQuery().dir)
         }
 
         binding.downVoteButton.isSelected = item.likedByUser == false
         binding.downVoteButton.setOnClickListener {
             if (!binding.downVoteButton.isSelected)
-                onClick(SubQuery(dir = -1, name = item.name), item, ClickableView.DOWN_VOTE)
+                onClick(SubQuery(dir = -1, name = item.name), item, ClickableView.VOTE)
             else
-                onClick(SubQuery(dir = 0, name = item.name), item, ClickableView.DOWN_VOTE)
+                onClick(SubQuery(dir = 0, name = item.name), item, ClickableView.VOTE)
 
             binding.downVoteButton.isSelected = !binding.downVoteButton.isSelected
             binding.upVoteButton.isSelected = false
-            showScore(item.score)
+            // showScore(item.score+SubQuery().dir)
         }
 
+        binding.saveButton.isSelected = item.saved == true
         binding.saveButton.setOnClickListener {
-            onClick(SubQuery(), item, ClickableView.SAVE)
+            if (binding.saveButton.isSelected) {
+                Snackbar.make(binding.root, getString(R.string.unsaved), LENGTH_SHORT).show()
+                onClick(SubQuery(name = item.name), item, ClickableView.UNSAVE)
+            } else {
+                Snackbar.make(binding.root, getString(R.string.saved), LENGTH_SHORT)
+                    .show()
+                onClick(SubQuery(name = item.name), item, ClickableView.SAVE)
+            }
             binding.saveButton.isSelected = !binding.saveButton.isSelected
+        }
+
+        binding.userName.setOnClickListener {
+            onClick(SubQuery(name = item.author), item, ClickableView.USER)
         }
     }
 }

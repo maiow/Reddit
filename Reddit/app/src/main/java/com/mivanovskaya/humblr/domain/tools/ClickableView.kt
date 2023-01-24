@@ -1,12 +1,13 @@
 package com.mivanovskaya.humblr.domain.tools
 
-enum class ClickableView(val vote: Int = 0) {
-    UP_VOTE(vote = 1),
-    DOWN_VOTE(vote = -1),
+enum class ClickableView(/*val vote: Int = 0*/) {
+    VOTE,
     SAVE,
-    PHOTO,
-    POST_TITLE,
-    COMMENT,
+    UNSAVE,
+    USER,
+   // PHOTO,
+   // POST_TITLE,
+   // COMMENT,
     SUBREDDIT,
     SUBSCRIBE
 }

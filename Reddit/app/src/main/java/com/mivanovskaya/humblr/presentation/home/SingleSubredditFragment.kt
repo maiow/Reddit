@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
@@ -30,8 +31,8 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
     private val viewModel by viewModels<SingleSubredditViewModel>()
 
     private val adapter by lazy {
-        HomePagedDataDelegationAdapter { subQuery: SubQuery, item: ListItem, clickableView: ClickableView ->
-            onClick(subQuery, clickableView, )
+        HomePagedDataDelegationAdapter { subQuery: SubQuery, _: ListItem, clickableView: ClickableView ->
+            onClick(subQuery, clickableView)
         }
     }
     private val args by navArgs<SingleSubredditFragmentArgs>()
@@ -79,13 +80,13 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
                     }
                 }
                 binding.shareButton.setOnClickListener {
-                    shareLinkOnSubreddit(getString(R.string.share_url,data.url ?: ""))
+                    shareLinkOnSubreddit(getString(R.string.share_url, data.url ?: ""))
                 }
                 binding.subscribeButton.isSelected = data.isUserSubscriber == true
                 binding.subscribeButton.setOnClickListener {
-                        binding.subscribeButton.isSelected = !binding.subscribeButton.isSelected
-                        val action = if (!binding.subscribeButton.isSelected) UNSUBSCRIBE else SUBSCRIBE
-                        onClick(SubQuery(name = data.name, action = action), ClickableView.SUBSCRIBE)
+                    binding.subscribeButton.isSelected = !binding.subscribeButton.isSelected
+                    val action = if (!binding.subscribeButton.isSelected) UNSUBSCRIBE else SUBSCRIBE
+                    onClick(SubQuery(name = data.name, action = action), ClickableView.SUBSCRIBE)
 
                 }
             }
@@ -115,13 +116,23 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
     }
 
     private fun onClick(subQuery: SubQuery, clickableView: ClickableView) {
-        //if (clickableView == ClickableView.USER) viewModel.navigate(this, item)
-        if (clickableView == ClickableView.SUBSCRIBE) {
-            viewModel.subscribe(subQuery)
-            val text =
-                if (subQuery.action == SUBSCRIBE) getString(R.string.subscribed)
-                else getString(R.string.unsubscribed)
-            Snackbar.make(binding.recycler, text, LENGTH_SHORT).show()
+        when (clickableView) {
+            ClickableView.SAVE -> viewModel.savePost(postName = subQuery.name)
+            ClickableView.UNSAVE -> viewModel.unsavePost(postName = subQuery.name)
+            ClickableView.VOTE ->
+                viewModel.votePost(voteDirection = subQuery.dir, postName = subQuery.name)
+            ClickableView.SUBSCRIBE -> {
+                viewModel.subscribe(subQuery)
+                val text =
+                    if (subQuery.action == SUBSCRIBE) getString(R.string.subscribed)
+                    else getString(R.string.unsubscribed)
+                Snackbar.make(binding.recycler, text, LENGTH_SHORT).show()
+            }
+            ClickableView.USER ->
+            findNavController().navigate(SingleSubredditFragmentDirections
+                .actionNavigationSingleSubredditToNavigationProfile(subQuery.name))
+            //viewModel.navigateToProfile(this, subQuery.name)
+            else -> { TODO() }
         }
     }
 

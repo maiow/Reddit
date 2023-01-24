@@ -42,7 +42,7 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_single_subreddit_fragment"
             app:destination="@id/navigation_single_subreddit_fragment"
-            app:popUpTo="@id/navigation_home"/>
+            app:popUpTo="@id/navigation_home" />
     </fragment>
 
     <fragment
@@ -56,6 +56,9 @@
         android:name="com.mivanovskaya.humblr.presentation.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="name"
+            app:argType="string" />
         <action
             android:id="@+id/action_navigation_profile_to_navigation_friends"
             app:destination="@id/navigation_friends"
@@ -104,7 +107,8 @@
     <fragment
         android:id="@+id/navigation_single_subreddit_fragment"
         android:name="com.mivanovskaya.humblr.presentation.home.SingleSubredditFragment"
-        android:label="Subreddit Description">
+        android:label="Subreddit Description"
+        tools:layout="@layout/fragment_single_subreddit">
         <argument
             android:name="name"
             app:argType="string" />
@@ -114,6 +118,10 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_home" />
 
+        <action
+            android:id="@+id/action_navigation_single_subreddit_to_navigation_profile"
+            app:destination="@id/navigation_profile"
+            app:popUpTo="@id/navigation_profile" />
     </fragment>
 
 </navigation>

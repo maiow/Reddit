@@ -1,5 +1,9 @@
 package com.mivanovskaya.humblr.domain.tools
 
+import com.mivanovskaya.humblr.domain.models.Comment
+import com.mivanovskaya.humblr.domain.models.CommentListing
+import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentDto
+import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentListingDto
 import com.mivanovskaya.humblr.data.api.dto.postDto.PostDto
 import com.mivanovskaya.humblr.data.api.dto.profileDto.Children
 import com.mivanovskaya.humblr.data.api.dto.profileDto.FriendsDto
@@ -8,6 +12,12 @@ import com.mivanovskaya.humblr.data.api.dto.profileDto.UserDataSubDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditListingDataDto
 import com.mivanovskaya.humblr.domain.models.*
+
+fun List<CommentListingDto>.toListCommentListing(): List<CommentListing> =
+    this.map { item -> item.toCommentListing() }
+
+fun List<CommentDto>.toListComment(): List<Comment> =
+    this.map { item -> item.toComment() }
 
 fun ProfileDto.toProfile() = Profile(name, id, urlAvatar, more_infos?.toUserDataSub(), total_karma)
 
