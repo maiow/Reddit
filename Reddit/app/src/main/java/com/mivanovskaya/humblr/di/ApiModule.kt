@@ -19,6 +19,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -56,6 +57,7 @@ class ApiModule {
     @Singleton
     fun provideRetrofit(okhttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl("https://oauth.reddit.com/")
+        .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .client(okhttpClient)
         .build()

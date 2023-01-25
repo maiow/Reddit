@@ -51,19 +51,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         when (state) {
             LoadState.NotStartedYet -> {}
             LoadState.Loading -> {
-                binding.progressBar.isVisible = true
-                binding.error.isVisible = false
+                binding.common.progressBar.isVisible = true
+                binding.common.error.isVisible = false
                 binding.recyclerView.isVisible = false
             }
             is LoadState.Content -> {
-                binding.progressBar.isVisible = false
-                binding.error.isVisible = false
+                binding.common.progressBar.isVisible = false
+                binding.common.error.isVisible = false
                 binding.recyclerView.isVisible = true
                 loadContent()
             }
             is LoadState.Error -> {
-                binding.progressBar.isVisible = false
-                binding.error.isVisible = true
+                binding.common.progressBar.isVisible = false
+                binding.common.error.isVisible = true
                 binding.recyclerView.isVisible = false
             }
         }

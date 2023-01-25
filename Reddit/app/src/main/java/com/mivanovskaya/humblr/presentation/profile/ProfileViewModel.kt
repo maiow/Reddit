@@ -23,7 +23,7 @@ class ProfileViewModel @Inject constructor(
     fun getProfile() {
         viewModelScope.launch(Dispatchers.IO + handler) {
             _state.value = LoadState.Loading
-            _state.value = LoadState.Content(repository.getProfile())
+            _state.value = LoadState.Content(repository.getLoggedUserProfile())
         }
     }
 

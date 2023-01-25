@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_alfa4"
-    tools:context=".presentation.profile.ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.user.UserFragment">
 
     <LinearLayout
         android:id="@+id/container_view"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_marginTop="-50dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -76,45 +75,31 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button_list_of_friends"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="@dimen/profile_margin_top"
-            android:background="@drawable/round_corners_btn"
-            android:text="@string/list_of_friends"
-            android:textAllCaps="false"
-            app:layout_constraintBottom_toTopOf="@id/button_clear_saved"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_data_frame" />
-
-        <Button
-            android:id="@+id/button_clear_saved"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="@dimen/profile_margin_top"
-            android:background="@drawable/round_corners_btn"
-            android:text="@string/clear_saved"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_list_of_friends" />
-
-        <Button
-            android:id="@+id/button_logout"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="@dimen/logout_margin_top"
-            android:background="@drawable/round_corners_btn"
-            android:text="@string/logout"
-            android:textAllCaps="false"
-            app:backgroundTint="@color/red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_clear_saved" />
+    <Button
+        android:id="@+id/button_make_friends"
+        android:layout_width="300dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="@dimen/photo_margin_top"
+        android:background="@drawable/round_corners_btn"
+        android:text="@string/make_friends"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_data_frame" />
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constrainedHeight="true"
+        android:layout_marginTop="@dimen/margin_mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container_view" />
 
     <include layout="@layout/common_progress_error" android:id="@+id/common" />
 

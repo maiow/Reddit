@@ -19,4 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <include layout="@layout/common_progress_error" android:id="@+id/common" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,8 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/small_font_size"
             android:layout_marginStart="@dimen/header_padding"
+            android:clickable="true"
+            android:focusable="true"
             android:text="u/username"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/subreddit_name" />

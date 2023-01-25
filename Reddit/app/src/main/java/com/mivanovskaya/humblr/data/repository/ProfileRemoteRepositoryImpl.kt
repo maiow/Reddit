@@ -11,7 +11,11 @@ import javax.inject.Inject
 class ProfileRemoteRepositoryImpl @Inject constructor(private val apiProfile: ApiProfile):
     ProfileRemoteRepository {
 
-    override suspend fun getProfile(): Profile = apiProfile.getProfile().toProfile()
+    override suspend fun getLoggedUserProfile(): Profile = apiProfile.getLoggedUserProfile().toProfile()
 
     override suspend fun getFriends(): Friends = apiProfile.getFriends().data.toFriends()
+
+    override suspend fun getAnotherUserProfile(username: String): Profile = apiProfile.getAnotherUserProfile(username).data.toProfile()
+
+    override suspend fun makeFriends(username: String) = apiProfile.makeFriends(username)
 }

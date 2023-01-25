@@ -6,7 +6,7 @@ import com.mivanovskaya.humblr.domain.models.Subreddit
 
 interface SubredditsRemoteRepository {
 
-    suspend fun getList(type: ListTypes, source: String?, page: String): List<ListItem>//Subreddits//
+    suspend fun getList(type: ListTypes, source: String?, page: String): List<ListItem>
 
     suspend fun subscribeOnSubreddit(action: String, name: String)
 

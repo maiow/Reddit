@@ -58,18 +58,18 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
             LoadState.NotStartedYet -> {}
             LoadState.Loading -> {
                 binding.recycler.isVisible = false
-                binding.progressBar.isVisible = true
-                binding.error.isVisible = false
+                binding.common.progressBar.isVisible = true
+                binding.common.error.isVisible = false
             }
             is LoadState.Error -> {
                 binding.recycler.isVisible = false
-                binding.progressBar.isVisible = false
-                binding.error.isVisible = true
+                binding.common.progressBar.isVisible = false
+                binding.common.error.isVisible = true
             }
             is LoadState.Content -> {
                 binding.recycler.isVisible = true
-                binding.progressBar.isVisible = false
-                binding.error.isVisible = false
+                binding.common.progressBar.isVisible = false
+                binding.common.error.isVisible = false
                 val data = state.data as Subreddit
                 loadSubredditDescription(data)
                 binding.expandButton.setOnClickListener {
@@ -130,7 +130,7 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
             }
             ClickableView.USER ->
             findNavController().navigate(SingleSubredditFragmentDirections
-                .actionNavigationSingleSubredditToNavigationProfile(subQuery.name))
+                .actionNavigationSingleSubredditToNavigationUser(subQuery.name))
             //viewModel.navigateToProfile(this, subQuery.name)
             else -> { TODO() }
         }

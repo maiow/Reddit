@@ -5,7 +5,11 @@ import com.mivanovskaya.humblr.domain.models.Profile
 
 interface ProfileRemoteRepository {
 
-    suspend fun getProfile(): Profile
+    suspend fun getLoggedUserProfile(): Profile
 
     suspend fun getFriends(): Friends
+
+    suspend fun getAnotherUserProfile(username: String): Profile
+
+    suspend fun makeFriends(username: String)
 }

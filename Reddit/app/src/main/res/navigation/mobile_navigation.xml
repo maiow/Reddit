@@ -56,9 +56,6 @@
         android:name="com.mivanovskaya.humblr.presentation.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile">
-        <argument
-            android:name="name"
-            app:argType="string" />
         <action
             android:id="@+id/action_navigation_profile_to_navigation_friends"
             app:destination="@id/navigation_friends"
@@ -119,9 +116,21 @@
             app:popUpTo="@id/navigation_home" />
 
         <action
-            android:id="@+id/action_navigation_single_subreddit_to_navigation_profile"
-            app:destination="@id/navigation_profile"
-            app:popUpTo="@id/navigation_profile" />
+            android:id="@+id/action_navigation_single_subreddit_to_navigation_user"
+            app:destination="@id/navigation_user"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_user" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="com.mivanovskaya.humblr.presentation.user.UserFragment"
+        android:label="User"
+        tools:layout="@layout/fragment_user">
+    <argument
+        android:name="name"
+        android:defaultValue=""
+        app:argType="string" />
     </fragment>
 
 </navigation>

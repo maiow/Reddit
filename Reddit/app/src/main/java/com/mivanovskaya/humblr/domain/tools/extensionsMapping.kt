@@ -1,5 +1,6 @@
 package com.mivanovskaya.humblr.domain.tools
 
+import android.util.Log
 import com.mivanovskaya.humblr.domain.models.Comment
 import com.mivanovskaya.humblr.domain.models.CommentListing
 import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentDto
@@ -19,7 +20,10 @@ fun List<CommentListingDto>.toListCommentListing(): List<CommentListing> =
 fun List<CommentDto>.toListComment(): List<Comment> =
     this.map { item -> item.toComment() }
 
-fun ProfileDto.toProfile() = Profile(name, id, urlAvatar, more_infos?.toUserDataSub(), total_karma)
+fun ProfileDto.toProfile(): Profile {
+    Log.e("Mapper: ", "${Profile(name, id, urlAvatar, more_infos?.toUserDataSub(), total_karma)}")
+    return Profile(name, id, urlAvatar, more_infos?.toUserDataSub(), total_karma)
+}
 
 fun UserDataSubDto.toUserDataSub() = UserDataSubscribers(subscribers)
 
