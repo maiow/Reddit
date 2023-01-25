@@ -3,8 +3,8 @@ Humblr for Reddit
 
 Task was to develop Android mobile application - analog of Reddit. 
 
-This application allows registered Reddit users to post links on the information they like 
-in the Internet, find interesting content and discuss it.
+This application allows registered Reddit users to share links on the information they like,
+find interesting content and discuss it.
 
 Full API description: https://www.reddit.com/dev/api
 
@@ -46,33 +46,27 @@ Author, time, post text.
 Buttons:
 "Save".
 "Vote up/down".
-Ниже список первой страницы сообщений для комментария, после него кнопка «Показать всё». Кнопка ведёт на отдельную страницу сообщений с пагинацией.
 
 
-Посмотреть профиль юзера
+See user profile:
 
-Открывает профиль любого юзера.
-Краткая информация.
-Кнопка «Зафрендиться».
-Комментарии.
+Opens any user profile.
+Short info.
+"Make Friends" button.
+User's posts and comments.
 
+See "Favourites"
 
-Посмотреть вкладку «Избранное»
+2 tabs: Subreddits/Posts, All/Saved.
+Lists of subreddits and posts below.
 
-Вверху два переключателя: «Сабреддиты»/«Комментарии»,  «Все»/«Сохранённые».
-Ниже списки сабреддитов и комментариев.
-Переходы при сохранённом:
-Пытаться загрузить онлайн.
-Если информация доступна, отображаем.
-Нет ― пишем, что информация недоступна или удалена.
-Пытаться загрузить локально. (//реализация не требуется)
-Пишем, что информация недоступна.
+For Saved: try to upload online. If no info available - show that info is unavailable or deleted.
 
 
-Добавить в друзья
+Add to friends:
 
-Можно добавить любого юзера.
-Список друзей лежит в профиле.
+Can add any user.
+List of friends is available on Profile screen.
 
 See "Profile":
 
@@ -80,4 +74,3 @@ Logout button.
 Profile description.
 "Clear saved" button.
 List of friends button, friends can be seen on separate screen.
-
