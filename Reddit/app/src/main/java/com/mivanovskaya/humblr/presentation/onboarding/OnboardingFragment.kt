@@ -12,9 +12,12 @@ import com.mivanovskaya.humblr.databinding.FragmentOnboardingBinding
 import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
 import com.mivanovskaya.humblr.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
+class OnboardingFragment @Inject constructor(
+    private val sharedPrefsService: SharedPrefsService
+): BaseFragment<FragmentOnboardingBinding>() {
 
     private var mediator: TabLayoutMediator? = null
 
@@ -65,7 +68,7 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     }
 
     private fun saveOnboardingShown() {
-        SharedPrefsService.save(requireContext(), ONBOARDING_IS_SHOWN, true)
+        sharedPrefsService.save(requireContext(), ONBOARDING_IS_SHOWN, true)
     }
 
     override fun onDestroyView() {

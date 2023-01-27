@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val apiToken: ApiToken) : ViewModel() {
+class AuthViewModel @Inject constructor(private val apiToken: ApiToken, private val sharedPrefsService: SharedPrefsService) : ViewModel() {
 
     private val _state = MutableStateFlow<LoadState>(LoadState.NotStartedYet)
     val state = _state.asStateFlow()
@@ -24,11 +24,11 @@ class AuthViewModel @Inject constructor(private val apiToken: ApiToken) : ViewMo
             viewModelScope.launch(Dispatchers.IO) {
                 _state.value = LoadState.Loading
                 try {
-                    SharedPrefsService.saveEncryptedToken(
+                    sharedPrefsService.saveEncryptedToken(
                         context,
                         apiToken.getToken(code = code).access_token
                     )
-                    _state.value = LoadState.Content(data = null)
+                    _state.value = LoadState.Content()
                 } catch (e: Exception) {
                     _state.value = LoadState.Error(message = e.message.toString())
                 }

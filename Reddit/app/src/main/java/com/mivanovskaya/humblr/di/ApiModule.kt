@@ -13,6 +13,7 @@ import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptor
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptorQualifier
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenProvider
 import com.mivanovskaya.humblr.data.api.interceptor.LoggingInterceptorQualifier
+import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -36,7 +37,7 @@ class ApiModule {
     @Provides
     @Singleton
     fun provideAuthTokenProvider(@ApplicationContext context: Context): AuthTokenProvider =
-        AuthTokenProvider(context)
+        AuthTokenProvider(context, SharedPrefsService(/*context*/))
 
     @Provides
     @AuthTokenInterceptorQualifier
@@ -93,7 +94,8 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideApiSubreddits(retrofit: Retrofit): ApiSubreddits = retrofit.create(ApiSubreddits::class.java)
+    fun provideApiSubreddits(retrofit: Retrofit): ApiSubreddits =
+        retrofit.create(ApiSubreddits::class.java)
 
     @Provides
     @Singleton

@@ -63,19 +63,20 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
                 binding.common.error.isVisible = true
             }
             is LoadState.Content -> {
-                binding.containerView.isVisible = false
-                binding.common.progressBar.isVisible = true
+                binding.containerView.isVisible = true
+                binding.common.progressBar.isVisible = false
                 binding.common.error.isVisible = false
                 val data = state.data as Profile
                 if (data.urlAvatar != null) loadAvatar(data.urlAvatar!!)
                 loadProfileTexts(data)
+                loadUserContent(state.data2 as List<ListItem>)
             }
-            is LoadState.Content2 -> {
-                binding.containerView.isVisible = true
-                binding.common.progressBar.isVisible = false
-                binding.common.error.isVisible = false
-                loadUserContent(state.data as List<ListItem>)
-            }
+//            is LoadState.Content2 -> {
+//                binding.containerView.isVisible = true
+//                binding.common.progressBar.isVisible = false
+//                binding.common.error.isVisible = false
+//
+//            }
         }
     }
 

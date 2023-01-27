@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val repository: ProfileRemoteRepository
+    private val repository: ProfileRemoteRepository, private val sharedPrefsService: SharedPrefsService
 ) : BaseViewModel() {
 
     fun getProfile() {
@@ -33,8 +33,8 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun logout(context: Context, fragment: Fragment) {
-        SharedPrefsService.save(context, TOKEN_SHARED_KEY, "")
-        SharedPrefsService.save(context, TOKEN_ENABLED_KEY, false)
+        sharedPrefsService.save(context, TOKEN_SHARED_KEY, "")
+        sharedPrefsService.save(context, TOKEN_ENABLED_KEY, false)
         fragment.findNavController()
             .navigate(ProfileFragmentDirections.actionNavigationProfileToNavigationAuth())
     }

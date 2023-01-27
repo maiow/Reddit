@@ -17,9 +17,10 @@ class UserViewModel @Inject constructor(
     fun getProfileAndContent(name: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
             _state.value = LoadState.Loading
-            //TODO: change for 2 datas in 1 LoadState.Content maybe?
-            _state.value = LoadState.Content(repository.getAnotherUserProfile(name))
-            _state.value = LoadState.Content2(repository.getUserContent(name))
+            _state.value = LoadState.Content(
+                repository.getAnotherUserProfile(name),
+                repository.getUserContent(name)
+            )
         }
     }
 

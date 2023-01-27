@@ -50,7 +50,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun updateUi(state: LoadState) {
         when (state) {
             LoadState.NotStartedYet -> {}
-            is LoadState.Content2 ->{} //TODO
             LoadState.Loading -> {
                 binding.common.progressBar.isVisible = true
                 binding.common.error.isVisible = false

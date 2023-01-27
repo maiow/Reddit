@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO + handler) {
             _state.value = LoadState.Loading
             getSubredditsList(query)
-            _state.value = LoadState.Content("")
+            _state.value = LoadState.Content()
         }
     }
 

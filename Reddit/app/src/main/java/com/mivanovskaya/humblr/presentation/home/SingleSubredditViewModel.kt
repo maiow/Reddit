@@ -34,7 +34,7 @@ class SingleSubredditViewModel @Inject constructor(private val repository: Subre
         pagingSourceFactory = { PagingSource(repository, name, ListTypes.SUBREDDIT_POST) }
     ).flow
 
-    fun getSubredditInfo(name: String, ){
+    fun getSubredditInfo(name: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
             _state.value = LoadState.Loading
             _state.value = LoadState.Content(repository.getSubredditInfo(name))
@@ -47,20 +47,20 @@ class SingleSubredditViewModel @Inject constructor(private val repository: Subre
         }
     }
 
-    fun votePost(voteDirection: Int, postName: String){
-        viewModelScope.launch (Dispatchers.IO + handler) {
+    fun votePost(voteDirection: Int, postName: String) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
             repository.votePost(voteDirection, postName)
         }
     }
 
-    fun savePost(postName: String){
-        viewModelScope.launch (Dispatchers.IO + handler) {
+    fun savePost(postName: String) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
             repository.savePost(postName)
         }
     }
 
-    fun unsavePost(postName: String){
-        viewModelScope.launch (Dispatchers.IO + handler) {
+    fun unsavePost(postName: String) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
             repository.unsavePost(postName)
         }
     }

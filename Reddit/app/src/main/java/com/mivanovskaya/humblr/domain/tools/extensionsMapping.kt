@@ -14,6 +14,11 @@ import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditListingDataDto
 import com.mivanovskaya.humblr.domain.models.*
 
+
+fun CommentListingDto.toCommentListing() = CommentListing(
+    children = data.children.toListComment()
+)
+
 fun List<CommentListingDto>.toListCommentListing(): List<CommentListing> =
     this.map { item -> item.toCommentListing() }
 

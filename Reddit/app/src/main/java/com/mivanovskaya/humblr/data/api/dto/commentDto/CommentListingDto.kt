@@ -16,7 +16,7 @@ data class CommentListingDto(
         val before: String?
     )
 
-    fun toCommentListing() = CommentListing(
-        children = data.children.toListComment()
-    )
+//    fun toCommentListing() = CommentListing(
+//        children = data.children.toListComment()
+//    )
 }

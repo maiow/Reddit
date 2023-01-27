@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+class MainViewModel @Inject constructor(private val sharedPrefsService: SharedPrefsService) : ViewModel() {
 
     fun setNavigation(context: Context, fragment: Fragment) {
 
@@ -24,10 +24,10 @@ class MainViewModel @Inject constructor() : ViewModel() {
         val toAuthFragment = MainFragmentDirections.actionMainFragmentToAuthFragment()
         val toHomeFragment = MainFragmentDirections.actionMainFragmentToNavigationHome()
 
-        if (SharedPrefsService.load(context, TOKEN_ENABLED_KEY))
+        if (sharedPrefsService.load(context, TOKEN_ENABLED_KEY))
             fragment.findNavController().navigate(toHomeFragment)
         else {
-            if (SharedPrefsService.load(context, ONBOARDING_IS_SHOWN))
+            if (sharedPrefsService.load(context, ONBOARDING_IS_SHOWN))
                 fragment.findNavController().navigate(toAuthFragment)
             else fragment.findNavController().navigate(toOnboardingFragment)
         }
