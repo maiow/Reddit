@@ -32,14 +32,16 @@ interface ApiPost {
         @Query("id") postName: String
     )
 
+    //GET [/r/subreddit]/comments/article , where article = ID36 of a link
+    //Get the comment tree for a given Link article.
     @GET("/comments/{url}/")
     suspend fun getSinglePost(
         @Path("url") url: String
     ): List<SinglePostListingDto>
 
-    @GET("/user/{user_name}/saved/")
+    @GET("/user/{username}/saved/")
     suspend fun getSaved(
-        @Path("user_name") userName: String?,
+        @Path("username") username: String?,
         @Query("after") page: String
     ): PostListingDto
 }

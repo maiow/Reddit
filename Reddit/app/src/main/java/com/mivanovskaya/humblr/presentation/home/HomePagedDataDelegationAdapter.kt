@@ -4,6 +4,8 @@ import com.mivanovskaya.humblr.domain.ListItem
 import com.mivanovskaya.humblr.domain.tools.ClickableView
 import com.mivanovskaya.humblr.domain.tools.SubQuery
 import com.mivanovskaya.humblr.presentation.ListItemDiffUtil
+import com.mivanovskaya.humblr.presentation.delegates.postsDelegate
+import com.mivanovskaya.humblr.presentation.delegates.subredditsDelegate
 import com.mivanovskaya.humblr.tools.PagedDataDelegationAdapter
 
 class HomePagedDataDelegationAdapter(

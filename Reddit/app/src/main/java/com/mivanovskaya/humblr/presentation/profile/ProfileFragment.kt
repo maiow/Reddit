@@ -40,6 +40,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun updateUi(state: LoadState) {
         when (state) {
             LoadState.NotStartedYet -> {}
+            is LoadState.Content2 -> {}
             LoadState.Loading -> {
                 binding.containerView.isVisible = false
                 binding.common.progressBar.isVisible = true

@@ -1,12 +1,15 @@
 package com.mivanovskaya.humblr.data.api.dto.subredditDto
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 class SubredditDto(
     val kind: String,
     val data: SubredditDataDto,
 )
 
+@JsonClass(generateAdapter = true)
 class SubredditDataDto(
     val display_name: String?,
     val header_img: String?,
@@ -25,7 +28,7 @@ class SubredditDataDto(
     val banner_background_color: String?,
     val id: String,
     val over18: Boolean?,
-    @SerializedName("header_title")
+    @Json(name = "header_title")
     val description: String?,
     val url: String?,
     val mobile_banner_image: String?,

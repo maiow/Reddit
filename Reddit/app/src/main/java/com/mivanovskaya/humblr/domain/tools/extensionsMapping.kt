@@ -53,7 +53,7 @@ fun List<PostDto>.toListPost(): List<Post> = this.map { item -> item.toPost() }
 
 
 fun PostDto.toPost(): Post {
-    val dir = when (data.likes) {
+    val voteDirection = when (data.likes) {
         null -> 0
         true -> 1
         false -> -1
@@ -79,6 +79,6 @@ fun PostDto.toPost(): Post {
         fallbackUrl = data.media?.reddit_video?.fallback_url,
         isVideo = data.is_video,
         likedByUser = data.likes,
-        dir = dir
+        dir = voteDirection
     )
 }

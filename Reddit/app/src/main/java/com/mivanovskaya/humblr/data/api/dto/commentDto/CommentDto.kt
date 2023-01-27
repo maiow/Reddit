@@ -1,34 +1,37 @@
 package com.mivanovskaya.humblr.data.api.dto.commentDto
 
 import com.mivanovskaya.humblr.domain.models.Comment
-import com.google.gson.annotations.SerializedName
 import com.mivanovskaya.humblr.data.api.dto.ThingDto
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class CommentDto(
     override val kind: String,
     val data: CommentDataDto
 ) : ThingDto {
+    @JsonClass(generateAdapter = true)
     data class CommentDataDto(
-        @SerializedName("subreddit_id")
+        @Json(name = "subreddit_id")
         val subredditId: String?,
         val likes: Boolean?,
 //        val replies: Any?,
         val saved: Boolean?,
         val id: String,
         val author: String,
-        @SerializedName("parent_id")
+        @Json(name = "parent_id")
         val parentId: String,
         val score: Int?,
-        @SerializedName("author_fullname")
+        @Json(name = "author_fullname")
         val authorFullname: String?,
         val body: String?,
 //        val edited: Boolean?,
         val name: String,
         val permalink: String?,
         val created: Double?,
-        @SerializedName("link_id")
+        @Json(name = "link_id")
         val linkId: String?,
-        @SerializedName("subreddit_name_prefixed")
+        @Json(name = "subreddit_name_prefixed")
         val subredditNamePrefixed: String?,
         val depth: Int?,
         val count: Int?,

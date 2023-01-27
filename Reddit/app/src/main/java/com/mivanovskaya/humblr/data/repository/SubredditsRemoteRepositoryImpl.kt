@@ -1,6 +1,5 @@
 package com.mivanovskaya.humblr.data.repository
 
-import android.util.Log
 import com.mivanovskaya.humblr.data.api.ApiPost
 import com.mivanovskaya.humblr.data.api.ApiSubreddits
 import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentDto
@@ -53,7 +52,6 @@ class SubredditsRemoteRepositoryImpl @Inject constructor(
                 else if (child is CommentDto) list.add(child.toComment())
             }
         }
-        Log.d("Model is ready:", "${list.toList()}")
         return list.toList()
     }
 }

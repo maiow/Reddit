@@ -5,10 +5,17 @@ import com.mivanovskaya.humblr.data.api.ApiPost
 import com.mivanovskaya.humblr.data.api.ApiProfile
 import com.mivanovskaya.humblr.data.api.ApiSubreddits
 import com.mivanovskaya.humblr.data.api.ApiToken
+import com.mivanovskaya.humblr.data.api.dto.More
+import com.mivanovskaya.humblr.data.api.dto.ThingDto
+import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentDto
+import com.mivanovskaya.humblr.data.api.dto.postDto.PostDto
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptor
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptorQualifier
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenProvider
 import com.mivanovskaya.humblr.data.api.interceptor.LoggingInterceptorQualifier
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +25,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
@@ -55,10 +62,24 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okhttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    fun provideMoshi(): Moshi =
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+//            .add(RepliesAdapter())
+            .add(
+                PolymorphicJsonAdapterFactory.of(ThingDto::class.java, "kind")
+                    .withSubtype(PostDto::class.java, "t3")
+                    .withSubtype(CommentDto::class.java, "t1")
+                    .withSubtype(More::class.java, "more")
+            )
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(okhttpClient: OkHttpClient, moshi: Moshi): Retrofit = Retrofit.Builder()
         .baseUrl("https://oauth.reddit.com/")
         .addConverterFactory(ScalarsConverterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .client(okhttpClient)
         .build()
 

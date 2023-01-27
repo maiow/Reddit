@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.presentation.home
+package com.mivanovskaya.humblr.presentation.delegates
 
 import android.view.View
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT

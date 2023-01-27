@@ -1,15 +1,17 @@
 package com.mivanovskaya.humblr.data.api.dto.profileDto
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class ProfileDto(
     var name: String?,
-    var display_name: String,
+    //var display_name: String,
     var id: String?,
-    @SerializedName("icon_img")
+    @Json(name = "icon_img")
     var urlAvatar: String?,
 
-    @SerializedName("subreddit")
+    @Json(name = "subreddit")
     var more_infos: UserDataSubDto?,
 
 //    var awarder_karma: Int?,
@@ -25,6 +27,7 @@ data class ProfileDto(
 //    var account_creation_date: Long?
 )
 
+@JsonClass(generateAdapter = true)
 data class UserDataSubDto(
     var subscribers: Int?,
 //    @SerializedName("public_description")

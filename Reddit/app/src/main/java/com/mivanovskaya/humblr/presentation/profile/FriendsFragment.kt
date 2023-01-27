@@ -38,6 +38,7 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
     private fun updateUi(state: LoadState) {
         when (state) {
             LoadState.NotStartedYet -> {}
+            is LoadState.Content2 -> {}
             LoadState.Loading -> {
                 binding.common.progressBar.isVisible = true
                 binding.common.error.isVisible = false

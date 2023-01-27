@@ -1,11 +1,14 @@
 package com.mivanovskaya.humblr.data.api.dto.postDto
 
 import com.mivanovskaya.humblr.data.api.dto.ThingDto
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class PostDto(
     override val kind: String,
     val data: PostDataDto,
 ) : ThingDto {
+    @JsonClass(generateAdapter = true)
     data class PostDataDto(
         val subreddit: String,
         val selftext: String?,

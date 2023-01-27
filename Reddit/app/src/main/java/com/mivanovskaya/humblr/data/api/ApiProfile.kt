@@ -1,5 +1,6 @@
 package com.mivanovskaya.humblr.data.api
 
+import com.mivanovskaya.humblr.data.api.dto.postDto.SinglePostListingDto
 import com.mivanovskaya.humblr.data.api.dto.profileDto.ClickedUserProfileDto
 import com.mivanovskaya.humblr.data.api.dto.profileDto.FriendsListingDto
 import com.mivanovskaya.humblr.data.api.dto.profileDto.ProfileDto
@@ -26,6 +27,11 @@ interface ApiProfile {
         @Path("username") username: String,
         @Body requestBody: String = "{\"name\": \"$username\"}"
     )
+
+    @GET("/user/{username}")
+    suspend fun getUserContent(
+        @Path("username") username: String
+    ): SinglePostListingDto
 
 //
 //    DELETE /api/v1/me/friends/usernamesubscribe

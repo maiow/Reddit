@@ -46,6 +46,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.state.collect { state ->
                 when (state) {
+                    is LoadState.Content2 -> {}
                     LoadState.NotStartedYet ->
                         setViewsStates(
                             buttonIsEnabled = true,

@@ -7,10 +7,17 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
+import com.google.android.material.snackbar.Snackbar
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.mivanovskaya.humblr.R
 import com.mivanovskaya.humblr.databinding.FragmentUserBinding
+import com.mivanovskaya.humblr.domain.ListItem
 import com.mivanovskaya.humblr.domain.models.Profile
 import com.mivanovskaya.humblr.domain.state.LoadState
+import com.mivanovskaya.humblr.domain.tools.ClickableView
+import com.mivanovskaya.humblr.domain.tools.SubQuery
+import com.mivanovskaya.humblr.presentation.delegates.postsDelegate
 import com.mivanovskaya.humblr.tools.BaseFragment
 import com.mivanovskaya.humblr.tools.loadImage
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +27,11 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
 
     override fun initBinding(inflater: LayoutInflater) = FragmentUserBinding.inflate(inflater)
     private val viewModel by viewModels<UserViewModel>()
+
+    private val adapter by lazy { ListDelegationAdapter(postsDelegate{
+            subQuery: SubQuery, listItem: ListItem, clickableView: ClickableView ->
+        onClick(subQuery, listItem, clickableView)
+    }) }
 
     private val args by navArgs<UserFragmentArgs>()
 
@@ -31,7 +43,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     }
 
     private fun getLoadingState() {
-        viewModel.getProfile(args.name)
+        viewModel.getProfileAndContent(args.name)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.state.collect { state -> updateUi(state) }
         }
@@ -51,14 +63,24 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
                 binding.common.error.isVisible = true
             }
             is LoadState.Content -> {
-                binding.containerView.isVisible = true
-                binding.common.progressBar.isVisible = false
+                binding.containerView.isVisible = false
+                binding.common.progressBar.isVisible = true
                 binding.common.error.isVisible = false
                 val data = state.data as Profile
                 if (data.urlAvatar != null) loadAvatar(data.urlAvatar!!)
                 loadProfileTexts(data)
             }
+            is LoadState.Content2 -> {
+                binding.containerView.isVisible = true
+                binding.common.progressBar.isVisible = false
+                binding.common.error.isVisible = false
+                loadUserContent(state.data as List<ListItem>)
+            }
         }
+    }
+
+    private fun loadAvatar(url: String) {
+        binding.imageView.loadImage(url)
     }
 
     private fun loadProfileTexts(data: Profile) {
@@ -71,13 +93,20 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         }
     }
 
-    private fun loadAvatar(url: String) {
-        binding.imageView.loadImage(url)
+    private fun loadUserContent(data: List<ListItem>) {
+        binding.recycler.adapter = adapter
+        adapter.items = data
+
     }
 
     private fun setMakeFriendsClick(name: String) {
         binding.buttonMakeFriends.setOnClickListener {
-            viewModel.makeFriends(name, binding.containerView)
+            viewModel.makeFriends(name)
+            Snackbar.make(binding.containerView, "You are friends now", LENGTH_SHORT).show()
         }
+    }
+
+    private fun onClick(subQuery: SubQuery, listItem: ListItem, clickableView: ClickableView){
+        //TODO()
     }
 }

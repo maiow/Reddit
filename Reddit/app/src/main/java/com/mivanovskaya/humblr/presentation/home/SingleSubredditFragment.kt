@@ -56,6 +56,7 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
     private fun updateUi(state: LoadState) {
         when (state) {
             LoadState.NotStartedYet -> {}
+            is LoadState.Content2 ->{} //TODO
             LoadState.Loading -> {
                 binding.recycler.isVisible = false
                 binding.common.progressBar.isVisible = true

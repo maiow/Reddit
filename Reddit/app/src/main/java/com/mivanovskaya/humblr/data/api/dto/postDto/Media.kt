@@ -1,9 +1,12 @@
 package com.mivanovskaya.humblr.data.api.dto.postDto
 
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
 data class Media(
     val reddit_video: RedditVideo?
 )
-
+@JsonClass(generateAdapter = true)
 data class RedditVideo(
     val bitrate_kbps: Int,
     val fallback_url: String,
