@@ -23,7 +23,7 @@ class ProfileRemoteRepositoryImpl @Inject constructor(private val apiProfile: Ap
 
     override suspend fun makeFriends(username: String) = apiProfile.makeFriends(username)
 
-    //TODO: test comments view
+    /** no comments in tech.reqs, but can add later, after testing comments view*/
     override suspend fun getUserContent(username: String): List<ListItem> {
         val list = mutableListOf<ListItem>()
         apiProfile.getUserContent(username).data.children.forEach { child ->

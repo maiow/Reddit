@@ -24,10 +24,9 @@ class SingleSubredditViewModel @Inject constructor(private val repository: Subre
     BaseViewModel() {
 
     //TODO:
-    // - progress bar for recycler loading, not for AppBar;
-    // - move save & votes logic from ViewHolder here;
-    // - Posts Comment button - decide on;
-    // - SharedPrefs DI in VMs.
+    // - need to move Save & Votes logic from ViewHolder here or it's ok as is?
+    // - Votes, Save, and Download buttons - merge local updates to keep changes made
+    // in case of scrolling down and back again.
 
     fun getPostsList(name: String?): Flow<PagingData<ListItem>> = Pager(
         config = PagingConfig(pageSize = 10),
@@ -65,14 +64,15 @@ class SingleSubredditViewModel @Inject constructor(private val repository: Subre
         }
     }
 
+    fun navigateToUser(fragment: Fragment, name: String) {
+        fragment.findNavController().navigate(SingleSubredditFragmentDirections
+            .actionNavigationSingleSubredditToNavigationUser(name))
+    }
+
     fun navigateBack(fragment: Fragment) {
         fragment.findNavController().navigate(
             SingleSubredditFragmentDirections.actionNavigationSingleSubredditToNavigationHome()
         )
     }
-    /** тут регулярно перестает видеть action, поэтому убрала во фрагмент*/
-//    fun navigateToProfile(fragment: Fragment, name: String) {
-//        fragment.findNavController().navigate(SingleSubredditFragmentDirections.actionNavigationSubredditToNavigationProfile(name))
-//    }
 
 }

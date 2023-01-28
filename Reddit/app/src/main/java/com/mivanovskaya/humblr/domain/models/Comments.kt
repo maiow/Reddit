@@ -2,6 +2,10 @@ package com.mivanovskaya.humblr.domain.models
 
 import com.mivanovskaya.humblr.domain.ListItem
 
+data class Comments(
+    val children : List<Comment>
+)
+
 data class Comment(
     override val id: String,
     override val name: String,
@@ -21,4 +25,4 @@ data class Comment(
 //    val depth: Int,
 //    val count: Int?,
 //    val children: List<String>?
-    ) : ListItem
+) : ListItem

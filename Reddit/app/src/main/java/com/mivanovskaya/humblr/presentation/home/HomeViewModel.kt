@@ -17,58 +17,48 @@ import com.mivanovskaya.humblr.domain.tools.Query
 import com.mivanovskaya.humblr.domain.tools.SubQuery
 import com.mivanovskaya.humblr.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: SubredditsRemoteRepository
-) :
-    BaseViewModel() {
-
-    /**работает без показа прогресс бара, и тут пока по-черному написано, надо подчистить*/
+) : BaseViewModel() {
 
     private val _query = Query()
-    val query get() = _query.source
+    private val subredditsSource get() = _query.source
 
-    private val _thingFlow = MutableStateFlow(query)
-
-//    private val _sub = SubQuery()
-//    val sub get() = _sub.action
-//    val sub_name get() = _sub.name
-//    private val _subFlow = MutableStateFlow(sub)
-//    private val _subFlow = MutableStateFlow(sub_name)
+    private val _subredditsSourceFlow = MutableStateFlow(subredditsSource)
 
     fun setSource(position: Int) {
-        _query.source = if (position == 0) NEW else POPULAR
-        _thingFlow.value = query
+        _query.source = if (position == FIRST_POSITION_INDEX) NEW else POPULAR
+        _subredditsSourceFlow.value = subredditsSource
         getSubreddits()
     }
 
     fun getSubreddits() {
         viewModelScope.launch(Dispatchers.IO + handler) {
             _state.value = LoadState.Loading
-            getSubredditsList(query)
+            //loading is so fast, that progress bar isn't seen without delay
+            //delay(1_000)
+            getSubredditsList(subredditsSource)
             _state.value = LoadState.Content()
         }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    var thingList: Flow<PagingData<ListItem>> =
-        _thingFlow.asStateFlow().flatMapLatest { query ->
-            getSubredditsList(query).flow
+    var subredditsList: Flow<PagingData<ListItem>> =
+        _subredditsSourceFlow.asStateFlow().flatMapLatest { source ->
+            getSubredditsList(source).flow
         }.cachedIn(CoroutineScope(Dispatchers.IO))
 
     private fun getSubredditsList(source: String?): Pager<String, ListItem> =
         Pager(
-            config = PagingConfig(pageSize = 10),
+            config = PagingConfig(pageSize = PAGE_SIZE_SUBREDDITS),
             pagingSourceFactory = { PagingSource(repository, source, ListTypes.SUBREDDIT) }
         )
 
@@ -78,7 +68,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun navigate(fragment: Fragment, item: ListItem) {
+    fun navigateToSingleSubreddit(fragment: Fragment, item: ListItem) {
         fragment.findNavController().navigate(
             HomeFragmentDirections.actionNavigationHomeToNavigationSingleSubredditFragment(
                 (item as Subreddit).namePrefixed
@@ -87,7 +77,9 @@ class HomeViewModel @Inject constructor(
     }
 
     companion object {
+        private const val FIRST_POSITION_INDEX = 0
         private const val NEW = "new"
         private const val POPULAR = ""
+        private const val PAGE_SIZE_SUBREDDITS = 10
     }
 }

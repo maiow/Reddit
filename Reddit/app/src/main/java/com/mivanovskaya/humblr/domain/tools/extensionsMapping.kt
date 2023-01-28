@@ -2,7 +2,7 @@ package com.mivanovskaya.humblr.domain.tools
 
 import android.util.Log
 import com.mivanovskaya.humblr.domain.models.Comment
-import com.mivanovskaya.humblr.domain.models.CommentListing
+import com.mivanovskaya.humblr.domain.models.Comments
 import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentDto
 import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentListingDto
 import com.mivanovskaya.humblr.data.api.dto.postDto.PostDto
@@ -15,11 +15,11 @@ import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditListingDataDto
 import com.mivanovskaya.humblr.domain.models.*
 
 
-fun CommentListingDto.toCommentListing() = CommentListing(
+fun CommentListingDto.toCommentListing() = Comments(
     children = data.children.toListComment()
 )
 
-fun List<CommentListingDto>.toListCommentListing(): List<CommentListing> =
+fun List<CommentListingDto>.toListCommentListing(): List<Comments> =
     this.map { item -> item.toCommentListing() }
 
 fun List<CommentDto>.toListComment(): List<Comment> =

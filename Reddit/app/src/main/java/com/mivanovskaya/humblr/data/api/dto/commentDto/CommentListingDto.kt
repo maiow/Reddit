@@ -1,7 +1,5 @@
 package com.mivanovskaya.humblr.data.api.dto.commentDto
 
-import com.mivanovskaya.humblr.domain.models.CommentListing
-import com.mivanovskaya.humblr.domain.tools.toListComment
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)

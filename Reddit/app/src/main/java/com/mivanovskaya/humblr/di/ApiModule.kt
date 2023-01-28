@@ -37,7 +37,7 @@ class ApiModule {
     @Provides
     @Singleton
     fun provideAuthTokenProvider(@ApplicationContext context: Context): AuthTokenProvider =
-        AuthTokenProvider(context, SharedPrefsService(/*context*/))
+        AuthTokenProvider(context, SharedPrefsService())
 
     @Provides
     @AuthTokenInterceptorQualifier

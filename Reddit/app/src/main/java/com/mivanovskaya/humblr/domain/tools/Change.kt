@@ -16,5 +16,5 @@ data class SubQuery(
     var action: String = "",
     var name: String = "",
     var id: String = "",
-    var dir: Int = 0
+    var voteDirection: Int = 0
 )

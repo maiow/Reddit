@@ -7,7 +7,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
@@ -46,6 +45,15 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
         setToolbarBackButton()
     }
 
+    private fun loadPosts() {
+        binding.recycler.adapter = adapter
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.getPostsList(args.name).collect { pagingData ->
+                adapter.submitData(pagingData)
+            }
+        }
+    }
+
     private fun getLoadingState(name: String) {
         viewModel.getSubredditInfo(name)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -72,39 +80,10 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
                 binding.common.error.isVisible = false
                 val data = state.data as Subreddit
                 loadSubredditDescription(data)
-                binding.expandButton.setOnClickListener {
-                    when (binding.detailedInfo.visibility) {
-                        View.GONE -> binding.detailedInfo.visibility = View.VISIBLE
-                        View.VISIBLE -> binding.detailedInfo.visibility = View.GONE
-                        View.INVISIBLE -> {}
-                    }
-                }
-                binding.shareButton.setOnClickListener {
-                    shareLinkOnSubreddit(getString(R.string.share_url, data.url ?: ""))
-                }
+                setExpandButtonClick()
+                setShareButtonClick(data)
                 binding.subscribeButton.isSelected = data.isUserSubscriber == true
-                binding.subscribeButton.setOnClickListener {
-                    binding.subscribeButton.isSelected = !binding.subscribeButton.isSelected
-                    val action = if (!binding.subscribeButton.isSelected) UNSUBSCRIBE else SUBSCRIBE
-                    onClick(SubQuery(name = data.name, action = action), ClickableView.SUBSCRIBE)
-
-                }
-            }
-        }
-    }
-
-    private fun shareLinkOnSubreddit(url: String) {
-        val sharingIntent = Intent(Intent.ACTION_SEND)
-        sharingIntent.type = getString(R.string.share_text)
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, url)
-        startActivity(Intent.createChooser(sharingIntent, getString(R.string.share)))
-    }
-
-    private fun loadPosts() {
-        binding.recycler.adapter = adapter
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.getPostsList(args.name).collect { pagingData ->
-                adapter.submitData(pagingData)
+                setSubscribeButtonClick(data)
             }
         }
     }
@@ -115,12 +94,43 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
         binding.subredditDescription.text = subreddit.description
     }
 
+    private fun setExpandButtonClick() {
+        binding.expandButton.setOnClickListener {
+            when (binding.detailedInfo.visibility) {
+                View.GONE -> binding.detailedInfo.visibility = View.VISIBLE
+                View.VISIBLE -> binding.detailedInfo.visibility = View.GONE
+                View.INVISIBLE -> {}
+            }
+        }
+    }
+
+    private fun setShareButtonClick(data: Subreddit) {
+        binding.shareButton.setOnClickListener {
+            shareLinkOnSubreddit(getString(R.string.share_url, data.url ?: ""))
+        }
+    }
+
+    private fun setSubscribeButtonClick(data: Subreddit) {
+        binding.subscribeButton.setOnClickListener {
+            binding.subscribeButton.isSelected = !binding.subscribeButton.isSelected
+            val action = if (!binding.subscribeButton.isSelected) UNSUBSCRIBE else SUBSCRIBE
+            onClick(SubQuery(name = data.name, action = action), ClickableView.SUBSCRIBE)
+        }
+    }
+
+    private fun shareLinkOnSubreddit(url: String) {
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = getString(R.string.share_text)
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, url)
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.share)))
+    }
+
     private fun onClick(subQuery: SubQuery, clickableView: ClickableView) {
         when (clickableView) {
             ClickableView.SAVE -> viewModel.savePost(postName = subQuery.name)
             ClickableView.UNSAVE -> viewModel.unsavePost(postName = subQuery.name)
             ClickableView.VOTE ->
-                viewModel.votePost(voteDirection = subQuery.dir, postName = subQuery.name)
+                viewModel.votePost(voteDirection = subQuery.voteDirection, postName = subQuery.name)
             ClickableView.SUBSCRIBE -> {
                 viewModel.subscribe(subQuery)
                 val text =
@@ -128,11 +138,8 @@ class SingleSubredditFragment : BaseFragment<FragmentSingleSubredditBinding>() {
                     else getString(R.string.unsubscribed)
                 Snackbar.make(binding.recycler, text, LENGTH_SHORT).show()
             }
-            ClickableView.USER ->
-            findNavController().navigate(SingleSubredditFragmentDirections
-                .actionNavigationSingleSubredditToNavigationUser(subQuery.name))
-            //viewModel.navigateToProfile(this, subQuery.name)
-            else -> { TODO() }
+            ClickableView.USER -> viewModel.navigateToUser(this, subQuery.name)
+            else -> {}
         }
     }
 

@@ -10,6 +10,7 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.mivanovskaya.humblr.databinding.FragmentFriendsBinding
 import com.mivanovskaya.humblr.domain.models.Friends
 import com.mivanovskaya.humblr.domain.state.LoadState
+import com.mivanovskaya.humblr.presentation.delegates.friendsDelegate
 import com.mivanovskaya.humblr.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 

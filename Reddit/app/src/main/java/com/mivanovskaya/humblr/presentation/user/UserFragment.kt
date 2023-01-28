@@ -29,8 +29,8 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     private val viewModel by viewModels<UserViewModel>()
 
     private val adapter by lazy { ListDelegationAdapter(postsDelegate{
-            subQuery: SubQuery, listItem: ListItem, clickableView: ClickableView ->
-        onClick(subQuery, listItem, clickableView)
+            subQuery: SubQuery, _: ListItem, clickableView: ClickableView ->
+        onClick(subQuery, clickableView)
     }) }
 
     private val args by navArgs<UserFragmentArgs>()
@@ -71,12 +71,6 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
                 loadProfileTexts(data)
                 loadUserContent(state.data2 as List<ListItem>)
             }
-//            is LoadState.Content2 -> {
-//                binding.containerView.isVisible = true
-//                binding.common.progressBar.isVisible = false
-//                binding.common.error.isVisible = false
-//
-//            }
         }
     }
 
@@ -107,7 +101,13 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
         }
     }
 
-    private fun onClick(subQuery: SubQuery, listItem: ListItem, clickableView: ClickableView){
-        //TODO()
+    private fun onClick(subQuery: SubQuery, clickableView: ClickableView) {
+        when (clickableView) {
+            ClickableView.SAVE -> viewModel.savePost(postName = subQuery.name)
+            ClickableView.UNSAVE -> viewModel.unsavePost(postName = subQuery.name)
+            ClickableView.VOTE ->
+                viewModel.votePost(voteDirection = subQuery.voteDirection, postName = subQuery.name)
+            else -> { TODO() }
+        }
     }
 }

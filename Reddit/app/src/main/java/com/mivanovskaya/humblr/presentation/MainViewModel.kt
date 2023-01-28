@@ -11,7 +11,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val sharedPrefsService: SharedPrefsService) : ViewModel() {
+class MainViewModel @Inject constructor(private val sharedPrefsService: SharedPrefsService) :
+    ViewModel() {
 
     fun setNavigation(context: Context, fragment: Fragment) {
 

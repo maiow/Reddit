@@ -46,7 +46,6 @@ fun postsDelegate(
     bind {
         showScore(item.score)
         binding.postTitle.text = item.title
-        //binding.commentsCount.text = item.numComments.toString()
         binding.subredditName.text = item.subredditNamePrefixed
         binding.userName.text = context.getString(R.string.author, item.author)
         if (item.postHint == "image") {
@@ -67,25 +66,28 @@ fun postsDelegate(
         binding.upVoteButton.isSelected = item.likedByUser == true
 
         binding.upVoteButton.setOnClickListener {
-            if (!binding.upVoteButton.isSelected)
-                onClick(SubQuery(dir = 1, name = item.name), item, ClickableView.VOTE)
-            else
-                onClick(SubQuery(dir = 0, name = item.name), item, ClickableView.VOTE)
+            if (!binding.upVoteButton.isSelected) {
+                onClick(SubQuery(voteDirection = 1, name = item.name), item, ClickableView.VOTE)
+                showScore(item.score + 1)
+            } else {
+                onClick(SubQuery(voteDirection = 0, name = item.name), item, ClickableView.VOTE)
+                showScore(item.score)
+            }
             binding.upVoteButton.isSelected = !binding.upVoteButton.isSelected
             binding.downVoteButton.isSelected = false
-            // showScore(item.score+SubQuery().dir)
         }
 
         binding.downVoteButton.isSelected = item.likedByUser == false
         binding.downVoteButton.setOnClickListener {
-            if (!binding.downVoteButton.isSelected)
-                onClick(SubQuery(dir = -1, name = item.name), item, ClickableView.VOTE)
-            else
-                onClick(SubQuery(dir = 0, name = item.name), item, ClickableView.VOTE)
-
+            if (!binding.downVoteButton.isSelected) {
+                onClick(SubQuery(voteDirection = -1, name = item.name), item, ClickableView.VOTE)
+                showScore(item.score - 1)
+            } else {
+                onClick(SubQuery(voteDirection = 0, name = item.name), item, ClickableView.VOTE)
+                showScore(item.score)
+            }
             binding.downVoteButton.isSelected = !binding.downVoteButton.isSelected
             binding.upVoteButton.isSelected = false
-            // showScore(item.score+SubQuery().dir)
         }
 
         binding.saveButton.isSelected = item.saved == true
@@ -111,7 +113,7 @@ private fun AdapterDelegateViewBindingViewHolder<Post, ItemPostImageBinding>.sho
     if (score > 999_999) {
         binding.likes.text = getString(R.string.likesM, score / 1_000_000)
     } else {
-        if (item.score > 999) binding.likes.text = getString(R.string.likesK, score / 1_000)
-        else binding.likes.text = item.score.toString()
+        if (score > 999) binding.likes.text = getString(R.string.likesK, score / 1_000)
+        else binding.likes.text = score.toString()
     }
 }

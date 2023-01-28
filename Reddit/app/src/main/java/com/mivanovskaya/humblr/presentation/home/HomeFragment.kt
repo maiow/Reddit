@@ -35,9 +35,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadContent()
         getLoadingState()
         tabLayoutListener(binding.toggleSource)
         setSearch()
+    }
+
+    private fun loadContent() {
+        binding.recyclerView.adapter = adapter
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.subredditsList.collect { pagingData -> adapter.submitData(pagingData) }
+        }
     }
 
     private fun getLoadingState() {
@@ -59,20 +67,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.common.progressBar.isVisible = false
                 binding.common.error.isVisible = false
                 binding.recyclerView.isVisible = true
-                loadContent()
+
             }
             is LoadState.Error -> {
                 binding.common.progressBar.isVisible = false
                 binding.common.error.isVisible = true
                 binding.recyclerView.isVisible = false
             }
-        }
-    }
-
-    private fun loadContent() {
-        binding.recyclerView.adapter = adapter
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.thingList.collect { pagingData -> adapter.submitData(pagingData) }
         }
     }
 
@@ -84,13 +85,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun setSearch() {
         binding.searchView.setOnSearchClickListener {
-            Snackbar.make(binding.recyclerView, getString(R.string.no_function), LENGTH_SHORT)
-                .show()
+            Snackbar.make(binding.recyclerView, getString(R.string.no_function),
+                LENGTH_SHORT).show()
         }
     }
 
     private fun onClick(subQuery: SubQuery, item: ListItem, clickableView: ClickableView) {
-        if (clickableView == ClickableView.SUBREDDIT) viewModel.navigate(this, item)
+        if (clickableView == ClickableView.SUBREDDIT)
+            viewModel.navigateToSingleSubreddit(this, item)
         if (clickableView == ClickableView.SUBSCRIBE) {
             viewModel.subscribe(subQuery)
             val text =

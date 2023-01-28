@@ -1,4 +1,4 @@
-package com.mivanovskaya.humblr.presentation.profile
+package com.mivanovskaya.humblr.presentation.delegates
 
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import com.mivanovskaya.humblr.databinding.ItemFriendsBinding

@@ -4,24 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mivanovskaya.humblr.R
-import com.mivanovskaya.humblr.data.api.ONBOARDING_IS_SHOWN
 import com.mivanovskaya.humblr.databinding.FragmentOnboardingBinding
-import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
 import com.mivanovskaya.humblr.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class OnboardingFragment @Inject constructor(
-    private val sharedPrefsService: SharedPrefsService
-): BaseFragment<FragmentOnboardingBinding>() {
+class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
     private var mediator: TabLayoutMediator? = null
 
     override fun initBinding(inflater: LayoutInflater) = FragmentOnboardingBinding.inflate(inflater)
+    private val viewModel by viewModels<OnboardingViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,12 +59,12 @@ class OnboardingFragment @Inject constructor(
     private fun setAuthorizeButton() {
         binding.skipButton.background = null
         binding.skipButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_onboarding_to_navigation_auth)
+            viewModel.navigateToAuth(this)
         }
     }
 
     private fun saveOnboardingShown() {
-        sharedPrefsService.save(requireContext(), ONBOARDING_IS_SHOWN, true)
+        viewModel.saveOnboardingShown(requireContext())
     }
 
     override fun onDestroyView() {
