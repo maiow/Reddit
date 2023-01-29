@@ -41,11 +41,14 @@
     <string name="author">"Автор поста: u/%1$s"</string>
     <string name="share">Поделиться</string>
     <string name="subscribers">Подписчиков: %1$d</string>
-    <string name="download">Локальная загрузка</string>
+    <string name="download">Загрузить</string>
     <string name="downloaded">Загружено</string>
     <string name="already_downloaded">Уже загружено ранее</string>
     <string name="save">Сохранить</string>
     <string name="saved">Сохранено</string>
+    <string name="saved_or_all">Сохраненные</string>
     <string name="unsaved">Удалено из сохраненных</string>
     <string name="make_friends">Добавить в друзья</string>
+    <string name="all">Все</string>
+    <string name="friends_now">Пользователь добавлен в список друзей</string>
 </resources>

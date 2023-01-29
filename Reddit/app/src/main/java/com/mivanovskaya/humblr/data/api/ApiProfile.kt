@@ -33,7 +33,7 @@ interface ApiProfile {
         @Path("username") username: String
     ): SinglePostListingDto
 
-// no unfriend feature in tech.reqs, can add later
+/** no unfriend feature in tech.reqs, can add later*/
 //    DELETE /api/v1/me/friends/usernamesubscribe
 //    Stop being friends with a user.
 }

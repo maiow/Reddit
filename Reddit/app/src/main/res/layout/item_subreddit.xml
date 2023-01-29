@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/header_padding"
                 android:layout_weight="1"
-                android:text="Subreddit Title"
+                tools:text="Subreddit Title"
                 android:textSize="@dimen/title_font_size" />
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -51,7 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/subreddit_title"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="Subreddit description, which is extremely short usually" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

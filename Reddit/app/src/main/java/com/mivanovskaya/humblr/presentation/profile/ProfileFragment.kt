@@ -7,6 +7,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.mivanovskaya.humblr.R
 import com.mivanovskaya.humblr.databinding.FragmentProfileBinding
 import com.mivanovskaya.humblr.domain.models.Profile
@@ -26,8 +28,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
         getLoadingState()
         setFriendsListClick()
+        setClearSaved()
         setLogoutButton()
-        //TODO: добавить кнопку Clear Saved после готовности экрана с функционалом сохранения
     }
 
     private fun getLoadingState() {
@@ -80,6 +82,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun setFriendsListClick() {
         binding.buttonListOfFriends.setOnClickListener {
             viewModel.navigateToFriends(this)
+        }
+    }
+
+    private fun setClearSaved(){
+        binding.buttonClearSaved.setOnClickListener {
+            viewModel.clearSaved()
+            Snackbar.make(binding.root, "All posts have been unsaved", BaseTransientBottomBar.LENGTH_SHORT).show()
         }
     }
 

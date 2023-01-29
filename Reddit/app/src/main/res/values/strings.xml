@@ -52,4 +52,7 @@
     <string name="saved">Saved</string>
     <string name="unsaved">Unsaved</string>
     <string name="make_friends">Make Friends</string>
+    <string name="saved_or_all">Saved</string>
+    <string name="all">All</string>
+    <string name="friends_now">User\'s added to your friends list</string>
 </resources>

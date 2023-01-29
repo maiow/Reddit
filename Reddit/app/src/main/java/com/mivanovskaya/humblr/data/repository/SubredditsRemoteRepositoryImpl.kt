@@ -1,6 +1,7 @@
 package com.mivanovskaya.humblr.data.repository
 
 import com.mivanovskaya.humblr.data.api.ApiPost
+import com.mivanovskaya.humblr.data.api.ApiProfile
 import com.mivanovskaya.humblr.data.api.ApiSubreddits
 import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentDto
 import com.mivanovskaya.humblr.data.api.dto.postDto.PostDto
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 class SubredditsRemoteRepositoryImpl @Inject constructor(
     private val apiSubreddits: ApiSubreddits,
-    private val apiPost: ApiPost
+    private val apiPost: ApiPost,
+    private val apiProfile: ApiProfile
 ) : SubredditsRemoteRepository {
 
     override suspend fun getList(type: ListTypes, source: String?, page: String): List<ListItem> {
@@ -22,13 +24,17 @@ class SubredditsRemoteRepositoryImpl @Inject constructor(
 
             ListTypes.SUBREDDIT_POST -> apiSubreddits.getSubredditPosts(source, page)
                 .data.children.toListPost()
-        }
-            //ListTypes.POST -> apiPost.getPostListing(source, page).data.children.toListPost()
-/*
 
-             ListTypes.SUBSCRIBED_SUBREDDIT -> apiSubreddits.getSubscribed(page)
-                 .data.children.toListSubreddit()
-             ListTypes.SAVED_POST -> apiPost.getSaved(source, page).data.children.toListPost()*/
+            ListTypes.POST -> apiPost.getPostListing(source, page).data.children.toListPost()
+
+            ListTypes.SUBSCRIBED_SUBREDDIT -> apiSubreddits.getSubscribed(page)
+                .data.children.toListSubreddit()
+
+            ListTypes.SAVED_POST -> {
+                val username = apiProfile.getLoggedUserProfile().name
+                apiPost.getSaved(username, page).data.children.toListPost()
+            }
+        }
     }
 
     override suspend fun subscribeOnSubreddit(action: String, name: String) =

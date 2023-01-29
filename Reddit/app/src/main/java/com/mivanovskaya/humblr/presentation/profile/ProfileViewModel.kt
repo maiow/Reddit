@@ -17,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val repository: ProfileRemoteRepository, private val sharedPrefsService: SharedPrefsService
+    private val repository: ProfileRemoteRepository,
+    private val sharedPrefsService: SharedPrefsService
 ) : BaseViewModel() {
 
     fun getProfile() {
@@ -44,5 +45,12 @@ class ProfileViewModel @Inject constructor(
             ProfileFragmentDirections
                 .actionNavigationProfileToNavigationFriends()
         )
+    }
+
+    fun clearSaved() {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+           TODO()
+           // repository.clearSaved()
+        }
     }
 }

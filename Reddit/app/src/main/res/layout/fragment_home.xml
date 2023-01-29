@@ -19,26 +19,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="@string/search" />
 
-    <!--com.google.android.material.tabs.TabLayout
-        android:id="@+id/toggle_type"
-        style="@style/MyTabLayoutStyle"
-        android:layout_marginTop="@dimen/margin_standard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_view">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/posts" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/subreddits" />
-
-    </com.google.android.material.tabs.TabLayout-->
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/toggle_source"
         style="@style/MyTabLayoutStyle"

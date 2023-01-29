@@ -49,7 +49,17 @@
         android:id="@+id/navigation_favourites"
         android:name="com.mivanovskaya.humblr.presentation.favourites.FavouritesFragment"
         android:label="@string/title_favourites"
-        tools:layout="@layout/fragment_favourites" />
+        tools:layout="@layout/fragment_favourites" >
+        <action
+            android:id="@+id/action_navigation_favourites_to_navigation_user"
+            app:destination="@id/navigation_user"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_user"/>
+        <action
+            android:id="@+id/action_navigation_favourites_to_navigation_single_subreddit_fragment"
+            app:destination="@id/navigation_single_subreddit_fragment"
+            app:popUpTo="@id/navigation_favourites"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"

@@ -97,7 +97,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     private fun setMakeFriendsClick(name: String) {
         binding.buttonMakeFriends.setOnClickListener {
             viewModel.makeFriends(name)
-            Snackbar.make(binding.containerView, "You are friends now", LENGTH_SHORT).show()
+            Snackbar.make(binding.containerView, getString(R.string.friends_now), LENGTH_SHORT).show()
         }
     }
 
