@@ -61,6 +61,18 @@
         app:layout_constraintTop_toBottomOf="@id/toggle_source"
         tools:listitem="@layout/item_subreddit" />
 
+    <TextView
+        android:id="@+id/no_saved_posts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/you_have_no_saved_posts"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@id/toggle_source"
+        />
+
     <include
         android:id="@+id/common"
         layout="@layout/common_progress_error" />

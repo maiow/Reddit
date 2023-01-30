@@ -46,6 +46,12 @@ class SubredditsRemoteRepositoryImpl @Inject constructor(
 
     override suspend fun unsavePost(postName: String) = apiPost.unsavePost(postName)
 
+    override suspend fun unsaveAllSavedPosts() {
+        val username = apiProfile.getLoggedUserProfile().name
+        val savedPostsNamesList: List<String> = apiPost.getAllSavedPosts(username).data.children.toListOfPostsNames()
+        savedPostsNamesList.forEach { postName -> apiPost.unsavePost(postName) }
+    }
+
     override suspend fun getSubredditInfo(name: String): Subreddit {
         return apiSubreddits.getSubredditInfo(name).toSubreddit()
     }

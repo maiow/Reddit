@@ -55,4 +55,6 @@
     <string name="saved_or_all">Saved</string>
     <string name="all">All</string>
     <string name="friends_now">User\'s added to your friends list</string>
+    <string name="snack_unsaved">All previously saved posts have been unsaved</string>
+    <string name="you_have_no_saved_posts">You have no saved posts. \n Information is unavailable or deleted</string>
 </resources>

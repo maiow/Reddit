@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -42,7 +43,9 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
     private fun loadContent() {
         binding.recyclerView.adapter = adapter
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.thingList.collect { pagingData -> adapter.submitData(pagingData) }
+            viewModel.thingList.collect { pagingData ->
+                adapter.submitData(pagingData)
+            }
         }
     }
 
@@ -50,8 +53,9 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             adapter.loadStateFlow.collect { state ->
                 binding.common.progressBar.isVisible =
-                    state.refresh is androidx.paging.LoadState.Loading || state.append is androidx.paging.LoadState.Loading
+                    state.refresh is LoadState.Loading || state.append is LoadState.Loading
                 binding.common.error.isVisible = false
+                binding.noSavedPosts.isVisible = state.refresh is LoadState.NotLoading && adapter.itemCount == 0
             }
         }
     }

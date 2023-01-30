@@ -51,4 +51,6 @@
     <string name="make_friends">Добавить в друзья</string>
     <string name="all">Все</string>
     <string name="friends_now">Пользователь добавлен в список друзей</string>
+    <string name="snack_unsaved">Все сохраненные ранее посты были удалены из сохраненных</string>
+    <string name="you_have_no_saved_posts">У вас нет сохраненных постов. \n Информация недоступна или удалена</string>
 </resources>

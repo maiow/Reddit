@@ -56,6 +56,9 @@ fun SubredditDto.toSubreddit() = Subreddit(
 
 fun List<PostDto>.toListPost(): List<Post> = this.map { item -> item.toPost() }
 
+fun List<PostDto>.toListOfPostsNames(): List<String> = this.map { item -> item.toPostName() }
+
+fun PostDto.toPostName(): String = data.name
 
 fun PostDto.toPost(): Post {
     val voteDirection = when (data.likes) {

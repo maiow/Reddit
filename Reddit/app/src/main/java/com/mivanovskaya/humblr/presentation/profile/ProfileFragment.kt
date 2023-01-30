@@ -88,7 +88,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun setClearSaved(){
         binding.buttonClearSaved.setOnClickListener {
             viewModel.clearSaved()
-            Snackbar.make(binding.root, "All posts have been unsaved", BaseTransientBottomBar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, getString(R.string.snack_unsaved), BaseTransientBottomBar.LENGTH_SHORT).show()
         }
     }
 

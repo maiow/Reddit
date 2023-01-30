@@ -42,4 +42,14 @@ interface ApiPost {
         @Path("username") username: String?,
         @Query("after") page: String
     ): PostListingDto
+
+    @GET("/user/{username}/saved/")
+    suspend fun getAllSavedPosts(
+        @Path("username") username: String?
+    ): PostListingDto
+
+/*    @POST("/api/unsave")
+    suspend fun unsaveAllPosts(
+        @Query("id") postName: String
+    )*/
 }

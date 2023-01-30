@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.mivanovskaya.humblr.data.api.TOKEN_ENABLED_KEY
 import com.mivanovskaya.humblr.data.api.TOKEN_SHARED_KEY
 import com.mivanovskaya.humblr.domain.repository.ProfileRemoteRepository
+import com.mivanovskaya.humblr.domain.repository.SubredditsRemoteRepository
 import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
 import com.mivanovskaya.humblr.domain.state.LoadState
 import com.mivanovskaya.humblr.tools.BaseViewModel
@@ -17,14 +18,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val repository: ProfileRemoteRepository,
+    private val repositoryProfile: ProfileRemoteRepository,
+    private val repositorySubreddits: SubredditsRemoteRepository,
     private val sharedPrefsService: SharedPrefsService
 ) : BaseViewModel() {
 
     fun getProfile() {
         viewModelScope.launch(Dispatchers.IO + handler) {
             _state.value = LoadState.Loading
-            _state.value = LoadState.Content(repository.getLoggedUserProfile())
+            _state.value = LoadState.Content(repositoryProfile.getLoggedUserProfile())
         }
     }
 
@@ -49,8 +51,7 @@ class ProfileViewModel @Inject constructor(
 
     fun clearSaved() {
         viewModelScope.launch(Dispatchers.IO + handler) {
-           TODO()
-           // repository.clearSaved()
+           repositorySubreddits.unsaveAllSavedPosts()
         }
     }
 }
