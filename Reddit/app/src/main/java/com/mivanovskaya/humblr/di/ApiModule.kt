@@ -66,7 +66,6 @@ class ApiModule {
     fun provideMoshi(): Moshi =
         Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
-//            .add(RepliesAdapter())
             .add(
                 PolymorphicJsonAdapterFactory.of(ThingDto::class.java, "kind")
                     .withSubtype(PostDto::class.java, "t3")

@@ -3,6 +3,7 @@ package com.mivanovskaya.humblr.presentation.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -38,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         loadContent()
         getLoadingState()
         tabLayoutListener(binding.toggleSource)
-        setSearch()
+        setSearchListener()
     }
 
     private fun loadContent() {
@@ -83,11 +84,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun setSearch() {
-        binding.searchView.setOnSearchClickListener {
-            Snackbar.make(binding.recyclerView, getString(R.string.no_function),
-                LENGTH_SHORT).show()
-        }
+    private fun setSearchListener() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if (query.isNotEmpty()) viewModel.onSearchButtonClick(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
     }
 
     private fun onClick(subQuery: SubQuery, item: ListItem, clickableView: ClickableView) {

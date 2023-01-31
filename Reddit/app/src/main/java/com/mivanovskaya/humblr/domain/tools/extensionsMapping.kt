@@ -12,6 +12,8 @@ import com.mivanovskaya.humblr.data.api.dto.profileDto.ProfileDto
 import com.mivanovskaya.humblr.data.api.dto.profileDto.UserDataSubDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditListingDataDto
+import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditSearchDto
+import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditsSearchDto
 import com.mivanovskaya.humblr.domain.models.*
 
 
@@ -40,6 +42,18 @@ fun Children.toFriend() = Friend(id = id, name = name)
 
 fun SubredditListingDataDto.toSubreddits() =
     Subreddits(subreddits_list = children.toListSubreddit())
+
+fun SubredditsSearchDto.toSearchSubreddits() = SearchSubreddits(subreddits.toListSearchSubreddits())
+
+fun List<SubredditSearchDto>.toListSearchSubreddits(): List<SearchSubreddit> =
+    this.map { item -> item.toSearchSubreddit() }
+
+fun SubredditSearchDto.toSearchSubreddit() = SearchSubreddit(
+    icon_img = icon_img,
+    subscribers = subscriber_count,
+    id = icon_img,
+    name = name
+)
 
 fun List<SubredditDto>.toListSubreddit(): List<Subreddit> = this.map { item -> item.toSubreddit() }
 
@@ -74,11 +88,8 @@ fun PostDto.toPost(): Post {
         subredditNamePrefixed = data.subreddit_name_prefixed,
         name = data.name,
         score = data.score,
-        //        thumbnail = data.thumbnail,
         postHint = data.post_hint,
         created = data.created,
-        //        urlOverriddenByDest = data.urlOverriddenByDest,
-        //        subredditId = data.subredditId,
         id = data.id,
         author = data.author,
         numComments = data.num_comments,

@@ -21,4 +21,6 @@ interface SubredditsRemoteRepository {
     suspend fun getSinglePost(url: String): List<ListItem>
 
     suspend fun unsaveAllSavedPosts()
+
+    suspend fun searchSubreddit(search: String): List<ListItem>
 }

@@ -34,8 +34,12 @@ class SubredditsRemoteRepositoryImpl @Inject constructor(
                 val username = apiProfile.getLoggedUserProfile().name
                 apiPost.getSaved(username, page).data.children.toListPost()
             }
+
+            ListTypes.SUBREDDITS_SEARCH -> apiSubreddits.searchSubredditsPaging(source, page).data.children.toListSubreddit()
         }
     }
+    override suspend fun searchSubreddit(search: String): List<ListItem> =
+    apiSubreddits.searchSubreddits(search).subreddits.toListSearchSubreddits()
 
     override suspend fun subscribeOnSubreddit(action: String, name: String) =
         apiSubreddits.subscribeOnSubreddit(action, name)

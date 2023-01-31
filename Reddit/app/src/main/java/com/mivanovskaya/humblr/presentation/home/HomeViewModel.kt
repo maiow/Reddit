@@ -18,10 +18,7 @@ import com.mivanovskaya.humblr.domain.tools.SubQuery
 import com.mivanovskaya.humblr.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,7 +42,7 @@ class HomeViewModel @Inject constructor(
             _state.value = LoadState.Loading
             //loading is so fast, that progress bar isn't seen without delay
             //delay(1_000)
-            getSubredditsList(subredditsSource)
+            getSubredditsList(subredditsSource, ListTypes.SUBREDDIT)
             _state.value = LoadState.Content()
         }
     }
@@ -53,13 +50,21 @@ class HomeViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     var subredditsList: Flow<PagingData<ListItem>> =
         _subredditsSourceFlow.asStateFlow().flatMapLatest { source ->
-            getSubredditsList(source).flow
+            if ((source == POPULAR) || (source == NEW)) {
+                getSubredditsList(source, ListTypes.SUBREDDIT).flow
+            } else {
+                getSubredditsList(source, ListTypes.SUBREDDITS_SEARCH).flow
+            }
         }.cachedIn(CoroutineScope(Dispatchers.IO))
 
-    private fun getSubredditsList(source: String?): Pager<String, ListItem> =
+
+    private fun getSubredditsList(
+        source: String?,
+        listType: ListTypes
+    ): Pager<String, ListItem> =
         Pager(
             config = PagingConfig(pageSize = PAGE_SIZE_SUBREDDITS),
-            pagingSourceFactory = { PagingSource(repository, source, ListTypes.SUBREDDIT) }
+            pagingSourceFactory = { PagingSource(repository, source, listType) }
         )
 
     fun subscribe(subQuery: SubQuery) {
@@ -74,6 +79,16 @@ class HomeViewModel @Inject constructor(
                 (item as Subreddit).namePrefixed
             )
         )
+    }
+
+    fun onSearchButtonClick(text: String) {
+        viewModelScope.launch(Dispatchers.Main + handler) {
+            _state.value = LoadState.Loading
+            _query.source = text
+            _subredditsSourceFlow.value = subredditsSource
+            getSubredditsList(text, ListTypes.SUBREDDITS_SEARCH)
+            _state.value = LoadState.Content()
+        }
     }
 
     companion object {

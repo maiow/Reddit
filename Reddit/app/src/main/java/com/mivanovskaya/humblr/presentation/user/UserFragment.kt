@@ -107,7 +107,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
             ClickableView.UNSAVE -> viewModel.unsavePost(postName = subQuery.name)
             ClickableView.VOTE ->
                 viewModel.votePost(voteDirection = subQuery.voteDirection, postName = subQuery.name)
-            else -> { TODO() }
+            else -> {}
         }
     }
 }

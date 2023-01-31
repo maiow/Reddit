@@ -23,11 +23,6 @@ import javax.inject.Inject
 class SingleSubredditViewModel @Inject constructor(private val repository: SubredditsRemoteRepository) :
     BaseViewModel() {
 
-    //TODO:
-    // - need to move Save & Votes logic from ViewHolder here or it's ok as is?
-    // - Votes, Save, and Download buttons - merge local updates to keep changes made
-    // in case of scrolling down and back again.
-
     fun getPostsList(name: String?): Flow<PagingData<ListItem>> = Pager(
         config = PagingConfig(pageSize = 10),
         pagingSourceFactory = { PagingSource(repository, name, ListTypes.SUBREDDIT_POST) }

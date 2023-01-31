@@ -54,33 +54,13 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
             adapter.loadStateFlow.collect { state ->
                 binding.common.progressBar.isVisible =
                     state.refresh is LoadState.Loading || state.append is LoadState.Loading
-                binding.common.error.isVisible = false
-                binding.noSavedPosts.isVisible = state.refresh is LoadState.NotLoading && adapter.itemCount == 0
+                binding.common.error.isVisible =
+                    state.refresh is LoadState.Error || state.append is LoadState.Error || state.prepend is LoadState.Error
+                binding.noSavedPosts.isVisible =
+                    state.refresh is LoadState.NotLoading && adapter.itemCount == 0
             }
         }
     }
-
-//    private fun updateUi(state: LoadState) {
-//        when (state) {
-//            LoadState.NotStartedYet -> {}
-//            LoadState.Loading -> {
-//                binding.common.progressBar.isVisible = true
-//                binding.common.error.isVisible = false
-//                binding.recyclerView.isVisible = false
-//            }
-//            is LoadState.Content -> {
-//                binding.common.progressBar.isVisible = false
-//                binding.common.error.isVisible = false
-//                binding.recyclerView.isVisible = true
-//
-//            }
-//            is LoadState.Error -> {
-//                binding.common.progressBar.isVisible = false
-//                binding.common.error.isVisible = true
-//                binding.recyclerView.isVisible = false
-//            }
-//        }
-//    }
 
     private fun tabLayoutSelectedListener(tabLayout: TabLayout, isSource: Boolean) {
         tabLayout.setSelectedTabListener { position ->
