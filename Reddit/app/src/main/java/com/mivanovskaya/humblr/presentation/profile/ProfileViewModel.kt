@@ -31,8 +31,12 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun getClearedUrlAvatar(urlAvatar: String): String {
-        val questionMark = urlAvatar.indexOf('?', 0)
-        return urlAvatar.substring(0, questionMark)
+        var clearedUrl = urlAvatar
+        if (urlAvatar.contains('?')) {
+            val questionMark = urlAvatar.indexOf('?', 0)
+            clearedUrl = urlAvatar.substring(0, questionMark)
+        }
+        return clearedUrl
     }
 
     fun logout(context: Context, fragment: Fragment) {
@@ -51,7 +55,7 @@ class ProfileViewModel @Inject constructor(
 
     fun clearSaved() {
         viewModelScope.launch(Dispatchers.IO + handler) {
-           repositorySubreddits.unsaveAllSavedPosts()
+            repositorySubreddits.unsaveAllSavedPosts()
         }
     }
 }
