@@ -1,8 +1,6 @@
 package com.mivanovskaya.humblr.domain.tools
 
 import android.util.Log
-import com.mivanovskaya.humblr.domain.models.Comment
-import com.mivanovskaya.humblr.domain.models.Comments
 import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentDto
 import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentListingDto
 import com.mivanovskaya.humblr.data.api.dto.postDto.PostDto
@@ -11,9 +9,6 @@ import com.mivanovskaya.humblr.data.api.dto.profileDto.FriendsDto
 import com.mivanovskaya.humblr.data.api.dto.profileDto.ProfileDto
 import com.mivanovskaya.humblr.data.api.dto.profileDto.UserDataSubDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditDto
-import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditListingDataDto
-import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditSearchDto
-import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditsSearchDto
 import com.mivanovskaya.humblr.domain.models.*
 
 
@@ -39,21 +34,6 @@ fun FriendsDto.toFriends() = Friends(friends_list = children.toListFriends())
 fun List<Children>.toListFriends(): List<Friend> = this.map { item -> item.toFriend() }
 
 fun Children.toFriend() = Friend(id = id, name = name)
-
-fun SubredditListingDataDto.toSubreddits() =
-    Subreddits(subreddits_list = children.toListSubreddit())
-
-fun SubredditsSearchDto.toSearchSubreddits() = SearchSubreddits(subreddits.toListSearchSubreddits())
-
-fun List<SubredditSearchDto>.toListSearchSubreddits(): List<SearchSubreddit> =
-    this.map { item -> item.toSearchSubreddit() }
-
-fun SubredditSearchDto.toSearchSubreddit() = SearchSubreddit(
-    icon_img = icon_img,
-    subscribers = subscriber_count,
-    id = icon_img,
-    name = name
-)
 
 fun List<SubredditDto>.toListSubreddit(): List<Subreddit> = this.map { item -> item.toSubreddit() }
 

@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
             if (destination.id == R.id.navigation_onboarding || destination.id == R.id.navigation_auth) {
                 navView.visibility = View.GONE
                 window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-                /**вместо deprecated в оф.документации предлагается использовать
-                 * WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE, который требует API 30+ */
+                /**off.documentation offers to use this instead of deprecated:
+                 * WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE, which requires API 30+ */
             } else navView.visibility = View.VISIBLE
         }
     }

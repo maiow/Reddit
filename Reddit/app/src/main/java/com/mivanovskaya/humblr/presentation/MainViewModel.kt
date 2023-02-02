@@ -16,11 +16,6 @@ class MainViewModel @Inject constructor(private val sharedPrefsService: SharedPr
 
     fun setNavigation(context: Context, fragment: Fragment) {
 
-        /**для тестирования без онбординга раскомментировать две строки ниже
-         * и закомментировать все остальные ниже этих двух*/
-        // fragment.findNavController().navigateToFriends(MainFragmentDirections
-        //     .actionMainFragmentToAuthFragment())
-
         val toOnboardingFragment = MainFragmentDirections.actionMainFragmentToNavigationOnboarding()
         val toAuthFragment = MainFragmentDirections.actionMainFragmentToAuthFragment()
         val toHomeFragment = MainFragmentDirections.actionMainFragmentToNavigationHome()

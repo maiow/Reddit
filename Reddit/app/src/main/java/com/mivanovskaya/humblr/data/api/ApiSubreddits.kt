@@ -3,7 +3,6 @@ package com.mivanovskaya.humblr.data.api
 import com.mivanovskaya.humblr.data.api.dto.postDto.PostListingDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditListingDto
-import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditsSearchDto
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -39,16 +38,9 @@ interface ApiSubreddits {
         @Query("after") page: String?
     ): SubredditListingDto
 
-    /**Search subreddits by title and description.*/
     @GET("/subreddits/search")
     suspend fun searchSubredditsPaging(
         @Query("q") source: String?,
         @Query("after") page: String?
     ): SubredditListingDto
-
-    /**List subreddits that begin with a query string.*/
-    @POST("/api/search_subreddits")
-    suspend fun searchSubreddits(
-        @Query("query") source: String?
-    ): SubredditsSearchDto
 }

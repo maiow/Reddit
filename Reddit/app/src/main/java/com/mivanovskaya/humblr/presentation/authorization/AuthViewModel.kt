@@ -14,7 +14,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val apiToken: ApiToken, private val sharedPrefsService: SharedPrefsService) : ViewModel() {
+class AuthViewModel @Inject constructor(
+    private val apiToken: ApiToken,
+    private val sharedPrefsService: SharedPrefsService
+) : ViewModel() {
 
     private val _state = MutableStateFlow<LoadState>(LoadState.NotStartedYet)
     val state = _state.asStateFlow()

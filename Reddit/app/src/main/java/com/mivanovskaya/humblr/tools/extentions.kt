@@ -10,18 +10,8 @@ fun ImageView.loadImage(urls: String) {
     Glide.with(this)
         .load(urls)
         .error(R.drawable.error_image)
-        // без crop смотрится лучше и ближе к дизайну оригинального приложения reddit
-        //.circleCrop()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .placeholder(R.drawable.placeholder)
-        .into(this)
-}
-
-fun ImageView.loadImage(id: Int) {
-    Glide.with(this)
-        .load(id)
-        .error(R.drawable.error_image)
-        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(this)
 }
 
@@ -35,6 +25,7 @@ fun TabLayout.setSelectedTabListener(block: (position: Int) -> Unit){
     })
 }
 
+//TODO: move here from home fragment:
 //fun SearchView.setChangeTextListener(block: (query: String) -> Unit) {
 //
 //    this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

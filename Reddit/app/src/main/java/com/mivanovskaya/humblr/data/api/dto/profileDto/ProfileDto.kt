@@ -13,14 +13,6 @@ data class ProfileDto(
 
     @Json(name = "subreddit")
     var more_infos: UserDataSubDto?,
-
-//    var awarder_karma: Int?,
-//    var awardee_karma: Int?,
-
-//    @SerializedName("link_karma")
-//    var publication_karma: Int?,
-
-//    var comment_karma: Int?,
     var total_karma: Int?,
 
 //    @SerializedName("created_utc")

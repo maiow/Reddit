@@ -16,7 +16,5 @@ data class FriendsDto(
 @JsonClass(generateAdapter = true)
 data class Children(
     val id: String,
-    val name: String,
-    //val date: Double,
-    //val rel_id: String
+    val name: String
 )
