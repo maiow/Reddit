@@ -9,6 +9,7 @@ data class Subreddits(
 data class Subreddit(
     val namePrefixed: String,
     val url: String?,
+    val imageUrl: String?,
     val isUserSubscriber: Boolean?,
     val description: String?,
     val subscribers: Int?,

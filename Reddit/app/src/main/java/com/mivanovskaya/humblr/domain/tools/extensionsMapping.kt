@@ -37,16 +37,28 @@ fun Children.toFriend() = Friend(id = id, name = name)
 
 fun List<SubredditDto>.toListSubreddit(): List<Subreddit> = this.map { item -> item.toSubreddit() }
 
-fun SubredditDto.toSubreddit() = Subreddit(
-    namePrefixed = data.display_name_prefixed,
-    url = data.url,
-    isUserSubscriber = data.user_is_subscriber,
-    description = data.description,
-    subscribers = data.subscribers,
-    created = data.created,
-    id = data.id,
-    name = data.name
-)
+fun SubredditDto.toSubreddit(): Subreddit {
+
+    var url = data.community_icon
+    if (url != null) {
+        if (url.contains('?')) {
+            val questionMark = url.indexOf('?', 0)
+            url = url.substring(0, questionMark)
+        }
+    } else url = data.icon_img
+
+    return Subreddit(
+        namePrefixed = data.display_name_prefixed,
+        url = data.url,
+        imageUrl = url,
+        isUserSubscriber = data.user_is_subscriber,
+        description = data.description,
+        subscribers = data.subscribers,
+        created = data.created,
+        id = data.id,
+        name = data.name
+    )
+}
 
 fun List<PostDto>.toListPost(): List<Post> = this.map { item -> item.toPost() }
 

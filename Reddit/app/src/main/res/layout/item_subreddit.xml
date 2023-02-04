@@ -22,6 +22,14 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/subreddit_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_r_circle"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/header_padding" />
+
             <TextView
                 android:id="@+id/subreddit_title"
                 android:layout_width="0dp"

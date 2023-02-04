@@ -9,7 +9,7 @@ import com.mivanovskaya.humblr.R
 fun ImageView.loadImage(urls: String) {
     Glide.with(this)
         .load(urls)
-        .error(R.drawable.error_image)
+        .error(R.drawable.ic_r_circle)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .placeholder(R.drawable.placeholder)
         .into(this)

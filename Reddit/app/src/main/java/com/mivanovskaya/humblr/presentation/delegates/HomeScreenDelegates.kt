@@ -26,6 +26,7 @@ fun subredditsDelegate(
         binding.subredditTitle.text = item.namePrefixed
         binding.subredditDescription.text = item.description
         binding.subscribeButton.isSelected = item.isUserSubscriber == true
+        if (item.imageUrl !=null) binding.subredditImage.loadImage(item.imageUrl!!)
     }
     binding.subscribeButton.setOnClickListener {
         binding.subscribeButton.isSelected = !binding.subscribeButton.isSelected
