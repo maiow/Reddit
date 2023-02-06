@@ -15,6 +15,7 @@ import com.mivanovskaya.humblr.domain.tools.ClickableView
 import com.mivanovskaya.humblr.domain.tools.SUBSCRIBE
 import com.mivanovskaya.humblr.domain.tools.SubQuery
 import com.mivanovskaya.humblr.domain.tools.UNSUBSCRIBE
+import com.mivanovskaya.humblr.tools.loadCircleImage
 import com.mivanovskaya.humblr.tools.loadImage
 
 fun subredditsDelegate(
@@ -26,7 +27,7 @@ fun subredditsDelegate(
         binding.subredditTitle.text = item.namePrefixed
         binding.subredditDescription.text = item.description
         binding.subscribeButton.isSelected = item.isUserSubscriber == true
-        if (item.imageUrl !=null) binding.subredditImage.loadImage(item.imageUrl!!)
+        if (item.imageUrl != null) binding.subredditImage.loadCircleImage(item.imageUrl!!)
     }
     binding.subscribeButton.setOnClickListener {
         binding.subscribeButton.isSelected = !binding.subscribeButton.isSelected

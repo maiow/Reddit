@@ -9,6 +9,16 @@ import com.mivanovskaya.humblr.R
 fun ImageView.loadImage(urls: String) {
     Glide.with(this)
         .load(urls)
+        .error(R.drawable.ic_launcher_foreground)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .placeholder(R.drawable.placeholder)
+        .into(this)
+}
+
+fun ImageView.loadCircleImage(urls: String) {
+    Glide.with(this)
+        .load(urls)
+        .circleCrop()
         .error(R.drawable.ic_r_circle)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .placeholder(R.drawable.placeholder)
