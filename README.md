@@ -1,4 +1,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/maiow/reddit?logo=GitHub)
+
+### Скачал - поставь звезду! :)
+
 ### study project using API for Reddit
 Humblr for Reddit. 
 
