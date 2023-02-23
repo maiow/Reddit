@@ -13,7 +13,7 @@ import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptor
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenInterceptorQualifier
 import com.mivanovskaya.humblr.data.api.interceptor.AuthTokenProvider
 import com.mivanovskaya.humblr.data.api.interceptor.LoggingInterceptorQualifier
-import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
+import com.mivanovskaya.humblr.data.sharedprefsservice.SharedPrefsService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -30,14 +30,14 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
+@InstallIn(SingletonComponent::class)
 class ApiModule {
 
     @Provides
     @Singleton
     fun provideAuthTokenProvider(@ApplicationContext context: Context): AuthTokenProvider =
-        AuthTokenProvider(context, SharedPrefsService())
+        AuthTokenProvider(context, SharedPrefsService(context))
 
     @Provides
     @AuthTokenInterceptorQualifier

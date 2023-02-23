@@ -64,7 +64,7 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     }
 
     private fun saveOnboardingShown() {
-        viewModel.saveOnboardingShown(requireContext())
+        viewModel.saveOnboardingShown()
     }
 
     override fun onDestroyView() {
