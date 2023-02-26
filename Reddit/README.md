@@ -1,3 +1,10 @@
+## To get the working application: 
+- you need to register on Reddit as a developer (https://github.com/reddit-archive/reddit/wiki/OAuth2), 
+- get your own application data 
+and put it into the AuthConst.kt:
+- const val CLIENT_ID = "your-client-id"
+- const val REDIRECT_URI = "your-redirect-uri"
+
 # study project using API for Reddit
 Humblr for Reddit
 
