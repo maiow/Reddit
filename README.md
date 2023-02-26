@@ -1,6 +1,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/maiow/reddit?logo=GitHub)
 
-### Скачал - поставь звезду! :)
+### Скачал - поставь звезду! :) Студентам Skillbox: помогаю с любыми изменениями и доработками только платно.
 
 ### study project using API for Reddit
 Humblr for Reddit. 
