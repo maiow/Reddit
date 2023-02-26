@@ -2,6 +2,11 @@
 
 ### Скачал - поставь звезду! :) Студентам Skillbox: помогаю с любыми изменениями и доработками как Unsplash, так и Reddit только платно.
 
+Для работы приложения необходимо зарегистрировать в качестве разработчика на Reddit ваше собственное приложение и вписать данные в файл AuthConst.kt:
+- const val CLIENT_ID = "your-client-id"
+- const val REDIRECT_URI = "your-redirect-uri"
+
+
 ### study project using API for Reddit
 Humblr for Reddit. 
 
