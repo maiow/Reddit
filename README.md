@@ -1,16 +1,17 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/maiow/reddit?logo=GitHub)
 
-### Скачал - поставь звезду! :) Студентам Skillbox: помогаю с любыми изменениями и доработками как Unsplash, так и Reddit только платно.
-
-Для работы приложения необходимо зарегистрировать в качестве разработчика на Reddit ваше собственное приложение и вписать данные в файл AuthConst.kt:
-- const val CLIENT_ID = "your-client-id"
-- const val REDIRECT_URI = "your-redirect-uri"
-
-
 ### study project using API for Reddit
 Humblr for Reddit. 
 
 Check Readme file inside the project for description in English .
+
+### Скачал - поставь 🌟 Студентам Skillbox: помогаю с любыми изменениями и доработками как Unsplash, так и Reddit только платно.
+
+### Для работы приложения необходимо:
+- зарегистрировать в качестве разработчика на Reddit ваше собственное приложение (https://github.com/reddit-archive/reddit/wiki/OAuth2)
+и вписать данные в файл AuthConst.kt:
+- const val CLIENT_ID = "your-client-id"
+- const val REDIRECT_URI = "your-redirect-uri"
 
 ~~~~~~~
 Задание
