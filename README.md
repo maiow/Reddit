@@ -1,6 +1,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/maiow/reddit?logo=GitHub)
 
-### study project using API for Reddit
+### Final study/diploma project using API for Reddit
 Humblr for Reddit. 
 
 Check Readme file inside the project for description in English .
