@@ -5,7 +5,29 @@ Humblr for Reddit.
 
 Check Readme file inside the project for description in English .
 
-### Скачал - поставь 🌟 Студентам Skillbox: помогаю с любыми изменениями и доработками как Unsplash, так и Reddit только платно.
+Onboarding, authorization through Reddit:
+
+![onb-auth](https://user-images.githubusercontent.com/113892176/224336482-667c6668-2bd1-47c5-a922-54c0ed47e1a6.gif)
+![auth](https://user-images.githubusercontent.com/113892176/224337012-08200147-1788-4ea3-a479-ce5d59ec4f2a.gif)
+
+New/Popular Subreddits listings with Search function. Subscribe/unsunscribe, share link on subreddit. Open subreddit, upvote/downvote post, download, save to online collection.
+
+![subreddits](https://user-images.githubusercontent.com/113892176/224339682-dd7053a3-05fb-4533-bc1d-2e59e1fa3468.gif)
+
+Favorites screen: Subreddits - Posts and All - Saved switchers.
+
+![favorites](https://user-images.githubusercontent.com/113892176/224341512-7c551d30-cae6-453a-b5de-89e521686ac1.gif)
+
+My Profile screen: logged user's friends list, Clear saved posts, Logout.
+
+![profile](https://user-images.githubusercontent.com/113892176/224345007-95747980-2069-4190-b3da-930d42867458.gif)
+
+Click on any Reddit user -> User screen with his Posts. Making Friends:
+
+![user](https://user-images.githubusercontent.com/113892176/224343901-2ba158f0-6f67-4880-be6e-03530c3d7049.gif)
+
+
+### Скачал - поставь 🌟
 
 ### Для работы приложения необходимо:
 - зарегистрировать в качестве разработчика на Reddit ваше собственное приложение (https://github.com/reddit-archive/reddit/wiki/OAuth2)
