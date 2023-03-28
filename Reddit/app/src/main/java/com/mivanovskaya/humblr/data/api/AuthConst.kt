@@ -1,6 +1,8 @@
 package com.mivanovskaya.humblr.data.api
 
-const val CLIENT_ID = "3y_mSCFNH-rGTtZHDYj6mw"
+import com.mivanovskaya.humblr.BuildConfig
+
+const val CLIENT_ID = BuildConfig.CLIENT_ID
 const val CLIENT_SECRET = ""
 const val RESPONSE_TYPE = "code"
 const val STATE = "my_state"
@@ -13,6 +15,7 @@ const val SCOPE = "identity edit flair history modconfig" +
 
 const val CALL =
     "https://www.reddit.com/api/v1/authorize.compact" +
+   // "https://old.reddit.com/api/v1/authorize" +
             "?client_id=" + CLIENT_ID +
             "&response_type=" + RESPONSE_TYPE +
             "&state=" + STATE +
