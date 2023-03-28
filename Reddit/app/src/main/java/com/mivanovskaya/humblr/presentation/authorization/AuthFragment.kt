@@ -32,7 +32,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
         setAuthorizationButton()
         updateUiOnLoadStateChange()
-        viewModel.createToken(args.code, requireContext())
+        viewModel.createToken(args.code)
     }
 
     private fun setAuthorizationButton() {

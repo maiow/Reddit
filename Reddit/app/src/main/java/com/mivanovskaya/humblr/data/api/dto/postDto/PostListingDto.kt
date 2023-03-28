@@ -6,10 +6,11 @@ import com.squareup.moshi.JsonClass
 data class PostListingDto(
     val kind: String,
     val data: PostListingDataDto
-)
-@JsonClass(generateAdapter = true)
-data class PostListingDataDto(
-    val after: String?,
-    val children: List<PostDto>,
-    val before: Any?
-)
+) {
+    @JsonClass(generateAdapter = true)
+    data class PostListingDataDto(
+        val after: String?,
+        val children: List<PostDto>,
+        val before: Any?
+    )
+}

@@ -18,12 +18,17 @@ android {
     namespace 'com.mivanovskaya.humblr'
     compileSdk 33
 
+    Properties properties = new Properties()
+    properties.load(rootProject.file("local.properties").newDataInputStream())
+
     defaultConfig {
         applicationId "com.mivanovskaya.humblr"
         minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
+
+        buildConfigField("String", "CLIENT_ID", "\"${properties.getProperty("CLIENT_ID")}\"")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -77,7 +82,7 @@ dependencies {
     implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
     implementation 'com.squareup.moshi:moshi-adapters:1.14.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
-    
+
     //Hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
@@ -88,7 +93,7 @@ dependencies {
 
     implementation "com.airbnb.android:lottie:5.2.0"
 
-   // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+    // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

@@ -66,7 +66,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun loadProfileTexts(data: Profile) {
         with(binding) {
             userName.text = data.name
-            userId.text = getString(R.string.user_id, data.id)
+            userId.text = getString(R.string.user_id, data.more_infos?.title /*?: "N/A"*/)
             karma.text = getString(R.string.karma, data.total_karma ?: 0)
             followers.text =
                 getString(R.string.followers, data.more_infos?.subscribers ?: "0")
@@ -103,7 +103,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         dialog.setTitle(R.string.logout_title)
             .setMessage(R.string.logout_message)
             .setPositiveButton(R.string.yes) { _, _ ->
-                viewModel.logout(requireContext(), this)
+                viewModel.logout(this)
             }
             .setNegativeButton(R.string.no) { _, _ ->
                 dialog.create().hide()

@@ -4,9 +4,8 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class ProfileDto(
+class ProfileDto(
     var name: String?,
-    //var display_name: String,
     var id: String?,
     @Json(name = "icon_img")
     var urlAvatar: String?,
@@ -17,11 +16,13 @@ data class ProfileDto(
 
 //    @SerializedName("created_utc")
 //    var account_creation_date: Long?
-)
-
-@JsonClass(generateAdapter = true)
-data class UserDataSubDto(
-    var subscribers: Int?,
+) {
+    @JsonClass(generateAdapter = true)
+    class UserDataSubDto(
+        var subscribers: Int?,
+        @Json(name = "title")
+        var title: String?
 //    @SerializedName("public_description")
 //    var description: String?
-)
+    )
+}

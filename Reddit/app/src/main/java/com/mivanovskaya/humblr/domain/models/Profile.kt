@@ -1,6 +1,6 @@
 package com.mivanovskaya.humblr.domain.models
 
-data class Profile(
+class Profile(
     var name: String?,
     var id: String?,
     var urlAvatar: String?,
@@ -8,6 +8,7 @@ data class Profile(
     var total_karma: Int?,
 )
 
-data class UserDataSubscribers(
-    var subscribers: Int?
+class UserDataSubscribers(
+    var subscribers: Int?,
+    var title: String?
 )

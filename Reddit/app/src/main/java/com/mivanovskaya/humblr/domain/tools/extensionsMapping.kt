@@ -1,13 +1,12 @@
 package com.mivanovskaya.humblr.domain.tools
 
-import android.util.Log
 import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentDto
 import com.mivanovskaya.humblr.data.api.dto.commentDto.CommentListingDto
 import com.mivanovskaya.humblr.data.api.dto.postDto.PostDto
-import com.mivanovskaya.humblr.data.api.dto.profileDto.Children
 import com.mivanovskaya.humblr.data.api.dto.profileDto.FriendsDto
+import com.mivanovskaya.humblr.data.api.dto.profileDto.FriendsDto.Children
 import com.mivanovskaya.humblr.data.api.dto.profileDto.ProfileDto
-import com.mivanovskaya.humblr.data.api.dto.profileDto.UserDataSubDto
+import com.mivanovskaya.humblr.data.api.dto.profileDto.ProfileDto.UserDataSubDto
 import com.mivanovskaya.humblr.data.api.dto.subredditDto.SubredditDto
 import com.mivanovskaya.humblr.domain.models.*
 
@@ -22,12 +21,10 @@ fun List<CommentListingDto>.toListCommentListing(): List<Comments> =
 fun List<CommentDto>.toListComment(): List<Comment> =
     this.map { item -> item.toComment() }
 
-fun ProfileDto.toProfile(): Profile {
-    Log.e("Mapper: ", "${Profile(name, id, urlAvatar, more_infos?.toUserDataSub(), total_karma)}")
-    return Profile(name, id, urlAvatar, more_infos?.toUserDataSub(), total_karma)
-}
+fun ProfileDto.toProfile() =
+    Profile(name = name, id = id, urlAvatar = urlAvatar, more_infos = more_infos?.toUserDataSub(), total_karma = total_karma)
 
-fun UserDataSubDto.toUserDataSub() = UserDataSubscribers(subscribers)
+fun UserDataSubDto.toUserDataSub() = UserDataSubscribers(subscribers, title)
 
 fun FriendsDto.toFriends() = Friends(friends_list = children.toListFriends())
 

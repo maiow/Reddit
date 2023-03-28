@@ -1,21 +1,20 @@
 package com.mivanovskaya.humblr.presentation.onboarding
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.mivanovskaya.humblr.R
 import com.mivanovskaya.humblr.data.api.ONBOARDING_IS_SHOWN
-import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
+import com.mivanovskaya.humblr.domain.storageservice.StorageService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class OnboardingViewModel @Inject constructor(private val sharedPrefsService: SharedPrefsService) :
+class OnboardingViewModel @Inject constructor(private val storageService: StorageService) :
     ViewModel() {
 
-    fun saveOnboardingShown(context: Context) {
-        sharedPrefsService.save(context, ONBOARDING_IS_SHOWN, true)
+    fun saveOnboardingShown() {
+        storageService.save(ONBOARDING_IS_SHOWN, true)
     }
 
     fun navigateToAuth(fragment: Fragment) {

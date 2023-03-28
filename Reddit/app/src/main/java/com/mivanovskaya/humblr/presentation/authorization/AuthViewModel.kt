@@ -1,10 +1,9 @@
 package com.mivanovskaya.humblr.presentation.authorization
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mivanovskaya.humblr.data.api.*
-import com.mivanovskaya.humblr.domain.sharedpreferences.SharedPrefsService
+import com.mivanovskaya.humblr.data.api.ApiToken
+import com.mivanovskaya.humblr.domain.storageservice.StorageService
 import com.mivanovskaya.humblr.domain.state.LoadState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,19 +15,18 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val apiToken: ApiToken,
-    private val sharedPrefsService: SharedPrefsService
+    private val storageService: StorageService
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<LoadState>(LoadState.NotStartedYet)
     val state = _state.asStateFlow()
 
-    fun createToken(code: String, context: Context) {
+    fun createToken(code: String) {
         if (code != PLUG)
             viewModelScope.launch(Dispatchers.IO) {
                 _state.value = LoadState.Loading
                 try {
-                    sharedPrefsService.saveEncryptedToken(
-                        context,
+                    storageService.saveEncryptedToken(
                         apiToken.getToken(code = code).access_token
                     )
                     _state.value = LoadState.Content()
