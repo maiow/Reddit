@@ -1,7 +1,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/maiow/reddit?logo=GitHub)
 
 ### Reddit client - project is using API for Reddit
-Humblr for Reddit. Android Kotlin, Single activity mobile application project with: Clean, MVVM, Hilt DI, coroutines, OAuth2, OkHttp Interceptor, Retrofit, Moshi (including PolymorphicJsonAdapterFactory & ScalarsConverterFactory), DelegateAdapters, Onboarding with ViewPager2 & TabLayout.
+Humblr for Reddit. Android Kotlin, Single activity mobile application project with: Clean, MVVM, Hilt DI, coroutines, OAuth2, OkHttp Interceptor, Retrofit, Moshi (including PolymorphicJsonAdapterFactory & ScalarsConverterFactory), DelegateAdapters, Onboarding with ViewPager2 & TabLayout, Lottie animation.
 Full support of Russian and English locales.
 
 Check Readme file inside the project for description in English .
